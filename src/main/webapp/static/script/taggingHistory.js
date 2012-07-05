@@ -14,7 +14,7 @@ var TaggingHistory = base2.Base.extend({
 					var ownerName = tag.matchingTagOwnerName ? tag.matchingTagOwnerName : 'Anoniempje';
 					var title = 'match met ' + tag.matchingTag + ' van ' + ownerName;
 					if (tag.pioneer) {
-						title += '. Jij hebt deze tag ge�ntroduceerd';
+						title += '. You have introduced this tag';
 					}
 					var iconSrc = '/static/img/' + (tag.pioneer ? 'match-pioneer.png' : 'match-social.png');
 					el.append(jQuery('<img/>',  { 'class' : 'icon', 'title' : title, 'src' : iconSrc }));
