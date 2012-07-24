@@ -13,7 +13,7 @@
 	<div id="addthis-bar" class="addthis_toolbox addthis_default_style pull-right spaced-bottom"
 		addthis:url="http://waisda.nl/"
     	addthis:title="Waisda?"
-		addthis:description="Speelt u mee?">
+		addthis:description="Would you like to play?">
 		<a class="addthis_button_preferred_1"></a>
 		<a class="addthis_button_preferred_2"></a>
 		<a class="addthis_button_preferred_3"></a>
@@ -25,10 +25,8 @@
 	<!-- AddThis Button END -->
 
 	<p class="spaced-bottom">
-		Play
-		<strong>Waisda </strong>
-		to make it easier to find stuff.
-	</p-->
+		By playing <strong>Waisda</strong>, you're helping us improve our archives by making them easier to search through. Thanks!
+	</p>
 	
 	<!--h2>Kanalen</h2-->
 	<ul class="row equal-cols unstyled clear-both">
@@ -51,13 +49,12 @@
 	<!--h2 class="spaced">Hoe werkt het?</h2-->
 	<div class="row equal-cols">
 		<ol class="unstyled pull-left">
-			<li class="box rich order span3 col"><span class="index">1</span>Select a video above or from the games queue</li>
-			<li class="box rich order span3 col"><span class="index">2</span>Enter as many words as possible to describe what you see and hear</li>
-			<li class="box rich order span3 col"><span class="index">3</span>If others enter the same word. You have a match. This is how you score points.</li>
-			<li class="box rich order span3 col"><span class="index">4</span><a href="/registreren">Register</a> to save your points and read the <a href="/spelinstructies">instructions</a></li>
+			<li class="box rich order span3 col"><span class="index">1</span>Select a video above or from the queue</li>
+			<li class="box rich order span3 col"><span class="index">2</span>Enter as many words as you can to describe what you see and hear</li>
+			<li class="box rich order span3 col"><span class="index">3</span>Score points by entering the same words as other players.</li>
+			<li class="box rich order span3 col"><span class="index">4</span>Read the <a href="/spelinstructies">instructions</a> and <a href="/registreren">register</a> to save your score.</li>
 		</ol>
-		<p id="silverlight-message" class="clear-both small">In order to be able to join <a href="http://www.silverlight.net/">Microsoft
-			Silverlight plugin</a> has to be installed.</p>
+		<p id="silverlight-message" class="clear-both small">In order to be able to join <a href="http://www.silverlight.net/">Microsoft Silverlight plugin</a> has to be installed.</p>
 	</div>
 	<!--div id="prizebanner">
 		<a href="/spelinstructies#wedstrijdregels">
@@ -67,7 +64,7 @@
 	
 	<div class="row equal-cols">
 		<div class="box span4 col">
-			<header class="header rich"><h2 class="h3 reset">Topscorers <small>last 7 days</small></h2></header>
+			<header class="header rich"><h2 class="h3 reset">Top Scorers <small>last 7 days</small></h2></header>
 			<section class="reset scroll-box">
 				<ol class="unstyled reset">
 				<c:forEach items="${globalStats.topScores.topTen}" var="u" varStatus="status">
@@ -85,7 +82,7 @@
 		<!-- #tagcloud -->
 		<div class="box span4 col leading">
 
-			<header class="header rich"><h2 class="h3 reset">Most populair tags <small>last 7 days</small></h2></header>
+			<header class="header rich"><h2 class="h3 reset">Most popular tags <small>last 7 days</small></h2></header>
 			<section class="reset fixed-low">
 				<ul class="tagcloud unstyled">
 					<c:forEach items="${globalStats.tagCloud}" var="tag">
