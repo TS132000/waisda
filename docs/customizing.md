@@ -60,12 +60,12 @@ Computing tags' scores is handled by class `ScoringService`. It takes care of do
 
 ## Modifying the database structure
 
-* Adding tables
-* Adding columns
-* Hibernate mappings
+The classes in package `nl.waisda.domain` model domain objects and have annotations on their properties that specify how they should be mapped to and from database records. This means that when you add, remove or change fields in a table, you should update the domain classes accordingly. If you don't, the website will report errors on startup.
+
+Similarly, if you add a database table and would like to be able to access it from within the application using Hibernate, you need to create a class for it. Tag the class with `@Entity` and annotate the properties. Finally, add an entry for it in `src/main/webapp/META-INF/persistence.xml`.
+
+Not all database tables are currently represented as Java classes: records in tables `DictionaryEntry` and `MatchingTag` don't need to exist as objects in the web application and so have no mappings.
 
 ## Adding new pages
 
-* Add controller method
-* Add JSP view
-* Possibly create new view model class
+To add a new kind of page to the application, create a JSP view. You can look at existing view pages in `src/main/webapp/WEB-INF/views` for examples. Then, in an existing or in a new controller, create a method with a `@RequestMapping` that listens to a specific URL, and return the name of the view. Use a `ModelMap` argument to supply the view with data. Again, you can look at existing controllers for plenty of examples.
