@@ -2,12 +2,27 @@
 
 ## Adding your own videos
 
-* In SQL format
-* In CSV format
+To add your own videos, simply fill the `Video` table with records. They will then become available in the website for playing sessions with them and earning scores. The default video selection for the channels on the homepage chooses randomly (uniformly) from all available videos. The structure of the table is explained in the "Backend architecture" chapter.
+
+If you have existing data available in SQL format, you can import it using various MySQL graphical tools, or using the command line:
+
+```
+$ mysql < videos.sql
+```
+
+Be sure to pass extra options to `mysql` to tell it how to connect to the database.
+
+If you have video data in CSV format, again you can use one of the many MySQL tools out there, or use the command line utility [`mysqlimport`](https://dev.mysql.com/doc/refman/5.0/en/mysqlimport.html). It allows you to map the various columns in the CSV file to specific columns in the `Video` table.
 
 ## Customizing channels
 
+By default, the channels on the homepage show a uniform random selection of all available videos. If you would like to customize this, the place to do that is in method `getChannelContent` of class `VideoService`. This method is called by the `HomeController` to determine what channels to show. The `VideoService` talks to the `VideoRepository` to actually query the database. By writing your own SQL queries to select videos, you can make the video selection as complex as you prefer.
+
 ## Adding matching tags
+
+Table `MatchingTag` contains tuples of normalized tags that *match* one another. When users enter tags, they receive higher scores if their tags match other tags, as explained in detail in the introduction of the documentation.
+
+To supply your own matching tags (for example, pairs of synonyms), populate the `MatchingTag` table with them. Make sure that every tuple's elements are lexicographically sorted. E.g. use `('aalmoes', 'gift')` rather than `('gift', 'aalmoes')`.
 
 ## Adding dictionaries
 
