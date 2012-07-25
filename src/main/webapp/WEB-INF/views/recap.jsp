@@ -39,7 +39,7 @@
 							<td class="text-right"><nf:format number="${recap.summary.countEmptyTags * 5}" /></td>
 						</tr>
 						<tr>
-							<td></td>
+							<td><img src="/static/img/match-dictionary.png" title="match with dictionary" /></td>
 							<td><strong><nf:format number="${recap.summary.countDictionaryMatches}"/></strong> ${recap.summary.countDictionaryMatches == 1 ? 'dictionarymatch' : 'dictionarymatches' } <span class="help" title="A dictionarymatch will earn you 25 points">?</span></td>
 							<td class="text-right"><nf:format number="${recap.summary.countDictionaryMatches * 25}" /></td>
 						</tr>
@@ -125,6 +125,9 @@
 						</c:if>
 						<c:if test="${tag.matchingTagEntry != null && !tag.pioneer}">
 							<img src="/static/img/match-social.png" class="icon" />
+						</c:if>
+						<c:if test="${tag.dictionary != null}">
+							<img src="/static/img/match-dictionary.png" class="icon" />
 						</c:if>
 						<span><c:out value="${tag.tag}"/></span>
 						<span class="matching small">
