@@ -11,13 +11,13 @@
 		<div class="box span9">
 	 		<h1 class="h2 form-shift">Register</h1>
 	 		<c:if test="${user.totalScore > 0}">
-				<p  class="form-shift">Your <nf:format number="${user.totalScore}" /> will be added after you've registered.</p>
+				<p  class="form-shift">Your <nf:format number="${user.totalScore}" /> points will be added after you've registered.</p>
 			</c:if>			
 			<f:form commandName="form" autocomplete="off" id="meedoenForm" class="form-horizontal">
 	  		<fieldset>
  	  			    <c:set var="emailErrors"><f:errors path="email"/></c:set>
 					<div class="control-group ${not empty emailErrors ? 'error' : ''}">
-						<f:label path="email" cssClass="control-label">Emailaddress</f:label>
+						<f:label path="email" cssClass="control-label">Email address</f:label>
 						<div class="controls" >
 							<f:input path="email" tabindex="4" cssClass="input-xlarge" /><br/>
 							<f:errors path="email" cssClass="help-inline"/>
@@ -67,7 +67,7 @@
 						<a href="#" onclick="document.getElementById('meedoenForm').submit(); return false" id="submitMeedoen" class="btn btn-primary btn-large" tabindex="9">Start</a>
 					</div>
 	
-					<input type="submit" value="Beginnen" tabindex="10" style="position:absolute;top:0;left:-10000px;"/>
+					<input type="submit" value="Start" tabindex="10" style="position:absolute;top:0;left:-10000px;"/>
 				</fieldset>  
 			</f:form>
 		</div>
