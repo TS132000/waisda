@@ -40,7 +40,7 @@
 						</tr>
 						<tr>
 							<td><img src="/static/img/match-dictionary.png" title="match with dictionary" /></td>
-							<td><strong><nf:format number="${recap.summary.countDictionaryMatches}"/></strong> ${recap.summary.countDictionaryMatches == 1 ? 'dictionarymatch' : 'dictionarymatches' } <span class="help" title="A dictionarymatch will earn you 25 points">?</span></td>
+							<td><strong><nf:format number="${recap.summary.countDictionaryMatches}"/></strong> ${recap.summary.countDictionaryMatches == 1 ? 'dictionarymatch' : 'dictionarymatches' } <span class="help" title="A dictionary match will earn you 25 points">?</span></td>
 							<td class="text-right"><nf:format number="${recap.summary.countDictionaryMatches * 25}" /></td>
 						</tr>
 						<tr>
