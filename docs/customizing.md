@@ -26,19 +26,37 @@ To supply your own matching tags (for example, pairs of synonyms), populate the 
 
 ## Adding dictionaries
 
+Adding dictionaries with words is done by filling table `DictionaryEntry` with records. Each entry is tied to a dictionary which allows the scoring engine to differentiate between different dictionaries. For example, if you have entries for dictionaries `people` and `placenames`, the scoring engine could choose to award more points to place names than to people's names.
+
+An alternative use for dictionaries is to make a dictionary `stopwords` and have the scoring engine award 0 points to all such tag entries.
+
 ## Adding your own style
+
 ### Changing colors
+
 All colors are defined in [variables.less](../src/main/webapp/static/styles/less/variables.less). The easiest way to change a color throughout the whole project is changing it's RGB-value in this less-file. To establish a link between the RGB-values and what you see on screen the variable-name should describe the color. This makes it easier to recognize and visualize the values and their on-screen representation. If a variable's name does not describe the new color very well please change it accordingly and run a simple search and replace action through all the less files.
 
 ### Adding your logo
+
 The logo is placed in the header. To change the logo place your logo-image in the [images folder](../src/main/webapp/static/img). And change the path for the dummy-logo image to your logo in the file [body.tag](../src/main/webapp/WEB-INF/tags/body.tag). To find the dummy-logo image in the code search for alt="LOGO" within this file. The logo should leave enough space for the tag-line about the amount of tags and matches. In the current setup a logo should not be wider than 220 pixels. 
 
 ### Changing the grid
+
 The document about [Front-end architecture](frontend.md) contains a description of how the grid can be accustomed to your specific needs. The current grid is based on 12 columns of 60 pixels wide divided by a 20 pixel wide gutter. This is also the document where you can find more in-debt descriptions about the front-end architecture. It's a starting point in case you need to make more changes to the visual design or layout. 
 
 ## Translating pages
 
+Because the project is not set up to support internationalization (where the language of the UI can be changed through a simple configuration setting), translating involves going through the source files and translating individual sentences.
+
+Phrases to be translated can be found in these files:
+
+* all views in `src/main/webapp/WEB-INF/views`
+* some of the scripts in `src/main/webapp/static/script`
+* the error messages in `src/main/resources/ValidationMessages.properties`
+
 ## Customizing scoring
+
+Computing tags' scores is handled by class `ScoringService`. It takes care of doing the appropriate database queries and combining all information. After it sets the appropriate properties on the tag entries (`matchingTagEntry`, `dictionary` and `pioneer`), it calls `TagEntry.recomputeScore` to update the entry's `score` property. Then it stores the updated entry in the database.
 
 ## Modifying the database structure
 
