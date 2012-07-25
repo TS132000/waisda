@@ -20,10 +20,10 @@
 					<c:if test="${user != null || user.playerBarVisible}">
 					<div class="stats pull-right">
 						<c:if test="${user == null || user.anonymous}">
-							<p ><strong><nf:format number="${globalStats.totalTags}" /></strong> <!-- ${globalStats.totalTags} --> tags entered and<strong><nf:format number="${globalStats.totalMatches}" /></strong> <!-- ${globalStats.totalMatches} --> matches made</p>
+							<p ><strong><nf:format number="${globalStats.totalTags}" /></strong> <!-- ${globalStats.totalTags} --> tags entered and<strong><nf:format number="${globalStats.totalMatches}" /> </strong> <!-- ${globalStats.totalMatches} --> matches made</p>
 						</c:if>
 						<c:if test="${user != null && !user.anonymous}">
-							<p>You contributed <strong><nf:format number="${user.totalTags}"/></strong> of <strong ><nf:format number="${globalStats.totalTags}" /></strong> tags and <strong><nf:format number="${user.totalMatches}" /></strong> of <strong><nf:format number="${globalStats.totalMatches}"  /></strong> matches over all</p>	
+							<p>You contributed <strong><nf:format number="${user.totalTags}"/></strong> of <strong ><nf:format number="${globalStats.totalTags}" /></strong> tags and <strong><nf:format number="${user.totalMatches}" /></strong> of <strong><nf:format number="${globalStats.totalMatches}"  /></strong> matches overall</p>
 						</c:if>		
 					</div>
 					</c:if>
