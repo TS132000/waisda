@@ -1,5 +1,5 @@
 <persistence>
-	<persistence-unit name="nl.waisda" transaction-type="JTA">
+	<persistence-unit name="nl.waisda" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>nl.waisda.domain.User</class>
 		<class>nl.waisda.domain.Gender</class>

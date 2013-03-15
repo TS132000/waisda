@@ -22,6 +22,40 @@ $ mysql < sql/create-database.sql
 
 To see how to specify username, password, hostname and other parameters, run `mysql --help`.
 
+## [NEW] Setup Bitronix transactionmanager in Tomcat
+
+This application uses Bitronix transactionmanager to provide transaction management. The application's /webapp/META-INF/context.xml file contains the configuration settings. To make the whole
+work correctly, Bitronix must be installed into Tomcat. The following steps are required to do so:
+
+- download Bitronix transactionmanger 2.1.3 (btm-dist-2.1.3.zip) from http://docs.codehaus.org/display/BTM/Home
+- try to follow the Tomcat setup guide http://docs.codehaus.org/display/BTM/Tomcat2x. If this doesn't result in a working situation, follow the steps below.
+
+- extract the following libs contained in btm-dist-2.1.3.zip to Tomcat/lib directory:
+    - btm-2.1.3.jar
+    - btm-tomcat55-lifecycle-2.1.3.jar
+    - geronimo-jta_1.1_spec-1.1.1.jar
+    - slf4j-api-1.6.4.jar
+    - slf4j-jdk14-1.6.4.jar
+- copy mysql jdbc driver lib (mysql-connector-java-5.1.7-bin.jar) to Tomcat/lib directory
+- define the btm lifecycle listener in Tomcat by adding the following line directly below the <Server> element in /tomcat/conf/Server.xml:
+    <Listener className="bitronix.tm.integration.tomcat55.BTMLifecycleListener" />
+- Specify where btm can find its properties file by adding the 'btm.root' and 'bitronix.tm.resource.configuration' to the tomcat VM options (can be done for example by
+  changing CATALINA_OPTS environment variable or adding it to the IDE's Tomcat VM settings):
+    -Dbtm.root=%CATALINA_HOME%/apache-tomcat-6.0.18 -Dbitronix.tm.resource.configuration=%CATALINA_HOME%/apache-tomcat-6.0.18/conf/resources.properties
+  NOTE: If %CATALINA_HOME% environment variable is not set, please replace it with the actual tomcat install directory
+        Ofcourse when using unix, replace %CATALINA_HOME% by $CATALINA_HOME
+- create BTM config file in /tomcat/conf. Name the file 'resources.properties'. The file requires the following content, make sure driverProperties values get set
+  to the correct values:
+    resource.ds.className=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+    resource.ds.uniqueName=pooledDataSource
+    resource.ds.minPoolSize=5
+    resource.ds.maxPoolSize=20
+    resource.ds.allowLocalTransactions=true
+    resource.ds.driverProperties.url=jdbc:mysql://localhost:3306/waisda?characterEncoding=UTF-8&amp;useUnicode=true
+    resource.ds.driverProperties.user=USER
+    resource.ds.driverProperties.password=PASSWORD
+- NOTE: Make sure there is no JTA library in Waisda's WEB-INF/lib directory
+
 ## Running in debug mode
 
 The source tree has a Makefile which lists commands for various useful scenarios. The first (and default) target is called `run`, which runs the website in debug mode using the Jetty webserver available to Maven.

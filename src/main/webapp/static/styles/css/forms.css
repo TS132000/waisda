@@ -940,3 +940,9 @@ legend + .control-group {
 .form-horizontal.boxed .error-block {
   margin-left: 100px;
 }
+
+.errors {
+ color: red;
+ display: block;
+ font-weight: bold;
+}

@@ -78,7 +78,8 @@ public abstract class AbstractRepository<T> {
 				else {
 					getEntityManager().persist(entity);
 				}
-				
+				getEntityManager().flush();
+
 				break;
 			}
 		}

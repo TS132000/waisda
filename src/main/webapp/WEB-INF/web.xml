@@ -20,11 +20,7 @@
 		<servlet-name>nl.waisda</servlet-name>
 		<url-pattern>/</url-pattern><!-- Hier mag geen sterretje! -->
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/static/*</url-pattern><!-- Hier moet een sterretje! -->
-	</servlet-mapping>
-	
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
