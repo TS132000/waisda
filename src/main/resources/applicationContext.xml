@@ -28,7 +28,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="jtaTransactionManager" factory-bean="transactionManager"
-		factory-method="getTransactionManager" />
+		factory-method="getTransactionManager" /> <!-- DRS: is this needed? -->
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -38,15 +38,16 @@
 		<property name="jpaVendorAdapter" ref="jpaAdapter" />
 		<property name="jpaProperties">
 			<props>
+			    <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop>
 				<prop key="hibernate.archive.autodetection">class, hbm</prop>
 				<prop key="hibernate.hbm2ddl.auto">${jpa.hbm2ddl.auto}</prop>
 				<prop key="hibernate.show_sql">${jpa.showSql}</prop>
 				<prop key="hibernate.format_sql">${jpa.formatSql}</prop>
-				<prop key="hibernate.connection.driver_class">${jdbc.driver}</prop>
-				<prop key="hibernate.connection.url">${jdbc.url}</prop>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
+				<!--prop key="hibernate.connection.driver_class">${jdbc.driver}</prop>
+				<prop key="hibernate.connection.url">${jdbc.url}</prop>
 				<prop key="hibernate.connection.username">${jdbc.username}</prop>
-				<prop key="hibernate.connection.password">${jdbc.password}</prop>
+				<prop key="hibernate.connection.password">${jdbc.password}</prop-->
 			</props>
 		</property>
 	</bean>

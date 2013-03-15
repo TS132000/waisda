@@ -95,6 +95,7 @@ public class User implements Comparable<User> {
 	@Basic(optional = true)
 	private String usernameFacebook;
 
+    private Boolean isAdmin;
 	// Afgeleide data
 
 	@Formula("IFNULL((SELECT SUM(te.score) FROM TagEntry te WHERE te.owner_id = id), 0)")
@@ -268,7 +269,15 @@ public class User implements Comparable<User> {
 		this.usernameFacebook = usernameFacebook;
 	}
 
-	public int getTotalScore() {
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public int getTotalScore() {
 		return totalScore;
 	}
 
