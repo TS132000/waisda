@@ -24,9 +24,16 @@ Now add the tables to the `waisda` database:
 $ mysql -u root waisda < sql/create-tables.sql
 ```
 
+Run all database updates by opening the files update-X_X_X.sql (where X_X_X holds the version number. At time of writing update-0_0_2.sql is available)
+
 The database `waisda` should now contain 8 tables. Consult the mysql documentation if you want to see the content of your database.
 
-Finally you need to create a user account that has access to the `waisda` database: 
+(To see how to specify username, password, hostname and other parameters, run `mysql --help`.)
+
+
+
+
+Finally you need to create a user account that has access to the `waisda` database:
 ```
 $ mysql -u root < sql/create-user.sql
 ```
@@ -51,7 +58,7 @@ work correctly, Bitronix must be installed into Tomcat. The following steps are 
 - define the btm lifecycle listener in Tomcat by adding the following line directly below the <Server> element in /tomcat/conf/Server.xml:
     <Listener className="bitronix.tm.integration.tomcat55.BTMLifecycleListener" />
 - Specify where btm can find its properties file by adding the 'btm.root' and 'bitronix.tm.resource.configuration' to the tomcat VM options (can be done for example by
-  changing CATALINA_OPTS environment variable or adding it to the IDE's Tomcat VM settings):
+  changing CATALINA_OPTS environment variable in the file %CATALINA_HOME%/bin/setenv.sh or adding it to the IDE's Tomcat VM settings):
     -Dbtm.root=%CATALINA_HOME%/apache-tomcat-6.0.18 -Dbitronix.tm.resource.configuration=%CATALINA_HOME%/apache-tomcat-6.0.18/conf/resources.properties
   NOTE: If %CATALINA_HOME% environment variable is not set, please replace it with the actual tomcat install directory
         Ofcourse when using unix, replace %CATALINA_HOME% by $CATALINA_HOME
