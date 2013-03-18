@@ -1,5 +1,7 @@
 <persistence>
 	<persistence-unit name="nl.waisda" transaction-type="JTA">
+	    <exclude-unlisted-classes>true</exclude-unlisted-classes><!-- FIXES Resource jndi://localhost not found WARNING -->
+	    <mapping-file>META-INF/orm.xml</mapping-file><!-- FIXES Resource jndi://localhost not found WARNING -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>nl.waisda.domain.User</class>
 		<class>nl.waisda.domain.Gender</class>
