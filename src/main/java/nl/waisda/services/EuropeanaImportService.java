@@ -26,14 +26,11 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.hibernate.stat.Statistics;
-import org.mockito.internal.matchers.EndsWith;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import nl.waisda.domain.PlayerType;
@@ -308,6 +305,12 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
 
                     String videoUrl = extractVideoUrl(detailedRecord);
                     String imageUrl = getFirst(record.getEdmPreviewList());
+                    Integer mediaLength = getMediaLength(detailedRecord);
+
+                    if (mediaLength == null || mediaLength == -1) {
+                        logError("VIDEO record with no duration set: title[0]: '" + getFirst(record.getTitleList()) + "' dcCreator[0]: '" + getFirst(record.getDcCreatorList()) + "'", null);
+                        continue;
+                    }
 
                     if (StringUtils.isEmpty(videoUrl)) {
                         logError("VIDEO record with empty video URL: title[0]: '" + getFirst(record.getTitleList()) + "' dcCreator[0]: '" + getFirst(record.getDcCreatorList()) + "'", null);
@@ -338,7 +341,7 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
                         action = "Updated";
                     }
 
-                    video.setDuration(getMediaLength(detailedRecord));
+                    video.setDuration(mediaLength);
                     video.setEnabled(true);
                     video.setFragmentID(null);
                     video.setImageUrl(imageUrl);

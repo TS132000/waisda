@@ -40,6 +40,10 @@ public class EuropeanaImportController {
     @Autowired
     private UserSessionService userSessionService;
 
+    /**
+     * Does current user have priviledges to run the importer?
+     * @return
+     */
     private boolean checkAuth() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         if (attributes != null) {
@@ -51,6 +55,16 @@ public class EuropeanaImportController {
         return false;
     }
 
+    /**
+     * Shows the import gui. Note that the import gui consists of two facets: a holder page that just defines
+     * the superficial page (i.e. head and body) and a contents part, that defines the searchbox, progress section
+     * and logs. When first called, the holderpage is returned. This page @include's the contents part.
+     * When the import process is started, jQuery updates the content part of the page every X seconds.
+     * Note: this has been set up very simplistic
+     * @param action
+     * @param map
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = PAGE_IMPORT_REQUEST)
     public String showImportPage(
         @PathVariable() String action,
@@ -58,6 +72,7 @@ public class EuropeanaImportController {
         EuropeanaImportForm form = new EuropeanaImportForm();
 
         if (!checkAuth()) {
+            // user must be logged in with admin account
             return PAGE_LOGON_REDIR;
         }
 
@@ -71,14 +86,23 @@ public class EuropeanaImportController {
 
         map.put(FORM_ATTRIBUTE, form);
 
-        if ("stats".equals(action)) {
+        if ("stats".equals(action)) { // show the contents part (perhaps a bit misnamed)
             return PAGE_IMPORT_STATS;
         }
-        // just return this for any other url
+        // just return the holder part for any other url requested
         return PAGE_IMPORT;
 
     }
 
+    /**
+     * Handle the import gui's input. It handles three actions:
+     * - when the user entered a new search query, the number of items found is returned
+     * - when the user confirms the result, the import process is started, running detached from current thread
+     * - when the user hits stop, the import process is stopped
+     * @param form
+     * @param result
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = PAGE_IMPORT_REQUEST)
     public String handleImportPageCommand(
         @ModelAttribute(FORM_ATTRIBUTE) EuropeanaImportForm form,
@@ -87,23 +111,30 @@ public class EuropeanaImportController {
         Assert.notNull(form);
 
         if (!checkAuth()) {
+            // user must be logged in with admin account
             return PAGE_LOGON_REDIR;
         }
 
         try {
             if (StringUtils.isNotEmpty(form.getStart()) && StringUtils.isNotEmpty(form.getImportRequestString()) && (form.getImportSummary() == null || !form.getImportRequestString().equals(form.getPrevImportRequestString()))) {
+                // return the resulting number of items for given search query
                 form.setImportSummary(importService.requestSummary(form.getImportRequestString()));
                 form.setPrevImportRequestString(form.getImportRequestString());
             } else if (StringUtils.isNotEmpty(form.getStart()) && StringUtils.isNotEmpty(form.getImportRequestString())) {
+                // execute the import
                 importService.runDetached(form.getImportRequestString());
+                form.setPrevImportRequestString(null);
                 return PAGE_IMPORT_REDIR;
             } else if (StringUtils.isNotEmpty(form.getStop())) {
+                // stop the importer
                 importService.requestStop();
                 return PAGE_IMPORT_REDIR;
             } else  {
+                // search query most probably not filled
                 result.rejectValue("importRequestString", null, "Please enter a query");
             }
         } catch(EuropeanaImportException eie) {
+            // functional exceptions are shown to user
             result.reject(null, eie.getMessage());
         }
 
