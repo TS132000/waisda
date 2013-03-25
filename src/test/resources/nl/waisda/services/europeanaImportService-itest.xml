@@ -16,15 +16,16 @@
                 <value>/nl/waisda/services/europeanaImportService-test.properties</value>
             </list>
         </property>
-    </bean>
+     </bean>
 
     <import resource="classpath:/jpa-test.xml"/>
 
-    <bean class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="org.apache.http.client.HttpClient"/>
-    </bean>
+    <!--bean class="org.mockito.Mockito" factory-method="mock">
+    <constructor-arg value=""/>
+    </bean-->
 
     <bean class="nl.waisda.services.EuropeanaImportService"/>
+    <bean class="org.apache.http.impl.client.DefaultHttpClient"/>
     <bean class="nl.waisda.repositories.VideoRepository"/>
     <bean class="nl.waisda.services.TransactionService"/>
     <bean id="europeanaImportThreadPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" autowire="byName">

@@ -32,7 +32,6 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional(propagation = Propagation.REQUIRED)
 public abstract class AbstractRepository<T> {
 
 	@PersistenceContext(unitName = "nl.waisda")

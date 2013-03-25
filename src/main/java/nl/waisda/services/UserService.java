@@ -47,7 +47,7 @@ public class UserService {
 	private TagEntryRepository tagRepo;
 
 	@Autowired
-	private ScoringService scoringService;
+	private ScoringServiceIF scoringService;
 
 	@Autowired
 	private GameRepository gameRepo;

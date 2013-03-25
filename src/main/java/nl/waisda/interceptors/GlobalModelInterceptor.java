@@ -31,6 +31,7 @@ import nl.waisda.repositories.GameRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.services.GameService;
 import nl.waisda.services.ScoringService;
+import nl.waisda.services.ScoringServiceIF;
 import nl.waisda.services.UserSessionService;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -47,7 +48,7 @@ public class GlobalModelInterceptor extends HandlerInterceptorAdapter {
 	private UserSessionService userSessionService;
 
 	@Autowired
-	private ScoringService scoringService;
+	private ScoringServiceIF scoringService;
 
 	@Autowired
 	private GameRepository gameRepo;

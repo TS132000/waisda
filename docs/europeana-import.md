@@ -77,6 +77,8 @@ waisda.import.europeana.rowsperquery    the maximum number of items we request f
 waisda.import.europeana.profile         the profile used in a search. Set this to 'minimal'
 waisda.import.europeana.videoextensions cumma separated list of the video extensions supported (.mp4, .avi, .mpg etc). 
                                         Note that Waisda's JW Player must support these formats
+waisda.import.europeana.validvideourls  cumma separated list of regular expressions a videoUrl must match with to accept
+                                        it as valid input
 
 ## Technical Description
 
