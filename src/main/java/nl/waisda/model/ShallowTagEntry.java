@@ -32,10 +32,11 @@ public class ShallowTagEntry {
 	private int gameTime;
 	private String matchingTag;
 	private String matchingTagOwnerName;
+	private boolean specialMatch;
 
 	public ShallowTagEntry(int id, String tag, int score, String dictionary,
 			boolean pioneer, int gameTime, String matchingTag,
-			String matchingTagOwnerName) {
+			String matchingTagOwnerName, boolean specialMatch) {
 		this.id = id;
 		this.tag = tag;
 		this.score = score;
@@ -44,6 +45,7 @@ public class ShallowTagEntry {
 		this.gameTime = gameTime;
 		this.matchingTag = matchingTag;
 		this.matchingTagOwnerName = matchingTagOwnerName;
+		this.specialMatch = specialMatch;
 	}
 
 	public static ShallowTagEntry fromTagEntry(TagEntry tag) {
@@ -51,8 +53,8 @@ public class ShallowTagEntry {
 		ShallowTagEntry shallow = new ShallowTagEntry(tag.getId(),
 				tag.getTag(), tag.getScore(), tag.getDictionary(),
 				tag.isPioneer(), tag.getGameTime(),
-				match != null ? match.getTag() : null, match != null ? match
-						.getOwner().getName() : null);
+				match != null ? match.getTag() : null, match != null ? match.getOwner().getName() : null,
+				tag.isSpecialMatch());
 		return shallow;
 	}
 
@@ -87,4 +89,12 @@ public class ShallowTagEntry {
 	public String getMatchingTagOwner() {
 		return matchingTagOwnerName;
 	}
+
+    public boolean isSpecialMatch() {
+        return specialMatch;
+    }
+
+    public void setSpecialMatch(boolean specialMatch) {
+        this.specialMatch = specialMatch;
+    }
 }

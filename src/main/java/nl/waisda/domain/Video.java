@@ -45,6 +45,7 @@ public class Video {
 	private int duration;
 
 	@Basic
+	@Column(length = 1024)
 	private String imageUrl;
 
 	@Basic
@@ -66,6 +67,7 @@ public class Video {
 	/** Fragmentenrubriek zoals in MBH dump. */
 	private Integer sectionNid;
 
+	@Column(length = 1024)
 	private String sourceUrl;
 
 	public int getId() {

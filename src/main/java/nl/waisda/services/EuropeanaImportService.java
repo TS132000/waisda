@@ -87,7 +87,11 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
 
     @Value("${waisda.import.europeana.videoextensions}")
     private String videoExtensions;
-    private List<String> videoExtensionList = new LinkedList<String>();;
+    private List<String> videoExtensionList = new LinkedList<String>();
+
+    @Value("${waisda.import.europeana.validvideourls}")
+    private String validVideoUrls;
+    private List<Pattern> validVideoUrlList = new LinkedList<Pattern>();
 
     private boolean isRunning = false;
     private boolean stopRequested = false;
@@ -97,17 +101,30 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
     private int     importingProgress = 0;
     private List<String> importLog = new LinkedList<String>();
 
+    /**
+     * Stop the process when the JVM tries to destroy this class
+     * @throws Throwable
+     */
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
         requestStop();
     }
 
+    /**
+     * Spring bean initialization
+     * @throws Exception
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         String[] videoTypesSplit = videoExtensions.split(",");
         for (String videoExtension : videoTypesSplit) {
             videoExtensionList.add(videoExtension.trim());
+        }
+
+        String[] validVideoUrlsSplit = this.validVideoUrls.split(",");
+        for (String validUrlExpression : validVideoUrlsSplit) {
+            validVideoUrlList.add(Pattern.compile(validUrlExpression));
         }
     }
 
@@ -420,6 +437,16 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
         return -1;
     }
 
+    private boolean isValidVideoUrl(String videoUrl) {
+        for (Pattern pattern : validVideoUrlList) {
+            Matcher matcher = pattern.matcher(videoUrl);
+            if (matcher.matches()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private String extractVideoUrl(EuropeanaObject record) {
         Assert.notNull(record);
 
@@ -428,8 +455,11 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
             // find URL using the preferred method
             for (EuropeanaAggregation aggregation : aggregationList) {
                 if (StringUtils.isNotEmpty(aggregation.getEdmIsShownBy())) {
+                    String videoUrl = aggregation.getEdmIsShownBy();
                     // this is the preferred way of obtaining the stream's URL
-                    return aggregation.getEdmIsShownBy();
+                    if (isValidVideoUrl(videoUrl)) {
+                        return aggregation.getEdmIsShownBy();
+                    }
                 }
             }
             // find URL using fallback method (examine the webresources)
@@ -584,4 +614,5 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
     public String getRunningQuery() {
         return runningQuery;
     }
+
 }

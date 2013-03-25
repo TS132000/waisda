@@ -33,7 +33,7 @@
 
     <header class="site-header">
   		<div class="container row relative equal-cols">
-	    	<h1 class="reset span3"><a href="/" class="logo reset col"><img src="/static/img/logo-dummy.png" alt="LOGO"></a></h1>
+	    	<h1 class="reset span3"><a href="/" class="logo reset col"><img src="/static/img/logo-europeana.png" alt="LOGO"></a></h1>
 	  		
 	  		<c:if test="${globalStats != null}">
 	  			<c:if test="${user == null || !user.playerBarVisible}">
@@ -100,24 +100,28 @@
 	 	<div class="container">
 				<ul class="unstyled horizontal pull-left">
 					<li><a href="/">Home</a></li>
-		  		<li><a href="/over-het-spel">Example contentpage 1</a></li>
-		  		<li><a href="/spelinstructies">Example contentpage 2</a></li>
+		  		<%--li><a href="/over-het-spel">Example contentpage 1</a></li>
+		  		<li><a href="/spelinstructies">Example contentpage 2</a></li--%>
 		  	</ul>
 	  		<ul class="unstyled horizontal pull-right">
 	  			<li>Find us on</li>
-		  		<li><a href="http://www.facebook.com/pages/Waisda/187799419727">Facebook</a></li>
-		  		<li><a href="http://twitter.com/waisda">Twitter</a></li>
-		  		<li><a href="http://blog.waisda.nl">Blog</a></li>
+		  		<%--li><a href="http://www.facebook.com/pages/Waisda/187799419727">Facebook</a></li--%>
+		  		<li><a href="https://twitter.com/EuropeanaTech">Twitter</a></li>
+		  		<li><a href="http://pro.europeana.eu/web/network/europeana-tech">Blog</a></li>
 		  	</ul>
 		</div>
 		<div class="container spaced-ext">
-			<p class="pull-left">
+			<p class="pull-left bold">
 				With support of 
-				<a href="http://beeldengeluid.nl" target="_nieuw"> <img src="/static/img/logo-beeldengeluid.png" alt="Beeld en Geluid /"></a>
-				<a href="http://beeldenvoordetoekomst.nl/" target="_nieuw"><img src="/static/img/logo-future.png" alt="Images for the future" /></a>
-				<a href="http://vu.nl" target="_nieuw"><img src="/static/img/logo-vu.png" alt="Vrije Universiteit" /></a>
-				<a href="http://q42.nl" target="_nieuw"><img src="/static/img/logo-q42.png" alt="Q42" /></a>
+				<a href="http://beeldengeluid.nl" target="_nieuw"> <img src="/static/img/logo-beeldengeluid.png" title="Beeld en Geluid /"></a>
+				<a href="http://beeldenvoordetoekomst.nl/" target="_nieuw"><img src="/static/img/logo-future.png" title="Images for the future" /></a>
+				<a href="http://vu.nl" target="_nieuw"><img src="/static/img/logo-vu.png" title="Vrije Universiteit" /></a>
+				<a href="http://q42.nl" target="_nieuw"><img src="/static/img/logo-q42.png" title="Q42" /></a>
 			</p>
+			<p class="pull-right width-350 bold small">
+                <img src="/static/img/flag-europa.png" align="right" style="margin-top: 2px" title="ICT Policy Support Programme"/>
+                co-funded by the European Union's ICT Policy Support Programme as part of the Competitiveness and Innovation Framework Programme
+            </p>
 		</div>		
 	</div>
 
