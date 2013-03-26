@@ -75,8 +75,6 @@ waisda.import.europeana.apikey          the Europeana API key, must be requested
 waisda.import.europeana.privkey         the Europeana Private key, must be requested at Europeana     
 waisda.import.europeana.rowsperquery    the maximum number of items we request from Europeana per search
 waisda.import.europeana.profile         the profile used in a search. Set this to 'minimal'
-waisda.import.europeana.videoextensions cumma separated list of the video extensions supported (.mp4, .avi, .mpg etc). 
-                                        Note that Waisda's JW Player must support these formats
 waisda.import.europeana.validvideourls  cumma separated list of regular expressions a videoUrl must match with to accept
                                         it as valid input
 
@@ -90,6 +88,7 @@ An overview of the steps the application performs in case of a Europeana import
 
 [ROLE: USER]
 - The user enters a search query in the importer frontend
+
 [ROLE: SYSTEM]
 - The import service starts the import in a background thread using Spring TaskExecutor
 - The import service queries Europeana API for a subset of items using the maximum rows per query
@@ -104,6 +103,7 @@ An overview of the steps the application performs in case of a Europeana import
 - The import service updates the log and progress summary. Note that aside the file log, the log is kept locally 
   in memory for frontend progress requests
 - The import service continues fetching the next subset of items and processes it
+
 [ROLE: USER]
 - The importer frontend updates the progress notification and log every 4 seconds using jQuery
 - The importer frontend sends a 'stop request' when the user hits the stop button
@@ -120,12 +120,14 @@ nl.waisda.services.EuropeanaImportServiceIF     Interface for Europeana import s
                                                 - stop current import
                                                 - request the progress summary fields
                                                 - request the progress log
+
 nl.waisda.services.EuropeanaImportService       Implementation for Europeana import service
 
 nl.waisda.services.TransactionServiceIF         Interface for TransactionService. Basically a facade to
                                                 execute Callables in transactional context. Currently only provides
                                                 a method to:
                                                 - run the Callable in a new Transaction (Propagation.REQUIRES_NEW)
+
 nl.waisda.services.TransactionService           Implementation of TransactionService.
 
 #### Importer model
