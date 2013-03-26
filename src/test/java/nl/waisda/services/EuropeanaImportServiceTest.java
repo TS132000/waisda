@@ -1,6 +1,10 @@
 package nl.waisda.services;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -18,11 +22,13 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import nl.waisda.domain.Video;
 import nl.waisda.repositories.VideoRepository;
 
 /**
@@ -83,7 +89,7 @@ public class EuropeanaImportServiceTest {
                 "\"edmProvider\":{\"def\":[\"Nationale Aggregator\"]}," +
                 "\"edmRights\":{\"def\":[\"http://creativecommons.org/licenses/by-sa/3.0/nl/\"]}," +
                 "\"webResources\":[{\"about\":\"http://www.openbeelden.nl/media/3969\"}," +
-                "{\"about\":\"http://www.openbeelden.nl/files/03/8613.3970.ONTHULLINGSTA-HRE00007FDA.mp4\"}," +
+                "{\"about\":\"http://www.openbeelden.nl/webresources.mp4\"}," +
                 "{\"about\":\"http://www.openbeelden.nl/images/66690/Vlissingen_%285_28%29.png\"}]}]," +
                 "\"timespans\":[{\"about\":\"http://semium.org/time/19xx_1_third\"," +
                 "\"prefLabel\":{\"en\":[\"early 20th century\"],\"ru\":[\"начало 20-го века\"]}}," +
@@ -106,7 +112,7 @@ public class EuropeanaImportServiceTest {
                 "\"items\":[{\n" +
                 "  \"id\":\"/08614/6569D2A45FD1CD9ADFB0E5BA54A3BD79C9DAE0BC\",\n" +
                 "  \"provider\":[\"EFG - The European Film Gateway\"],\n" +
-                "  \"edmPreview\":[\"http://europeanastatic.eu/api/image?uri=http%3A%2F%2Fwww.openbeelden.nl%2Fimages%2F64678%2FNieuws_uit_de_West_suikercultuur_in_Suriname_%25280_44%2529.png&size=LARGE&type=VIDEO\"],\n" +
+                "  \"edmPreview\":[\"http://europeanastatic.eu/api/image.png\"],\n" +
                 "  \"europeanaCompleteness\":0,\n" +
                 "  \"year\":[\"1921\"],\n" +
                 "  \"rights\":[\"http://www.europeana.eu/rights/rr-f/\"],\n" +
@@ -123,6 +129,7 @@ public class EuropeanaImportServiceTest {
 
     @Test
     @Transactional
+    @Rollback(value = true)
     public void testImportAcceptMP4() {
         HttpUriRequest overview = new HttpGet("http://preview.europeana.eu/api/v2/search.json?wskey=XxxsEZoWj&query=dontcare&start=1&rows=12&profile=minimal");
         HttpUriRequest details = new HttpGet("http://detail");
@@ -145,9 +152,17 @@ public class EuropeanaImportServiceTest {
             });
             // call the service
             service.importEuropeanaData("dontcare");
+            EntityManager em = entityManagerFactory.getObject().createEntityManager();
+            TypedQuery q = em.createQuery("select v from Video v", Video.class);
+            List<Video> result = q.getResultList();
+            Assert.assertTrue(result.size() > 0);
+            Assert.assertEquals("http://www.openbeelden.nl/files/03/8613.3970.ONTHULLINGSTA-HRE00007FDA.mp4", result.get(0).getSourceUrl());
+            Assert.assertEquals("http://europeanastatic.eu/api/image.png", result.get(0).getImageUrl());
+
 
         } catch(Exception e) {
             Assert.fail("Not supposed to fail");
+
         }
 
 
