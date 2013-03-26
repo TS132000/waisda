@@ -8,7 +8,6 @@ var TaggingHistory = base2.Base.extend({
 
 			if (!el.length) {
 				// Create an element for it
-			debugger;
 				el = jQuery('<div/>', { 'class' : 'tag', 'id' : this.idPrefix + tag.id });
 				el.append(jQuery('<span/>', { 'class' : 'points', 'text': '+' + tag.score }));
 				if (tag.matchingTag) {

@@ -15,4 +15,6 @@ public interface ScoringServiceIF {
 	void updateMatchAndStore(TagEntry tagEntry, boolean updateReverseMatches);
 	GlobalStats getGlobalStats();
 
+	boolean isSpecialDictionaryMatch(final String dictionaryName);
+
 }

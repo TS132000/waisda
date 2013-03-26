@@ -111,6 +111,13 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
         }
 	}
 
+    public boolean isSpecialDictionaryMatch(final String dictionaryName) {
+        if (StringUtils.isNotEmpty(dictionaryName)) {
+            return specialDictionaryList.contains(dictionaryName);
+        }
+        return false;
+    }
+
 	@Transactional
 	public void updateMatchAndStore(TagEntry tagEntry,
 			boolean updateReverseMatches) {
