@@ -85,10 +85,6 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
     @Value("${waisda.import.europeana.profile}")
     private String profile;
 
-    @Value("${waisda.import.europeana.videoextensions}")
-    private String videoExtensions;
-    private List<String> videoExtensionList = new LinkedList<String>();
-
     @Value("${waisda.import.europeana.validvideourls}")
     private String validVideoUrls;
     private List<Pattern> validVideoUrlList = new LinkedList<Pattern>();
@@ -117,14 +113,9 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        String[] videoTypesSplit = videoExtensions.split(",");
-        for (String videoExtension : videoTypesSplit) {
-            videoExtensionList.add(videoExtension.trim());
-        }
-
         String[] validVideoUrlsSplit = this.validVideoUrls.split(",");
         for (String validUrlExpression : validVideoUrlsSplit) {
-            validVideoUrlList.add(Pattern.compile(validUrlExpression));
+            validVideoUrlList.add(Pattern.compile(validUrlExpression.trim()));
         }
     }
 
@@ -468,13 +459,11 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
                 List<EuropeanaAbout> webresourcesList = aggregation.getWebResources();
                 if (webresourcesList != null) {
                     for (EuropeanaAbout about : webresourcesList) {
-                        String value = about.getAbout();
-                        int idxLastDot = value.lastIndexOf('.');
-
-                        if (value != null && idxLastDot > -1 && videoExtensionList.contains(value.substring(idxLastDot))) {
+                        String videoUrl = about.getAbout();
+                        if (isValidVideoUrl(videoUrl)) {
                             // yes, this is a video link
                             logWarn("Using video URL found in webresources!");
-                            return value;
+                            return videoUrl;
                         }
 
                     }
