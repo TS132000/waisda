@@ -77,6 +77,10 @@
 			<bean class="nl.waisda.interceptors.GlobalModelInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+            <bean class="nl.waisda.interceptors.StaticModelInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/registreren" />
 			<mvc:mapping path="/inloggen" />
 			<mvc:mapping path="/start-game/*" />

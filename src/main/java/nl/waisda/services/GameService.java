@@ -57,6 +57,9 @@ public class GameService {
 	@Autowired
 	private TagEntryRepository tagRepo;
 
+	@Autowired
+	private ScoringServiceIF scoringService;
+
 	private Cache<List<Game>> currentGamesCache;
 
 	{
@@ -128,6 +131,9 @@ public class GameService {
 		for (TagEntry tag : entries) {
 			User u = tag.getOwner();
 
+            // set special dictionary flag
+            tag.setSpecialMatch(scoringService.isSpecialDictionaryMatch(tag.getDictionary()));
+
 			if (u.getId() == owner.getId()) {
 				ownerEntries.add(tag);
 				ownerScore += tag.getScore();
@@ -139,6 +145,8 @@ public class GameService {
 				scores.put(u, score);
 			}
 			score.count(tag);
+
+
 		}
 
 		ArrayList<UserScore> participants = new ArrayList<UserScore>(

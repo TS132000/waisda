@@ -53,7 +53,7 @@ public class TagEntrySummary {
 		TagEntrySummary summary = new TagEntrySummary();
 		for (TagEntry tag : entries) {
 			summary.countTags++;
-			if (tag.getMatchingTagEntry() != null) {
+			if (tag.getMatchingTagEntry() != null && tag.getScore() > 0) { // only count it if it has points
 				summary.countMatchingTags++;
 				if (tag.isPioneer()) {
 					summary.countPioneerTags++;

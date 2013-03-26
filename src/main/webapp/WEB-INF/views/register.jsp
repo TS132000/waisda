@@ -64,11 +64,10 @@
 				
 
 					<div class="form-actions">
-						<a href="#" onclick="document.getElementById('meedoenForm').submit(); return false" id="submitMeedoen" class="btn btn-primary btn-large" tabindex="9">Start</a>
+    					<input type="submit" value="Registreer" class="btn btn-primary btn-large" tabindex="10"/>
 					</div>
 	
-					<input type="submit" value="Start" tabindex="10" style="position:absolute;top:0;left:-10000px;"/>
-				</fieldset>  
+				</fieldset>
 			</f:form>
 		</div>
 

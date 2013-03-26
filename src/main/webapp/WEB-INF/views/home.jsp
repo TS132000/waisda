@@ -11,9 +11,9 @@
 
 	<!-- AddThis Button BEGIN -->
 	<div id="addthis-bar" class="addthis_toolbox addthis_default_style pull-right spaced-bottom"
-		addthis:url="http://waisda.nl/"
-    	addthis:title="Waisda?"
-		addthis:description="Would you like to play?">
+		addthis:url="${staticModel.socialReferenceHome}"
+    	addthis:title="${staticModel.socialReferenceTitle}"
+		addthis:description="${staticModel.socialReferenceDescription}">
 		<a class="addthis_button_preferred_1"></a>
 		<a class="addthis_button_preferred_2"></a>
 		<a class="addthis_button_preferred_3"></a>
