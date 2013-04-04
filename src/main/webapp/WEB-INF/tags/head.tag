@@ -18,6 +18,7 @@
 
 	  	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    	<script src="/static/script/lib/less.js"></script>
 	  <![endif]-->
 	  <!--[if lt IE 8]>
 		<link href="/static/styles/css/ie7andbelow.css" rel="stylesheet"/>

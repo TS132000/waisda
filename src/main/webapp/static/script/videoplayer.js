@@ -1,6 +1,33 @@
-var NPOPlayer = base2.Base.extend({
+var EventBase = base2.Base.extend({
+    evtHandles : [],
+
+    addEvent : function(evtName, handle) {
+        this.evtHandles.push({
+            evtName : evtName,
+            handle : handle
+        });
+    },
+
+	dispatchEvents : function(evtName, params) {
+		// loop through all event handles, match event names and fire
+		for ( var i = 0; i < this.evtHandles.length; i++) {
+		    var handler = this.evtHandles[i];
+			if (handler.evtName == evtName) {
+				if (params == null || params == undefined || params.length == 0) {
+    			    handler.handle.apply(this); // IE 8 doesn't want params if no params present (or something)
+				} else {
+			        handler.handle.apply(this, params);
+                }
+			}
+		}
+	    return true;
+	}
+
+
+});
+
+var NPOPlayer = EventBase.extend({
 			constructor : function(elementId, config) {
-				this.evtHandles = [];
 				this.elementId = elementId;
 
 				var seekTime = Math.max(0, config.startTime);
@@ -45,22 +72,6 @@ var NPOPlayer = base2.Base.extend({
 
 			getElapsed : function() {
 				return this.elapsed;
-			},
-
-			addEvent : function(evtName, handle) {
-				this.evtHandles.push({
-					evtName : evtName,
-					handle : handle
-				});
-			},
-
-			dispatchEvents : function(evtName, params) {
-				// loop through all event handles, match event names and fire
-				for ( var i = 0; i < this.evtHandles.length; i++) {
-					if (this.evtHandles[i].evtName == evtName) {
-						this.evtHandles[i].handle.apply(this, params);
-					}
-				}
 			},
 
 			moveTo : function(sec) {
@@ -110,9 +121,8 @@ var onSilverlightLoad = function() {
 	game.initVideoPlayer();
 };
 
-var JWPlayer = base2.Base.extend({
+var JWPlayer = EventBase.extend({
 	constructor : function(elementId, imageUrl, sourceUrl) {
-		this.evtHandles = [];
 		this.elementId = elementId;
 
 		var self = this;
@@ -124,7 +134,7 @@ var JWPlayer = base2.Base.extend({
 			height: 351,
 			width: 618,
 			events: {
-				onComplete: function() { self.dispatchEvents("fragmentEnd"); },
+				onComplete: function() { self.dispatchEvents("fragmentEnd"); return true;},
 				onTime: function() {
 					var elapsed = Math.ceil(self.player.getPosition() * 1000);
 					var duration = Math.ceil(self.player.getDuration() * 1000);
@@ -133,6 +143,7 @@ var JWPlayer = base2.Base.extend({
 					if (duration != 0) {
 						self.dispatchEvents("tick", [ elapsed, duration ]);
 					}
+					return true;
 				}
 			}
 		});
@@ -140,22 +151,6 @@ var JWPlayer = base2.Base.extend({
 
 	getElapsed : function() {
 		return Math.ceil(this.player.getPosition() * 1000);
-	},
-
-	addEvent : function(evtName, handle) {
-		this.evtHandles.push({
-			evtName : evtName,
-			handle : handle
-		});
-	},
-
-	dispatchEvents : function(evtName, params) {
-		// loop through all event handles, match event names and fire
-		for ( var i = 0; i < this.evtHandles.length; i++) {
-			if (this.evtHandles[i].evtName == evtName) {
-				this.evtHandles[i].handle.apply(this, params);
-			}
-		}
 	},
 
 	moveTo : function(sec) {
