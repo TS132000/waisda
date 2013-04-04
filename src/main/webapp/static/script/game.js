@@ -57,8 +57,8 @@ var Game = base2.Base.extend({
 			jQuery('.equal-cols-game').equalHeights('.col-game');
 
 			setTimeout(jQuery.proxy(function() {
-				this.videoplayer.addEvent("tick", this.onVideoTick.bind(this));
-				this.videoplayer.addEvent("fragmentEnd", this.endGame.bind(this));
+                this.videoplayer.addEvent("tick", jQuery.proxy(this.onVideoTick, this));
+                this.videoplayer.addEvent("fragmentEnd", jQuery.proxy(this.endGame, this));
 
 				this.videoplayer.play();
 
@@ -193,7 +193,7 @@ var Game = base2.Base.extend({
 	
 	endGame: function() {
 		clearInterval(this.updateIntervalId);
-		location.href = "/game/" + this.gameId + "/recap/" + this.lastKnownUserId;
+		window.location.href = "/game/" + this.gameId + "/recap/" + this.lastKnownUserId;
 	}
 	
 });
