@@ -65,6 +65,12 @@ For testing purposes the source code provides and example CSV file in the direct
 mysql -u root waisda < sql/prelinger_videos.sql
 ```
 
+Now you can start your server and point your browser to `localhost:8080`.
+
+```
+make run
+```
+
 ## Adding your own style
 
 ### Changing colors
