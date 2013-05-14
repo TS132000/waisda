@@ -59,7 +59,7 @@ If you have existing data available in SQL format, you can import it using vario
 
 If you have video data in CSV format, again you can use one of the many MySQL tools out there, or use the command line utility [`mysqlimport`](https://dev.mysql.com/doc/refman/5.0/en/mysqlimport.html). It allows you to map the various columns in the CSV file to specific columns in the `Video` table.
 
-For testing purposes the source code provides and example CSV file in the directory `example`. The file [preligner_videos.sql](https://github.com/beeldengeluid/waisda/blob/master/sql/preliger_videos.sql) contains the required metadata for 1252 videos from the [Prelinger archive](http://archive.org/details/prelinger) hosted on [archive.org](http://archive.org/). To import these videos type:
+For testing purposes the source code provides and example SQL file in the directory `sql`. The file [preligner_videos.sql](https://github.com/beeldengeluid/waisda/blob/master/sql/preliger_videos.sql) contains the required metadata for 1252 videos from the [Prelinger archive](http://archive.org/details/prelinger) hosted on [archive.org](http://archive.org/). To import these videos type:
 
 ```
 mysql -u root waisda < sql/prelinger_videos.sql
