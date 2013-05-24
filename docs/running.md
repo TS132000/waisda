@@ -41,7 +41,7 @@ work correctly, Bitronix must be installed into Tomcat. The following steps are 
 - copy mysql jdbc driver lib (mysql-connector-java-5.1.7-bin.jar) to Tomcat/lib directory
 - define the btm lifecycle listener in Tomcat by adding the following line directly below the <Server> element in /tomcat/conf/Server.xml:
 
-    &lt;Listener className="bitronix.tm.integration.tomcat55.BTMLifecycleListener" />
+        <Listener className="bitronix.tm.integration.tomcat55.BTMLifecycleListener" />
 
 - Specify where btm can find its properties file by adding the 'btm.root' and 'bitronix.tm.resource.configuration' to the tomcat VM options (can be done for example by
   changing CATALINA_OPTS environment variable in the file %CATALINA_HOME%/bin/setenv.sh or adding it to the IDE's Tomcat VM settings):
