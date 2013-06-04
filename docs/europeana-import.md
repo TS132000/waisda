@@ -70,13 +70,13 @@ that the stop command was issued.
 ## Config and Setup
 
 The importer configuration is set in config.properties. The following parameters must be set:
-waisda.import.europeana.baseurl         the Europeana base URL, currently: http://preview.europeana.eu/api/v2/search.json
-waisda.import.europeana.apikey          the Europeana API key, must be requested at Europeana
-waisda.import.europeana.privkey         the Europeana Private key, must be requested at Europeana     
-waisda.import.europeana.rowsperquery    the maximum number of items we request from Europeana per search
-waisda.import.europeana.profile         the profile used in a search. Set this to 'minimal'
-waisda.import.europeana.validvideourls  cumma separated list of regular expressions a videoUrl must match with to accept
-                                        it as valid input
+    waisda.import.europeana.baseurl         the Europeana base URL, currently: http://preview.europeana.eu/api/v2/search.json
+    waisda.import.europeana.apikey          the Europeana API key, must be requested at Europeana
+    waisda.import.europeana.privkey         the Europeana Private key, must be requested at Europeana     
+    waisda.import.europeana.rowsperquery    the maximum number of items we request from Europeana per search
+    waisda.import.europeana.profile         the profile used in a search. Set this to 'minimal'
+    waisda.import.europeana.validvideourls  cumma separated list of regular expressions a videoUrl must match with to accept
+                                            it as valid input
 
 ## Technical Description
 
@@ -113,40 +113,40 @@ An overview of the steps the application performs in case of a Europeana import
 This section describes the classes that implement the Importer
 
 #### Importer logic
-nl.waisda.services.EuropeanaImportServiceIF     Interface for Europeana import service, provides methods to
-                                                - fetch the number of items to be imported with a given search
-                                                - execute an import
-                                                - execute an import running detached from the main thread
-                                                - stop current import
-                                                - request the progress summary fields
-                                                - request the progress log
-
-nl.waisda.services.EuropeanaImportService       Implementation for Europeana import service
-
-nl.waisda.services.TransactionServiceIF         Interface for TransactionService. Basically a facade to
-                                                execute Callables in transactional context. Currently only provides
-                                                a method to:
-                                                - run the Callable in a new Transaction (Propagation.REQUIRES_NEW)
-
-nl.waisda.services.TransactionService           Implementation of TransactionService.
-
+    nl.waisda.services.EuropeanaImportServiceIF     Interface for Europeana import service, provides methods to
+                                                    - fetch the number of items to be imported with a given search
+                                                    - execute an import
+                                                    - execute an import running detached from the main thread
+                                                    - stop current import
+                                                    - request the progress summary fields
+                                                    - request the progress log
+    
+    nl.waisda.services.EuropeanaImportService       Implementation for Europeana import service
+    
+    nl.waisda.services.TransactionServiceIF         Interface for TransactionService. Basically a facade to
+                                                    execute Callables in transactional context. Currently only provides
+                                                    a method to:
+                                                    - run the Callable in a new Transaction (Propagation.REQUIRES_NEW)
+    
+    nl.waisda.services.TransactionService           Implementation of TransactionService.
+    
 #### Importer model
-nl.waisda.exceptions.EuropeanaImportException   Thrown when a functional error occurs during import
-
-nl.waisda.model.europeana.EuropeanaResponse     Europeana API response DTO for Json marshalling
-nl.waisda.model.europeana.EuropeanaRecord       Europeana item DTO
-nl.waisda.model.europeana.EuropeanaObject       Europeana object DTO (adds a few fields to Europeana Record)
-
-nl.waisda.model.europeana.EuropeanaProxy        Entry for Europeana data category 'Proxies'
-nl.waisda.model.europeana.EuropeanaAggregation  Entry for Europeana data category 'Aggregation'
-
-nl.waisda.model.europeana.EuropeanaAbout        Europeana 'About' key value pair
-nl.waisda.model.europeana.EuropeanaSingleDef    Europeana 'Default' key value pair (single value)
-nl.waisda.model.europeana.EuropeanaMultiDef     Europeana 'Default' key value pair (multi value)
+    nl.waisda.exceptions.EuropeanaImportException   Thrown when a functional error occurs during import
+    
+    nl.waisda.model.europeana.EuropeanaResponse     Europeana API response DTO for Json marshalling
+    nl.waisda.model.europeana.EuropeanaRecord       Europeana item DTO
+    nl.waisda.model.europeana.EuropeanaObject       Europeana object DTO (adds a few fields to Europeana Record)
+    
+    nl.waisda.model.europeana.EuropeanaProxy        Entry for Europeana data category 'Proxies'
+    nl.waisda.model.europeana.EuropeanaAggregation  Entry for Europeana data category 'Aggregation'
+    
+    nl.waisda.model.europeana.EuropeanaAbout        Europeana 'About' key value pair
+    nl.waisda.model.europeana.EuropeanaSingleDef    Europeana 'Default' key value pair (single value)
+    nl.waisda.model.europeana.EuropeanaMultiDef     Europeana 'Default' key value pair (multi value)
 
 #### Importer frontend
-nl.waisda.controllers.EuropeanaImportController Frontend controller for Europeana import service. The user
-                                                must have isAdmin flag set to access pages
+    nl.waisda.controllers.EuropeanaImportController Frontend controller for Europeana import service. The user
+                                                    must have isAdmin flag set to access pages
 
 ### Changes
 - Added 'isAdmin' field to User table and DTO
