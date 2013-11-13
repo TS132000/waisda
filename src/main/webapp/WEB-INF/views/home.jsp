@@ -82,8 +82,6 @@
 			</section>
 		</div>
 		
-		<tt:games-queue dynamic="false"/>
-		
 	</div>
 
 </tt:body>

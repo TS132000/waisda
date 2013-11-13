@@ -57,65 +57,33 @@ public class GameService {
 	@Autowired
 	private TagEntryRepository tagRepo;
 
-	private Cache<List<Game>> currentGamesCache;
-
-	{
-		Value<List<Game>> fetchCurrentGames = new Value<List<Game>>() {
-
-			@Override
-			public List<Game> get() {
-				Date now = new Date();
-				return gameRepo.getQueuesFor(now);
-			}
-		};
-		currentGamesCache = new Cache<List<Game>>(fetchCurrentGames, 500);
-	}
-
 	@Transactional
-	public Game createGame(User user, Video video) throws NotFoundException {
+	public Game createGame(User user, Video video, Integer scoreToBeat) throws NotFoundException {
 		if (!video.isEnabled()) {
 			log.info(String.format("Ignoring request for new game for disabled video %d", video.getId()));
 			throw new NotFoundException();
 		}
 
-		List<Game> currentGames = gameRepo.getQueuesFor(new Date(), video);
+		Game game = new Game();
 
-		if (currentGames.isEmpty()) {
-			Game game = new Game();
+		game.setInitiator(user);
+		//game.setScoreToBeat(scoreToBeat);
 
-			game.setInitiator(user);
+		game.setStart(new Date());
+		game.setVideo(video);
+		game.setCountExistingVideoTags(tagRepo.countTags(video.getId()));
 
-			Calendar c = Calendar.getInstance();
-			c.add(Calendar.MILLISECOND, Game.QUEUE_TIME_MS);
-			Date start = c.getTime();
+		gameRepo.store(game);
 
-			game.setStart(start);
-			game.setVideo(video);
-			game.setCountExistingVideoTags(tagRepo.countTags(video.getId()));
+		log.info(String.format(
+				"Created new game %d for video %d and user %d",
+				game.getId(), video.getId(), user.getId()));
 
-			gameRepo.store(game);
-			currentGamesCache.invalidate();
-
-			log.info(String.format(
-					"Created new game %d for video %d and user %d",
-					game.getId(), video.getId(), user.getId()));
-
-			return game;
-		} else {
-			Game game = currentGames.get(0);
-			log.info(String.format(
-					"Returning existing game %d for video %d and user %d",
-					game.getId(), video.getId(), user.getId()));
-			return game;
-		}
+		return game;
 	}
 
 	public Game getGameById(int gameId) {
 		return gameRepo.getById(gameId);
-	}
-
-	public List<Game> getCurrentQueues() {
-		return currentGamesCache.get();
 	}
 
 	public Recap getRecap(Game game, User owner) {

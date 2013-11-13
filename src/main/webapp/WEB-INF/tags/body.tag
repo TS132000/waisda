@@ -121,8 +121,4 @@
 		</div>		
 	</div>
 
-	<c:if test="${cssClass != 'body' && cssClass != 'game'}">
-		<tt:games-queue dynamic="true"/>
-	</c:if>
-
 </body>

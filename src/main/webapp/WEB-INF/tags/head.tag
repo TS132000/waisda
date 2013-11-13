@@ -30,7 +30,6 @@
 
 	<script src="/currentUser.js?dummy=<%= new java.util.Date().getTime() %>"></script>
 	<script src="/static/script/global.js"></script>
-	<script src="/static/script/games-queue.js"></script>
 	<script src="https://base2.googlecode.com/svn/version/1.0.2/src/base2.js"></script>
 	<script src="/static/mediaplayer-5.9/jwplayer.js"></script>
 	<jsp:doBody/>

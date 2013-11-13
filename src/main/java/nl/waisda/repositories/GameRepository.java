@@ -58,36 +58,6 @@ public class GameRepository extends AbstractRepository<Game> {
 				source.getId(), target.getId()));
 	}
 
-	public List<Game> getQueuesFor(Date date) {
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		c.add(Calendar.MILLISECOND, Game.QUEUE_TIME_MS);
-		Date date2 = c.getTime();
-
-		TypedQuery<Game> query = getEntityManager().createQuery(
-				"SELECT g from Game g WHERE g.start BETWEEN :d1 AND :d2",
-				Game.class);
-		query.setParameter("d1", date);
-		query.setParameter("d2", date2);
-		return query.getResultList();
-	}
-
-	public List<Game> getQueuesFor(Date date, Video video) {
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		c.add(Calendar.MILLISECOND, Game.QUEUE_TIME_MS);
-		Date date2 = c.getTime();
-
-		TypedQuery<Game> query = getEntityManager()
-				.createQuery(
-						"SELECT g from Game g WHERE g.video = :v AND g.start BETWEEN :d1 AND :d2",
-						Game.class);
-		query.setParameter("v", video);
-		query.setParameter("d1", date);
-		query.setParameter("d2", date2);
-		return query.getResultList();
-	}
-
 	public GameScore getLastGamePlayed(int userId) {
 		List<GameScore> games = getRecentGames(userId, 1);
 		if (games.size() > 0) {

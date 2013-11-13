@@ -39,9 +39,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 public class Game {
 	
-	/** Time taken to give other players a chance to join the game. */
-	public static final int QUEUE_TIME_MS = 0;
-	
 	/** Allow users to submit entries for times at most this many ms in the past. */
 	public static final int ACCEPTABLE_LAG_MS = 2 * 60 * 1000; // 2 minutes
 

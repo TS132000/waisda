@@ -93,7 +93,7 @@ public class GameController {
 			throws NotFoundException {
 		User user = userSessionService.requireCurrentUserOrCreateAnonymous(session);
 		Video video = videoRepo.getById(videoId);
-		Game game = gameService.createGame(user, video);
+		Game game = gameService.createGame(user, video, null);
 
 		return "redirect:/game/" + game.getId();
 	}
@@ -167,12 +167,6 @@ public class GameController {
 		update.setStudents(summaries);
 
 		return update;
-	}
-	
-	@RequestMapping("/current-queues")
-	@ResponseBody
-	public CurrentGames currentQueues(ModelMap model) {
-		return new CurrentGames(new Date().getTime(), gameService.getCurrentQueues());
 	}
 
 	@RequestMapping("/tag-entry")

@@ -87,7 +87,6 @@ public class GlobalModelInterceptor extends HandlerInterceptorAdapter {
 
 			modelAndView.addObject("globalStats",
 					scoringService.getGlobalStats());
-			modelAndView.addObject("currentQueues", gameService.getCurrentQueues());
 		}
 	}
 }
