@@ -6,6 +6,7 @@
 
 <tt:html>
 <tt:head title="Home">
+<script type="text/javascript" src="/static/script/home.js"></script>
 </tt:head>
 <tt:body cssClass="body" pageName="home">
 
@@ -29,22 +30,11 @@
 	</p>
 	
 	<!--h2>Kanalen</h2-->
-	<ul class="row equal-cols unstyled clear-both">
-		
-		<c:forEach var="channel" items="${channels}">
-		
-		<li class="span2">
-			<a href="/start-game/${channel.video.id}" title="${channel.video.title}" rel="nofollow" class="box channel col">
-				<div class="img">
-					<img src="${channel.video.imageUrl}" />
-					<div class="overlay trigger"></div>
-				</div>
-				<h3 class="h5">${channel.video.title}</h3>
-				<p class="small">games: ${channel.video.timesPlayed}<br/>high score: <nf:format number="${channel.highscore}" /></p>
-			</a>
-		</li>
-		</c:forEach>		
-	</ul>
+
+	<a id="reloadChannelsButton" href="#" class="refresh topLeft ">Laad andere video's</a>
+	
+	<c:import url="/channels"/>
+
 
 	<!--h2 class="spaced">Hoe werkt het?</h2-->
 	<div class="row equal-cols">

@@ -2,11 +2,7 @@
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
-  *zoom: 1;
-  margin-right: auto;
-  margin-left: auto;
-  *zoom: 1;
-  *zoom: 1;
+  position: relative;
 }
 .container:before,
 .container:after {
@@ -44,7 +40,6 @@
   padding-right: 20px;
   padding-left: 20px;
   *zoom: 1;
-  *zoom: 1;
 }
 .container-fluid:before,
 .container-fluid:after {
@@ -61,4 +56,9 @@
 }
 .container-fluid:after {
   clear: both;
+}
+.topLeft {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }

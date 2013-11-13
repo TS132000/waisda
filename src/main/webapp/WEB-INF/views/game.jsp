@@ -34,17 +34,7 @@
 					<h3 class="h5">Good luck!</h3>
 				</div>
 				<div class="box clean span6">
-					<div id="playerList" class="box">
-						<header class="rich">
-							<h2 class="h3 pull-left reset">Players</h2>
-							<a href="/game/${game.id}/recap/${user.id}" class="btn btn-primary pull-right">stop</a>
-						</header>
-						<section class="reset">
-							<ul class="unstyled reset">
-							</ul>
-						</section>
-						
-					</div>		
+					<a href="/game/${game.id}/recap/${user.id}" class="btn btn-primary pull-right">stop</a>
 				</div>
 			</div>
 			

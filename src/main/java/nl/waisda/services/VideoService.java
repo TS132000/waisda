@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class VideoService {
 
-	public static final long MAX_CHANNEL_AGE = 60000;
+	public static final long MAX_CHANNEL_AGE = 1000;
 
 	@Autowired
 	private VideoRepository videoRepo;

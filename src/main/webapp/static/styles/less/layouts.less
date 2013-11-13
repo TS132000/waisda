@@ -12,6 +12,7 @@
 // Container (centered, fixed-width layouts)
 .container {
   .container-fixed();
+  position: relative;
 }
 
 // Fluid layouts (left aligned, with sidebar, min- & max-width content)
@@ -19,4 +20,10 @@
   padding-right: @gridGutterWidth;
   padding-left: @gridGutterWidth;
   .clearfix();
+}
+
+.topLeft {
+	position: absolute; 
+	top: 0px;
+	right: 0px;
 }

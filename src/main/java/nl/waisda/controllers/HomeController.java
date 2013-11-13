@@ -51,8 +51,6 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/", "/index.html" })
 	public String home(@RequestParam(defaultValue = "1", required = false) int page, ModelMap model, HttpSession session) {
-		List<Channel> channels = videoService.getChannelContent();
-		model.addAttribute("channels", channels);
 		model.addAttribute("cssClass", "home");
 		
 		return "home";
@@ -67,6 +65,13 @@ public class HomeController {
 		StringWriter sw = new StringWriter();
 		om.writeValue(sw, currentUser);
 		res.getWriter().write("var CurrentUser = " + sw.toString() + ";");
+	}
+
+	@RequestMapping("/channels")
+	public String channels(ModelMap model) {
+		List<Channel> channels = videoService.getChannelContent();
+		model.addAttribute("channels", channels);
+		return "channels";
 	}
 
 }
