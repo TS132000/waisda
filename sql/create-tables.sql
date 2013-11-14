@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.16, for osx10.6 (i386)
+-- MySQL dump 10.13  Distrib 5.6.13, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: waisda
 -- ------------------------------------------------------
--- Server version	5.5.16
+-- Server version	5.6.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,16 +40,17 @@ DROP TABLE IF EXISTS `Video`;
 CREATE TABLE `Video` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL COMMENT 'Title used in summaries, headers etc',
+  `startTime` int(11) NOT NULL DEFAULT '0' COMMENT 'For playerType NPO',
   `duration` int(11) NOT NULL COMMENT 'Length in ms',
   `imageUrl` varchar(255) DEFAULT NULL COMMENT 'URL of preview image',
   `enabled` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Whether this video is available for new games',
   `playerType` varchar(15) NOT NULL DEFAULT 'JW' COMMENT 'Either ''JW'' or ''NPO''',
   `sourceUrl` varchar(255) DEFAULT NULL COMMENT 'For playerType JW',
-  `fragmentID` varchar(255) DEFAULT NULL COMMENT 'For playerType NPO',
-  `sectionNid` int(11) DEFAULT NULL COMMENT 'For playerType NPO',
-  `startTime` int(11) DEFAULT NULL COMMENT 'For playerType NPO',
+  `lastUpdatedOn` datetime NOT NULL,
+  `mediaId` varchar(31) DEFAULT NULL,
+  `prid` varchar(31) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `fragmentID` (`fragmentID`)
+  UNIQUE KEY `medeaId` (`mediaId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Videos available for play';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,6 +82,8 @@ CREATE TABLE `Game` (
   `initiator_id` int(11) DEFAULT NULL COMMENT 'User who created this session',
   `video_id` int(11) NOT NULL COMMENT 'Video played',
   `countExistingVideoTags` int(11) NOT NULL DEFAULT '0' COMMENT 'Number of existing tags at creation time',
+  `challengeSource_id` int(11) DEFAULT NULL,
+  `scoreToBeat` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK21C012337EBE01` (`video_id`),
   KEY `FK21C0122F5F75EF` (`initiator_id`),
@@ -180,4 +183,4 @@ CREATE TABLE `Participant` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-18 14:27:59
+-- Dump completed on 2013-11-14 14:23:32

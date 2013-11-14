@@ -5,27 +5,28 @@ var Game = base2.Base.extend({
 	duration: null,
 	gameId: null,
 	history: null,
-	scoreboard: null,
 	updateIntervalId: null,
 	beenPlaying: false,
 	lastKnownUserId: CurrentUser.id,
+	scoreToBeat: 0,
 	
-//	constructor: function(gameId, fragmentID, startTimeWithinEpisode, duration, startTime) {
-	constructor: function(gameId, video, startTime) {
+	constructor: function(gameId, video, startTime, scoreToBeat) {
 		this.gameId = gameId;
 		this.startTime = startTime;
 		this.duration = video.duration;
 		this.loadTime = new Date().getTime();
+		this.scoreToBeat = scoreToBeat;
 		
 		this.history = new TaggingHistory();
-		this.scoreboard = new Scoreboard();
 
 		if (video.playerType == 'NPO') {
 			var playerArgs = {
 				fragmentID: video.fragmentId,
-				startTimeWithinEpisode: video.startTimeWithinEpisode,
-				duration: video.duration,
-				startTime: startTime
+				startTimeWithinEpisode: video.startTimeWithinEpisode / 1000,
+				duration: video.duration / 1000,
+				imageUrl: video.imageUrl,
+				prid: video.prid,
+				title: video.title
 			};
 			this.videoplayer = new NPOPlayer('video', playerArgs);
 		} else if (video.playerType == 'JW') {
@@ -34,8 +35,24 @@ var Game = base2.Base.extend({
 
 		if (this.videoplayer != null) {
 			this.updateIntervalId = setTimeout(jQuery.proxy(this.update, this), 1000);
+			this.attachHelpArrow();
 			this.initVideoPlayer();
+			
 		}
+	},
+	attachHelpArrow: function() {
+		var input = $('#inputField');
+		var arrow = $('#helparrow');
+		$('body').click(function(e){
+			if (e.target.id == "helparrow" && !arrow.hasClass('dontshow')) {
+				input.focus();
+			}
+			if (!input.is(":focus")) {
+				arrow.removeClass('dontshow');
+			} else {
+				arrow.addClass('dontshow');
+			}
+		});
 	},
 	
 	initVideoPlayer: function()
@@ -125,7 +142,6 @@ var Game = base2.Base.extend({
 						}
 						
 						this.lastKnownUserId = responseJSON.ownId;
-						this.scoreboard.update(responseJSON.students, responseJSON.ownId);
 
 						this.updateIntervalId = setTimeout(jQuery.proxy(this.update, this), 1000);
 					}

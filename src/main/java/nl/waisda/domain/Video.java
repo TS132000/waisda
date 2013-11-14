@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with Waisda.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package nl.waisda.domain;
 
@@ -56,64 +56,106 @@ public class Video {
 	@Enumerated(EnumType.STRING)
 	private PlayerType playerType;
 
-	@Basic
-	private String fragmentID;
-
 	/** Start time within episode, in ms. */
 	@Basic
-	private Integer startTime;
+	private int startTime;
 
-	/** Fragmentenrubriek zoals in MBH dump. */
-	private Integer sectionNid;
-
+	@Basic
 	private String sourceUrl;
+
+	@Basic
+	private String prid;
 
 	public int getId() {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
-		return title;
+		int index = title.indexOf('-');
+		if (title.startsWith("Vroege Vogels") && index >= 0) {
+			return title.substring(index + 1).trim();
+		} else {
+			return title;
+		}
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getDuration() {
 		return duration;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public String getPrettyDuration() {
+		return TagEntry.getFriendlyTime(duration);
 	}
 
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public int getTimesPlayed() {
 		return timesPlayed;
+	}
+
+	public void setTimesPlayed(int timesPlayed) {
+		this.timesPlayed = timesPlayed;
 	}
 
 	public PlayerType getPlayerType() {
 		return playerType;
 	}
 
-	public String getFragmentID() {
-		return fragmentID;
+	public void setPlayerType(PlayerType playerType) {
+		this.playerType = playerType;
 	}
 
-	public Integer getStartTime() {
+	public int getStartTime() {
 		return startTime;
 	}
 
-	public Integer getSectionNid() {
-		return sectionNid;
+	public void setStartTime(int startTime) {
+		this.startTime = startTime;
 	}
 
 	public String getSourceUrl() {
 		return sourceUrl;
 	}
 
-	public String getPrettyDuration() {
-		return TagEntry.getFriendlyTime(duration);
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
+
+	public String getPrid() {
+		return prid;
+	}
+
+	public void setPrid(String prid) {
+		this.prid = prid;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getImageUrl() {
+		if (imageUrl != null && imageUrl.startsWith("http://media.vara.nl/")) {
+			return "https" + imageUrl.substring(4);
+		}
+		return imageUrl;
 	}
 
 }

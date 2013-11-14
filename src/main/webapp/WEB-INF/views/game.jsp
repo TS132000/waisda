@@ -1,8 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="tt" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="js" uri="/WEB-INF/tld/js.tld"%>
 <tt:html>
 <tt:head title="${game.video.title}">
-	<script src="/static/script/ugslplayer.js"></script>
+	<c:choose>
+		<c:when test="${game.video.playerType == 'NPO'}">
+			<script src="http://ida.omroep.nl/npoplayer/npoplayer-min.js"></script>
+		</c:when>
+		<c:when test="${game.video.playerType == 'JW'}">
+			<script src="/static/mediaplayer-6.7/jwplayer.js"></script>
+		</c:when>
+	</c:choose>
 	<script src="/static/script/utils.js"></script>
 	<script src="/static/script/videoplayer.js"></script>
 	<script src="/static/script/taggingHistory.js"></script>
@@ -41,6 +49,7 @@
 			<div id="videoFrame" class="outside">
 				<div id="video" class="video"></div>
 			</div>
+			<div class="pauze">hulplijn / pauze</div>
 		</section>
 
 		<footer class="outside">
@@ -72,16 +81,18 @@
 			<c:when test="${game.video.playerType == 'NPO'}">
 				var video = {
 						playerType : 'NPO',
-						fragmentId : ${game.video.fragmentID},
+						prid : <js:lit string="${game.video.prid}"/>,
 						startTimeWithinEpisode : ${game.video.startTime},
-						duration : ${game.video.duration}
+						duration : ${game.video.duration},
+						imageUrl : <js:lit string="${game.video.imageUrl}"/>,
+						title : <js:lit string="${game.video.title}"/>
 					};
 			</c:when>
 			<c:when test="${game.video.playerType == 'JW'}">
 				var video = {
 						playerType : 'JW',
-						sourceUrl : '${game.video.sourceUrl}',
-						imageUrl : '${game.video.imageUrl}'
+						sourceUrl : <js:lit string="${game.video.sourceUrl}"/>,
+						imageUrl : <js:lit string="${game.video.imageUrl}"/>
 					};
 			</c:when>
 			<c:otherwise>
