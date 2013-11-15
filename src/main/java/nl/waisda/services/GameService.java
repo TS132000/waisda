@@ -60,7 +60,7 @@ public class GameService {
 		Game game = new Game();
 
 		game.setInitiator(user);
-		//game.setScoreToBeat(scoreToBeat);
+		game.setScoreToBeat(scoreToBeat);
 
 		game.setStart(new Date());
 		game.setVideo(video);
