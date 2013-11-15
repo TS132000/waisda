@@ -27,7 +27,7 @@
 				<form method="post" id="challengeForm">
 						<fieldset>
 							<div class="form-actions center">
-								<a href="#" onclick="document.getElementById('challengeForm').submit(); return false" class="button button-terra" tabindex="9">Uitdaging accepteren</a>
+								<a href="#" onclick="document.getElementById('challengeForm').submit(); return false" class="btn btn-primary btn-large" tabindex="9">Uitdaging accepteren</a>
 							</div>
 			
 							<input type="submit" value="Start" tabindex="10" style="position:absolute;top:0;left:-10000px;"/>

@@ -46,10 +46,10 @@
 						<header class="rich">
 							<c:choose>
 							<c:when test="${game.scoreToBeat != null}">
-								<a href="/game/${game.id}/recap/${user.id}#challenge" class="button button-terra pull-right">stop</a>
+								<a href="/game/${game.id}/recap/${user.id}#challenge" class="btn btn-primary btn-large pull-right">stop</a>
 							</c:when>
 							<c:otherwise>
-								<a href="/game/${game.id}/recap/${user.id}" class="button button-terra pull-right">stop</a>
+								<a href="/game/${game.id}/recap/${user.id}" class="btn btn-primary btn-large pull-right">stop</a>
 							</c:otherwise>
 							</c:choose>
 						</header>
