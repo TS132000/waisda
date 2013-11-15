@@ -97,13 +97,13 @@ var JWPlayer = base2.Base.extend({
 		this.elementId = elementId;
 
 		var self = this;
-		var pause = false;
 		this.player = jwplayer(elementId).setup({
 			flashplayer: '/static/mediaplayer-6.7/jwplayer.flash.swf',
 			file: sourceUrl,
 			image: imageUrl,
 			height: 351,
 			width: 618,
+			controls: false,
 			events: {
 				onComplete: function() { self.dispatchEvents("fragmentEnd"); },
 				onTime: function() {
@@ -118,7 +118,6 @@ var JWPlayer = base2.Base.extend({
 				onPause: function(){
 					$(".pauze").addClass("play");
 					$(".pauze").text("verder spelen");
-					pause = true;
 				},
 				onPlay: function(){
 					$(".pauze").removeClass("play");
@@ -128,17 +127,15 @@ var JWPlayer = base2.Base.extend({
 		});
 		
 		$(".pauze").click(function(){
-			if (pause) {
+			if (jwplayer(this.elementId).getState() == "PAUSED") {
 				$(".pauze").removeClass("play");
 				$(".pauze").text("pauze");
 				self.play();
-				pause = false;
 				
 			} else {
 				$(".pauze").addClass("play");
 				$(".pauze").text("verder spelen");
 				self.stop();
-				pause = true;
 			}
 			
 		});
@@ -169,10 +166,10 @@ var JWPlayer = base2.Base.extend({
 	},
 
 	play : function() {
-		this.player.play(true);
+		jwplayer(this.elementId).play();
 	},
 
 	stop : function() {
-		this.player.pause(true);
+		jwplayer(this.elementId).pause(true);
 	}
 });
