@@ -31,7 +31,7 @@ This document is intended for programmers who would like to take the white-label
 There are several important types of entities in the project:
 
 * A **video** has a title, description, source, screencap, length and information on how to play it. There are currently two players available: the JWPlayer (Flash), and the NPO player (HTML5/Flash) that specifically plays content from Dutch public broadcasting associations. Each video in the project specifies which of the two players it would like to use, in combination with the parameters required for the players.
-* A **game** is a session in which one or more players (called participants in the code) watch a video simultaneously and enter zero or more tags at specific timestamps relative to the video. Players can see the other participants’ names and their relative positions based on their session scores.
+* A **game** is a session in which a player watches a video and enters zero or more tags at specific timestamps relative to the video.
 * A **tag entry** for a specific game is owned by a user and contains information on what tag was entered exactly, at what timestamp relative to the video it was entered and has a score based on whether the tag matches other users’ tags and/or words in dictionaries.
 * A **dictionary** is a set of words which award extra points when entered by a user. Examples are names of celebrities and names of geographical locations.
 
@@ -55,12 +55,10 @@ To give you a good idea of what is possible on the website, here is an overview 
 * The game page is where a single game is played:
   * the video to watch;
   * a text area to enter tags;
-  * a list of participating players, showing their relative positions based on score;
   * a list of tags entered, with scores and information on what kind of match it is (if any).
 * After playing a game, the player is taken to a page that recaps the game just played:
   * the title of the video watched;
   * a summary of tags entered, grouped by match type;
-  * a list of participants, their scores and tag statistics;
   * a full list of every tag entered, with scores and match information.
 * Clicking on a user's name anywhere on the site leads to a user's profile page with:
   * general information about the user (name and some contact information if the user chose to enter it);

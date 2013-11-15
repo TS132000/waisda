@@ -45,21 +45,10 @@ The following fields are for registered users only and are optional; they are on
 Table `Game` models games which link tag entries to videos in gaming sessions. It has the following fields:
 
 * `id`: auto-incrementing ID
-* `start`: date/time at which game starts (usually 20 seconds after game is created, to allow users to queue)
+* `start`: date/time at which game starts
 * `initiator_id`: ID of user who created the game
 * `video_id`: ID of video tags are added to
 * `countExistingVideoTags`: number of tags that were added to the video the moment the game was created; used to determine whether the "players from the past" should be shown while players are waiting for the game to start
-
-### Participant
-
-Whenever a user joins a game, a record is created in this table. It is used to draw the participants list while players wait for a game to begin.
-
-It has the following fields:
-
-* `id`: auto-incrementing ID
-* `user_id`: ID of user who joined the game
-* `game_id`: ID of game joined
-* `joinedOn`: date/time when user joined game
 
 ### TagEntry
 

@@ -63,9 +63,6 @@ _example(s):_ Home-, profile-, game- and tagpage
 * `.tag-entry`
 _usage:_ Display a tag within `.tagcloud'.
 _example(s):_ Homepage
-* `.game-queue`
-_usage:_ Display overview of active games. 
-_example(s):_ Static on Homepage. Dynamic (showing in lower right corner) on every but gamepage
 * `.tag-list`
 _usage:_ Displaying tag-entries in a game
 _example(s):_ Game- and recappage
