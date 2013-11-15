@@ -29,13 +29,13 @@
 				addthis:url="http://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}"
 				addthis:title="Ik heb ${recap.ownerScore} punten behaald met het taggen van ${recap.game.video.title}. Kan jij het beter? #Waisda"
 				addthis:description="Do you want to play?">
-					<a class="addthis_button_twitter">
+					<a class="btn btn-primary addthis_button_twitter">
 						<span class="gradientButton twitter">Deel op Twitter</span>
 					</a>
-					<a class="addthis_button_facebook">
+					<a class="btn btn-primary addthis_button_facebook">
 						<span class="gradientButton facebook">Deel op Facebook</span>
 					</a>
-					<a href="mailto:?subject=Ik heb ${recap.ownerScore} punten behaald met Waisda, kan jij het beter?&body=${recap.owner.name} speelt Waisda! Hij of zij heeft ${recap.ownerScore} punten behaald met het spelen van het fragment ${recap.game.video.title}. Kun jij die score verbeteren?%0A%0AKlik op onderstaande link om de uitdaging te accepteren.%0Ahttp://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}%0A%0A%0AInstructies:%0A- Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort%0A- Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken%0A- Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler%0A- Voor woorden die dieren, planten en andere voor het programma relevante onderwerpen beschrijven ontvang je bonuspunten%0A- Op deelname aan het spel zijn de algemene voorwaarden van toepassing: http://${globalStats.domainName}/voorwaarden%0A%0AZie voor een uitgebreide uitleg ook onze spelinstructies: http://${globalStats.domainName}/spelinstructies%0A%0ASucces!"><span class="gradientButton mail">Deel via mail</span></a>
+					<a class="btn btn-primary" href="mailto:?subject=Ik heb ${recap.ownerScore} punten behaald met Waisda, kan jij het beter?&body=${recap.owner.name} speelt Waisda! Hij of zij heeft ${recap.ownerScore} punten behaald met het spelen van het fragment ${recap.game.video.title}. Kun jij die score verbeteren?%0A%0AKlik op onderstaande link om de uitdaging te accepteren.%0Ahttp://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}%0A%0A%0AInstructies:%0A- Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort%0A- Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken%0A- Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler%0A- Voor woorden die dieren, planten en andere voor het programma relevante onderwerpen beschrijven ontvang je bonuspunten%0A- Op deelname aan het spel zijn de algemene voorwaarden van toepassing: http://${globalStats.domainName}/voorwaarden%0A%0AZie voor een uitgebreide uitleg ook onze spelinstructies: http://${globalStats.domainName}/spelinstructies%0A%0ASucces!"><span class="gradientButton mail">Deel via mail</span></a>
 				</div>
 		<p class="close-link closer">Of sluit dit scherm en bekijk het scorescherm</p>
 	</div>
@@ -137,13 +137,13 @@
 				addthis:url="http://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}"
 				addthis:title="Ik heb ${recap.ownerScore} punten behaald met het taggen van ${recap.game.video.title}. Kan jij het beter? #Waisda"
 				addthis:description="Do you want to play?">
-					<a class="addthis_button_twitter">
+					<a class="btn btn-primary addthis_button_twitter">
 						<span class="gradientButton twitter">Deel op Twitter</span>
 					</a>
-					<a class="addthis_button_facebook">
+					<a class="btn btn-primary addthis_button_facebook">
 						<span class="gradientButton facebook">Deel op Facebook</span>
 					</a>
-					<a href="mailto:?subject=Ik heb ${recap.ownerScore} punten behaald met Waisda, kan jij het beter?&body=${recap.owner.name} speelt Waisda! Hij of zij heeft ${recap.ownerScore} punten behaald met het spelen van het fragment ${recap.game.video.title}. Kun jij die score verbeteren?%0A%0AKlik op onderstaande link om de uitdaging te accepteren.%0Ahttp://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}%0A%0A%0AInstructies:%0A- Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort%0A- Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken%0A- Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler%0A- Voor woorden die dieren, planten en andere voor het programma relevante onderwerpen beschrijven ontvang je bonuspunten%0A- Op deelname aan het spel zijn de algemene voorwaarden van toepassing: http://${globalStats.domainName}/voorwaarden%0A%0AZie voor een uitgebreide uitleg ook onze spelinstructies: http://${globalStats.domainName}/spelinstructies%0A%0ASucces!"><span class="gradientButton mail">Deel via mail</span></a>
+					<a class="btn btn-primary" href="mailto:?subject=Ik heb ${recap.ownerScore} punten behaald met Waisda, kan jij het beter?&body=${recap.owner.name} speelt Waisda! Hij of zij heeft ${recap.ownerScore} punten behaald met het spelen van het fragment ${recap.game.video.title}. Kun jij die score verbeteren?%0A%0AKlik op onderstaande link om de uitdaging te accepteren.%0Ahttp://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}%0A%0A%0AInstructies:%0A- Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort%0A- Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken%0A- Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler%0A- Voor woorden die dieren, planten en andere voor het programma relevante onderwerpen beschrijven ontvang je bonuspunten%0A- Op deelname aan het spel zijn de algemene voorwaarden van toepassing: http://${globalStats.domainName}/voorwaarden%0A%0AZie voor een uitgebreide uitleg ook onze spelinstructies: http://${globalStats.domainName}/spelinstructies%0A%0ASucces!"><span class="gradientButton mail">Deel via mail</span></a>
 				</div>
 				<script type="text/plain" class="npo_cc_social" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dca79b617093d25"></script>
 				</section>
