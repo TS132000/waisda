@@ -52,7 +52,7 @@ public class User implements Comparable<User> {
 			"dd-MM-yyyy");
 
 	private static final DateFormat CREATIONDATE_FORMAT = 
-			new SimpleDateFormat("EEEE d MMMM yyyy", Util.DUTCH_LOCALE);
+			new SimpleDateFormat("EEEE d MMMM yyyy", Util.ENGLISH_LOCALE);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
