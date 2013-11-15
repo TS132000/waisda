@@ -20,23 +20,16 @@
 package nl.waisda.services;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import nl.waisda.domain.Game;
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
-import nl.waisda.domain.UserScore;
 import nl.waisda.domain.Video;
 import nl.waisda.exceptions.NotFoundException;
-import nl.waisda.model.Cache;
 import nl.waisda.model.Recap;
 import nl.waisda.model.TagEntrySummary;
-import nl.waisda.model.Value;
 import nl.waisda.repositories.GameRepository;
 import nl.waisda.repositories.TagEntryRepository;
 
@@ -90,7 +83,6 @@ public class GameService {
 		// Prepare all the information needed for the Recap.
 		List<TagEntry> entries = tagRepo.getEntries(game.getId());
 		List<TagEntry> ownerEntries = new ArrayList<TagEntry>(entries.size());
-		Map<User, UserScore> scores = new TreeMap<User, UserScore>();
 		int ownerScore = 0;
 
 		for (TagEntry tag : entries) {
@@ -100,34 +92,12 @@ public class GameService {
 				ownerEntries.add(tag);
 				ownerScore += tag.getScore();
 			}
-
-			UserScore score = scores.get(u);
-			if (score == null) {
-				score = new UserScore(u);
-				scores.put(u, score);
-			}
-			score.count(tag);
-		}
-
-		ArrayList<UserScore> participants = new ArrayList<UserScore>(
-				scores.values());
-		Collections.sort(participants);
-
-		int ownerPosition = 0;
-		for (int i = 0; i < participants.size(); i++) {
-			UserScore participant = participants.get(i);
-			participant.setPosition(i);
-			if (participant.getUser().getId() == owner.getId()) {
-				ownerPosition = i;
-			}
 		}
 
 		Recap recap = new Recap();
 		recap.setGame(game);
 		recap.setOwner(owner);
 		recap.setOwnerScore(ownerScore);
-		recap.setParticipants(participants);
-		recap.setOwnerPosition(ownerPosition);
 		recap.setTagEntries(ownerEntries);
 		recap.setSummary(TagEntrySummary.fromEntries(ownerEntries));
 		return recap;

@@ -83,12 +83,6 @@
 							<li><a href="/registreren">register &raquo;</a></li>
 						</c:if>
 					</ul>
-
-				<c:if test="${globalStats.currentlyPlaying > 0}">
-					<p class="online">
-						<strong>${globalStats.currentlyPlaying} ${globalStats.currentlyPlaying == 1 ? 'player' : 'players'}</strong> currently online
-					</p>
-				</c:if>
 			</div>
    	</header>
 

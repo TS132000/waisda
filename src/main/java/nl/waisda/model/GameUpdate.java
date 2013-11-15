@@ -15,16 +15,12 @@
 
     You should have received a copy of the GNU General Public License
     along with Waisda.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package nl.waisda.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import nl.waisda.domain.UserSummary;
-
-
 
 public class GameUpdate {
 
@@ -48,11 +44,6 @@ public class GameUpdate {
 	 * Contains the TagEntries of the current user for this game.
 	 */
 	private List<ShallowTagEntry> tagEntries = new ArrayList<ShallowTagEntry>();
-
-	/**
-	 * (Shallow) summaries of fellow users' states during the game.
-	 */
-	private List<UserSummary> students;
 
 	public int getOwnId() {
 		return ownId;
@@ -84,14 +75,6 @@ public class GameUpdate {
 
 	public void setTagEntries(List<ShallowTagEntry> tagEntries) {
 		this.tagEntries = tagEntries;
-	}
-
-	public List<UserSummary> getStudents() {
-		return students;
-	}
-
-	public void setStudents(List<UserSummary> students) {
-		this.students = students;
 	}
 
 }

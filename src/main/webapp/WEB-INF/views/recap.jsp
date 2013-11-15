@@ -78,29 +78,6 @@
 					</div>
 					<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dca79b617093d25"></script>
 				</div>
-						
-				<div id="rankings" class="box span6">
-					<header class="rich">
-						<h2 class="h3 pull-left reset">Scoreboard</h2>
-					</header>
-					<section class="reset">
-						<ol class="unstyled reset">
-						
-						<c:forEach items="${recap.participants}" var="p">
-							<li class="${p.user.id == recap.owner.id ? 'chart-entry extended highlight' : 'chart-entry extended'}">
-							<tt:profileLink anonymous="${p.user.anonymous}" id="${p.user.id}">
-									<span class="index pull-left">${p.position + 1}</span>
-									<img src="${p.user.smallAvatarUrl}" />
-									${fn:escapeXml(p.user.name)}
-									<span class="score h5"><nf:format number="${p.score}" /></span><br />
-									<small><nf:format number="${p.countTags}" /> ${p.countTags == 1 ? 'tag' : 'tags'} and ${p.countMatches} ${p.countMatches == 1 ? 'match' : 'matches' }</small>
-							</tt:profileLink>
-							</li>
-						</c:forEach>
-						</ol>
-					</section>
-					
-				</div>
 			</div>
 		</section>
 	</div>
@@ -110,7 +87,7 @@
 			<h1 id="playerSessionScore" class="pull-left board span2"><nf:format number="${recap.ownerScore}"/></h1>				
 			<h2 id="playerPosition" class="pull-right reset">
 				<small class="h4">Rank</small>
-				<span id="playerPositionMine">${recap.ownerPosition + 1}</span> / <span id="playerPositionTotal" class="h4">${fn:length(recap.participants)}</span>
+				<span id="playerPositionMine">${recap.ownerPosition + 1}</span> / <span id="playerPositionTotal" class="h4">42</span>
 			</h2>
 		</header>
 		<section class="reset">

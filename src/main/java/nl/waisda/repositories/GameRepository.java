@@ -20,16 +20,12 @@
 package nl.waisda.repositories;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import nl.waisda.domain.Game;
 import nl.waisda.domain.User;
-import nl.waisda.domain.Video;
 import nl.waisda.model.GameScore;
 
 import org.apache.log4j.Logger;

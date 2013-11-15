@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with Waisda.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package nl.waisda.model;
 
@@ -23,21 +23,17 @@ import java.util.List;
 
 public class GlobalStats {
 
-
 	private final int totalTags;
 	private final int totalMatches;
 	private List<TagCloudItem> tagCloud;
 	private TopScores topScores;
-	private final int currentlyPlaying;
 
 	public GlobalStats(int totalTags, int totalMatches,
-			List<TagCloudItem> tagCloud, TopScores topScores,
-			int currentlyPlaying) {
+			List<TagCloudItem> tagCloud, TopScores topScores) {
 		this.totalTags = totalTags;
 		this.totalMatches = totalMatches;
 		this.tagCloud = tagCloud;
 		this.topScores = topScores;
-		this.currentlyPlaying = currentlyPlaying;
 	}
 
 	public int getTotalTags() {
@@ -66,10 +62,6 @@ public class GlobalStats {
 
 	public TopScores getTopScores() {
 		return topScores;
-	}
-
-	public int getCurrentlyPlaying() {
-		return currentlyPlaying;
 	}
 
 }

@@ -11,5 +11,5 @@ install:
 
 dump:
 	# dump the current database structure to sql/create-tables.sql
-	mysqldump -u root --no-data waisda MatchingTag Video DictionaryEntry Game TagEntry User ResetPassword Participant > sql/create-tables.sql
+	mysqldump -u root --no-data waisda MatchingTag Video DictionaryEntry Game TagEntry User ResetPassword > sql/create-tables.sql
 	sed -i '' -E 's/AUTO_INCREMENT=[0-9]+ //' sql/create-tables.sql

@@ -27,7 +27,6 @@ import nl.waisda.model.GlobalStats;
 import nl.waisda.model.TagCloudItem;
 import nl.waisda.model.TopScores;
 import nl.waisda.model.Value;
-import nl.waisda.repositories.ParticipantRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
 
@@ -49,9 +48,6 @@ public class ScoringService {
 	@Autowired
 	private UserRepository userRepo;
 
-	@Autowired
-	private ParticipantRepository participantRepo;
-
 	private Value<GlobalStats> globalStatsCache;
 
 	{
@@ -63,9 +59,8 @@ public class ScoringService {
 				int countMatches = tagEntryRepo.countMatches();
 				List<TagCloudItem> tagCloud = tagEntryRepo.getTagCloud();
 				TopScores topScores = userRepo.getTopScores();
-				int currentlyPlaying = participantRepo.countCurrentlyPlaying();
 				return new GlobalStats(countTags, countMatches, tagCloud,
-						topScores, currentlyPlaying);
+						topScores);
 			}
 		};
 		globalStatsCache = new Cache<GlobalStats>(fetchGlobalStats, 10000);

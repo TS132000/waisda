@@ -7,6 +7,5 @@
 		<class>nl.waisda.domain.Game</class>
 		<class>nl.waisda.domain.TagEntry</class>
 		<class>nl.waisda.domain.ResetPassword</class>
-		<class>nl.waisda.domain.Participant</class>
 	</persistence-unit>
 </persistence>

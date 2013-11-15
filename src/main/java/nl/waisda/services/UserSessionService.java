@@ -24,7 +24,6 @@ import javax.servlet.http.HttpSession;
 import nl.waisda.domain.User;
 import nl.waisda.exceptions.Forbidden;
 import nl.waisda.repositories.GameRepository;
-import nl.waisda.repositories.ParticipantRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
 
@@ -47,9 +46,6 @@ public class UserSessionService {
 
 	@Autowired
 	private GameRepository gameRepo;
-
-	@Autowired
-	private ParticipantRepository participantRepo;
 
 	public User getCurrentUser(HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userSession");
@@ -125,7 +121,6 @@ public class UserSessionService {
 				+ "with existing user %d", source.getId(), target.getId()));
 		gameRepo.moveGames(source, target);
 		tagEntryRepo.moveTagEntries(source, target);
-		participantRepo.moveParticipants(source, target);
 	}
 
 }

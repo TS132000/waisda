@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with Waisda.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package nl.waisda.model;
 
@@ -24,9 +24,6 @@ import java.util.List;
 import nl.waisda.domain.Game;
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
-import nl.waisda.domain.UserScore;
-
-
 
 public class Recap {
 
@@ -41,8 +38,6 @@ public class Recap {
 	private List<TagEntry> tagEntries;
 
 	private TagEntrySummary summary;
-
-	private List<UserScore> participants;
 
 	public Game getGame() {
 		return game;
@@ -90,14 +85,6 @@ public class Recap {
 
 	public void setSummary(TagEntrySummary summary) {
 		this.summary = summary;
-	}
-
-	public List<UserScore> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(List<UserScore> participants) {
-		this.participants = participants;
 	}
 
 	public boolean isEmpty() {

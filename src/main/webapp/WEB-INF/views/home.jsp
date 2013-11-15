@@ -39,7 +39,7 @@
 	<!--h2 class="spaced">Hoe werkt het?</h2-->
 	<div class="row equal-cols">
 		<ol class="unstyled pull-left">
-			<li class="box rich order span3 col"><span class="index">1</span>Select a video above or from the queue</li>
+			<li class="box rich order span3 col"><span class="index">1</span>Select a video above</li>
 			<li class="box rich order span3 col"><span class="index">2</span>Enter as many words as you can to describe what you see and hear</li>
 			<li class="box rich order span3 col"><span class="index">3</span>Score points by entering the same words as other players.</li>
 			<li class="box rich order span3 col"><span class="index">4</span>Read the <a href="/spelinstructies">instructions</a> and <a href="/registreren">register</a> to save your score.</li>

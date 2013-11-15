@@ -19,28 +19,20 @@
 
 package nl.waisda.controllers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import nl.waisda.domain.Game;
-import nl.waisda.domain.Participant;
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
-import nl.waisda.domain.UserScore;
-import nl.waisda.domain.UserSummary;
 import nl.waisda.domain.Video;
 import nl.waisda.exceptions.Forbidden;
 import nl.waisda.exceptions.NotFoundException;
-import nl.waisda.model.CurrentGames;
 import nl.waisda.model.GameUpdate;
 import nl.waisda.model.Recap;
 import nl.waisda.model.ShallowTagEntry;
-import nl.waisda.repositories.ParticipantRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
 import nl.waisda.repositories.VideoRepository;
@@ -83,9 +75,6 @@ public class GameController {
 	private TagEntryRepository tagEntryRepo;
 	
 	@Autowired
-	private ParticipantRepository participantRepo;
-
-	@Autowired
 	private ScoringService scoringService;
 	
 	@RequestMapping("/start-game/{videoId}")
@@ -103,20 +92,15 @@ public class GameController {
 			throws NotFoundException {
 		Game game = gameService.getGameById(gameId);
 		
+		User user = userSessionService.requireCurrentUser(session);
+
 		if (game == null) {
 			throw new NotFoundException("Unknown game " + gameId);
-		} else if (game.hasEnded()) {
-			log.info(String.format("Redirecting request for old game %d to /", gameId));
+		} else if (game.getInitiator().getId() != user.getId()) {
+			log.info(String.format("Redirecting request for game %d to / because user is not owner", gameId));
 			return "redirect:/";
 		}
 		
-		User user = userSessionService.requireCurrentUserOrCreateAnonymous(session);
-
-		if (participantRepo.get(user.getId(), game.getId()) == null) {
-			participantRepo.store(new Participant(user, game));
-			log.info(String.format("%s joins game %d", user.getShortDescription(), gameId));
-		}
-
 		model.addAttribute("game", game);
 		model.addAttribute("cssClass", "game");
 		
@@ -135,8 +119,6 @@ public class GameController {
 			throw new NotFoundException("Unknown game " + gameId);
 		}
 
-		List<UserScore> participants = tagEntryRepo.getParticipants(game
-				.getId());
 		List<TagEntry> myEntries = tagEntryRepo.getEntries(
 				game.getId(), user.getId());
 		
@@ -152,19 +134,6 @@ public class GameController {
 		for (TagEntry tag : myEntries) {
 			update.getTagEntries().add(ShallowTagEntry.fromTagEntry(tag));
 		}
-
-		List<UserSummary> summaries = new ArrayList<UserSummary>();
-		for (UserScore sgs : participants) {
-			User s = sgs.getUser();
-			summaries.add(new UserSummary(s.getId(), s.getName(), sgs.getScore(), s.getSmallAvatarUrl()));
-		}
-		Collections.sort(summaries, UserSummary.COMPARE_BY_GAME_SCORE);
-
-		if (game.getCountExistingVideoTags() > 0) {
-			summaries.add(UserSummary.GHOST);
-		}
-
-		update.setStudents(summaries);
 
 		return update;
 	}
@@ -206,8 +175,7 @@ public class GameController {
 			log.info(String
 					.format( "Ignoring tag %s for game %d, user %d, time %d",
 							tagEntry.getTag(), tagEntry.getGame().getId(),
-							user.getId(), tagEntry.getGameTime(), game.getElapsed(),
-							game.getElapsed() - tagEntry.getGameTime()));
+							user.getId(), tagEntry.getGameTime()));
 			return null;
 		}
 
@@ -218,9 +186,7 @@ public class GameController {
 				.format("Registering tag %s #%d with score %d for game %d, user %d, time %d",
 						tagEntry.getTag(), tagEntry.getId(),
 						tagEntry.getScore(), tagEntry.getGame().getId(),
-						user.getId(), tagEntry.getGameTime(),
-						game.getElapsed(),
-						game.getElapsed() - tagEntry.getGameTime()));
+						user.getId(), tagEntry.getGameTime()));
 
 		return ShallowTagEntry.fromTagEntry(tagEntry);
 	}

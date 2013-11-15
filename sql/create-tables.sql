@@ -157,22 +157,6 @@ CREATE TABLE `ResetPassword` (
   UNIQUE KEY `resetKey` (`resetKey`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Reset password requests for users';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `Participant`
---
-
-DROP TABLE IF EXISTS `Participant`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Participant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL COMMENT 'Player joining',
-  `game_id` int(11) NOT NULL COMMENT 'Game joined',
-  `joinedOn` datetime NOT NULL COMMENT 'Time at which player joined the game',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='A participating User in a Game; used to show player list';
-/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -183,4 +167,4 @@ CREATE TABLE `Participant` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-14 14:23:32
+-- Dump completed on 2013-11-15 13:42:00

@@ -28,7 +28,6 @@ import javax.persistence.Query;
 
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
-import nl.waisda.domain.UserScore;
 import nl.waisda.model.TagCloudItem;
 import nl.waisda.services.ScoringService;
 
@@ -143,29 +142,6 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 								+ "AND t.matchingTagEntry.owner.id = :ownerId",
 						TagEntry.class).setParameter("ownerId", ownerId)
 				.getResultList();
-	}
-
-	public List<UserScore> getParticipants(int gameId) {
-		String q = "select p.user_id, u.name, ifnull(sum(t.score), 0) as score " +
-				"from Participant p " +
-				"inner join User u on p.user_id = u.id " +
-				"left join TagEntry t on p.user_id = t.owner_id and p.game_id = t.game_id " +
-				"where p.game_id = :gameId " +
-				"group by p.user_id, p.game_id " +
-				"order by score desc";
-		List<?> arrays = getEntityManager().createNativeQuery(q).setParameter("gameId", gameId).getResultList();
-		
-		List<UserScore> res = new ArrayList<UserScore>(arrays.size());
-		
-		for (Object row : arrays) {
-			Object[] values = (Object[]) row;
-			User u = new User();
-			u.setId((int) (Integer) values[0]);
-			u.setName((String) values[1]);
-			res.add(new UserScore(u, ((Number) values[2]).intValue()));
-		}
-
-		return res;
 	}
 
 	@Transactional
