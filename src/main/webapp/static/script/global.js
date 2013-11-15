@@ -62,10 +62,6 @@ jQuery(function() {
 		});
 	}
 	
-	if (Silverlight.isInstalled) {
-		$('#silverlight-message').hide();
-	}
-
 	$('.help').each(function(){
 		//Grab the title attribute's value and assign it to a variable
 		$(this).attr('data-title', $(this).attr('title'));

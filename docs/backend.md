@@ -13,7 +13,7 @@ Table `Video` has the following fields:
 * `duration`: duration of video in ms
 * `imageUrl`: absolute URL of preview image
 * `enabled`: whether video is available for new games
-* `playerType`: either 'JW' or 'NPO' for the JWPlayer and Silverlight NPO player, respectively
+* `playerType`: either 'JW' or 'NPO' for the JWPlayer and NPO player, respectively
 * `sourceUrl`: for playerType 'JW', absolute URL of video to play
 * `fragmentID`: for playerType 'NPO'
 * `sectionNid`: for playerType 'NPO'

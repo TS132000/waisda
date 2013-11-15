@@ -24,7 +24,6 @@
 	  <![endif]-->
     
 	<script src="/static/script/lib/jquery.min.js"></script>
-	<script src="/static/script/silverlight.js"></script>
 	<script src="/static/script/plugins/jquery.equalheights.js"></script>
 	<script src="/static/script/plugins/jquery.color.js"></script>
 

@@ -44,7 +44,6 @@
 			<li class="box rich order span3 col"><span class="index">3</span>Score points by entering the same words as other players.</li>
 			<li class="box rich order span3 col"><span class="index">4</span>Read the <a href="/spelinstructies">instructions</a> and <a href="/registreren">register</a> to save your score.</li>
 		</ol>
-		<p id="silverlight-message" class="clear-both small">In order to be able to join <a href="http://www.silverlight.net/">Microsoft Silverlight plugin</a> has to be installed.</p>
 	</div>
 	<!--div id="prizebanner">
 		<a href="/spelinstructies#wedstrijdregels">
