@@ -204,10 +204,9 @@ public class GameController {
 			}
 		} else {
 			log.info(String
-					.format("Ignoring tag %s for game %d, user %d, time %d (actual game time %d, delay %d)",
+					.format( "Ignoring tag %s for game %d, user %d, time %d",
 							tagEntry.getTag(), tagEntry.getGame().getId(),
-							user.getId(), tagEntry.getGameTime(),
-							game.getElapsed(),
+							user.getId(), tagEntry.getGameTime(), game.getElapsed(),
 							game.getElapsed() - tagEntry.getGameTime()));
 			return null;
 		}
@@ -216,9 +215,10 @@ public class GameController {
 		scoringService.updateMatchAndStore(tagEntry, true);
 
 		log.info(String
-				.format("Registering tag %s #%d with score %d for game %d, user %d, time %d (actual game time %d, delay %d)",
-						tagEntry.getTag(), tagEntry.getId(), tagEntry.getScore(), tagEntry.getGame()
-								.getId(), user.getId(), tagEntry.getGameTime(),
+				.format("Registering tag %s #%d with score %d for game %d, user %d, time %d",
+						tagEntry.getTag(), tagEntry.getId(),
+						tagEntry.getScore(), tagEntry.getGame().getId(),
+						user.getId(), tagEntry.getGameTime(),
 						game.getElapsed(),
 						game.getElapsed() - tagEntry.getGameTime()));
 
