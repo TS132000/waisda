@@ -79,20 +79,20 @@
 		<div id="rightColumn" class="box fullcolorbox fullcolorbox-green span4 col-game">
 	</c:if>
 	
-	<div id="rightColumn" class="box span4 col-game">
-		<header class="rich extended">
-			<h1 id="playerSessionScore" class="pull-left board span2">0</h1>				
-			<h2 id="playerPosition" class="pull-right reset">
-				<small class="h4">Rank</small>
-				<span id="playerPositionMine">-</span> / <span id="playerPositionTotal" class="h4">-</span>
-			</h2>
-		</header>
-		<section class="reset">
-			<h3 class="h4 sub-header">Your tags:</h3>		
-			<div id="tagList" class="tag-list scroll-box">
-			</div>
-		</section>
-	</div>
+	<div class="playerBox">
+			<header class="rich extended">
+				<div style="clear:both">
+				<span class="pull-left"><strong>Jouw punten:</strong></span><h1 id="playerSessionScore" class="pull-right board span2">0</h1>
+				</div>
+			</header>
+			<h4 class="h4 sub-header light">Jouw ingevulde woorden:</h4>
+			<section class="innerwhitebox">	
+				<div id="tagList" class="tag-list">
+				</div>
+			</section>
+			<div class="clear"></div>
+			<div class="explanation-bubble hidden"></div>
+		</div>
 
 </div>
 
