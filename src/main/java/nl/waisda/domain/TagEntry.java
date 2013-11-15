@@ -133,13 +133,13 @@ public class TagEntry implements Serializable {
 
 		int score = 0;
 
-		if (dictionary != null) {
-			// Matches with a dictionary award 25 points. If you'd like the
-			// score to depend on the specific dictionary, you can do that here.
-			score += 25;
-		}
-
 		if (matchingTagEntry != null) {
+			if (dictionary != null) {
+				// Matches with a dictionary award 25 points. If you'd like the
+				// score to depend on the specific dictionary, you can do that here.
+				score += 25;
+			}
+
 			score += 50;
 
 			if (pioneer) {
