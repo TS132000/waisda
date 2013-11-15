@@ -152,9 +152,6 @@ public class Video {
 	}
 
 	public String getImageUrl() {
-		if (imageUrl != null && imageUrl.startsWith("http://media.vara.nl/")) {
-			return "https" + imageUrl.substring(4);
-		}
 		return imageUrl;
 	}
 
