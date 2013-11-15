@@ -42,7 +42,9 @@
 					<h3 class="h5">Good luck!</h3>
 				</div>
 				<div class="box clean span6">
-					<a href="/game/${game.id}/recap/${user.id}" class="btn btn-primary pull-right">stop</a>
+					<div id="playerList" class="box playerlist-box">
+						<a href="/game/${game.id}/recap/${user.id}" class="button pull-right">stop</a>
+					</div>		
 				</div>
 			</div>
 			
