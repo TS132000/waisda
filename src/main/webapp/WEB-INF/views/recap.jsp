@@ -175,9 +175,14 @@
 						<c:if test="${tag.matchingTagEntry != null && !tag.pioneer}">
 							<img src="/static/img/match-social.png" class="icon" />
 						</c:if>
-						<c:if test="${tag.dictionary != null}">
-							<img src="/static/img/match-dictionary.png" class="icon" />
-						</c:if>
+						<c:choose>
+							<c:when test="${tag.dictionary != null && tag.matchingTagEntry}">
+								<img src="/static/img/match-dictionary.png" class="icon" />
+							</c:when>
+							<c:when test="${tag.dictionary != null}">
+								<img src="/static/img/match-dictionary.png" class="icon notMatchingWithOtherPlayer" />
+							</c:when>
+						</c:choose>
 						<span><c:out value="${tag.tag}"/></span>
 						<span class="matching small">
 							<c:if test="${tag.matchingTagEntry != null}">

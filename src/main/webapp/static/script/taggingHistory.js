@@ -20,8 +20,15 @@ var TaggingHistory = base2.Base.extend({
 					el.append(jQuery('<img/>',  { 'class' : 'icon', 'title' : title, 'src' : iconSrc }));
 				}
 				if (tag.dictionary) {
+					// TODO test fixen op owner
+					var isMatching = "icon notMatchingWithOtherPlayer";
+					var title = "This tag was found in a dictionary but has not been confirmed by another player yet";
+					if (tag.matchingTag) {
+						isMatching = " icon";
+						title = "This tag was found in a dictionary";
+					}
 					var iconSrc = '/static/img/match-dictionary.png';
-					el.append(jQuery('<img/>',  { 'class' : 'icon', 'title' : 'This tag was found in a dictionary', 'src' : iconSrc }));
+					el.append(jQuery('<img />',  { 'class' : isMatching, 'title' : title, 'src' : iconSrc }));
 				}
 				el.append(jQuery('<span/>', { 'text'  : tag.tag }));
 			} else {
