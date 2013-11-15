@@ -470,6 +470,9 @@ section.main {
   font-size: 48px;
   padding: 18px 0;
 }
+.jwdisplay {
+  cursor: default!important;
+}
 .tag-list .tag {
   border-top: 1px solid #eeeeee;
   padding: 5px 10px;
