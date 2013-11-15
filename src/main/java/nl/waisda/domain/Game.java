@@ -57,6 +57,12 @@ public class Game {
 	@Basic(optional = false)
 	private int countExistingVideoTags;
 
+	@ManyToOne(optional = true)
+	private Game challengeSource;
+
+	@Basic
+	private Integer scoreToBeat;
+	
 	/*
 	 * Business logic
 	 */
@@ -132,6 +138,22 @@ public class Game {
 
 	public void setCountExistingVideoTags(int countExistingVideoTags) {
 		this.countExistingVideoTags = countExistingVideoTags;
+	}
+
+	public Game getChallengeSource() {
+		return challengeSource;
+	}
+
+	public void setChallengeSource(Game challengeSource) {
+		this.challengeSource = challengeSource;
+	}
+
+	public Integer getScoreToBeat() {
+		return scoreToBeat;
+	}
+
+	public void setScoreToBeat(Integer scoreToBeat) {
+		this.scoreToBeat = scoreToBeat;
 	}
 
 }

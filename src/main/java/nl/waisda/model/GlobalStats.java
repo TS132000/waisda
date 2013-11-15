@@ -27,13 +27,15 @@ public class GlobalStats {
 	private final int totalMatches;
 	private List<TagCloudItem> tagCloud;
 	private TopScores topScores;
+	private String domainName;
 
 	public GlobalStats(int totalTags, int totalMatches,
-			List<TagCloudItem> tagCloud, TopScores topScores) {
+			List<TagCloudItem> tagCloud, TopScores topScores, String domainName) {
 		this.totalTags = totalTags;
 		this.totalMatches = totalMatches;
 		this.tagCloud = tagCloud;
 		this.topScores = topScores;
+		this.domainName = domainName;
 	}
 
 	public int getTotalTags() {
@@ -62,6 +64,10 @@ public class GlobalStats {
 
 	public TopScores getTopScores() {
 		return topScores;
+	}
+
+	public String getDomainName() {
+		return domainName;
 	}
 
 }

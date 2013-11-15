@@ -48,6 +48,9 @@ public class ScoringService {
 	@Autowired
 	private UserRepository userRepo;
 
+	@org.springframework.beans.factory.annotation.Value("#{configProperties['waisda.domain']}")
+	private String domainName;
+
 	private Value<GlobalStats> globalStatsCache;
 
 	{
@@ -60,7 +63,7 @@ public class ScoringService {
 				List<TagCloudItem> tagCloud = tagEntryRepo.getTagCloud();
 				TopScores topScores = userRepo.getTopScores();
 				return new GlobalStats(countTags, countMatches, tagCloud,
-						topScores);
+						topScores, domainName);
 			}
 		};
 		globalStatsCache = new Cache<GlobalStats>(fetchGlobalStats, 10000);

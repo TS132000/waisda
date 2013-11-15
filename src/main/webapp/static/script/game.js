@@ -209,7 +209,9 @@ var Game = base2.Base.extend({
 	
 	endGame: function() {
 		clearInterval(this.updateIntervalId);
-		location.href = "/game/" + this.gameId + "/recap/" + this.lastKnownUserId;
+		var url = "/game/" + this.gameId + "/recap/" + this.lastKnownUserId;
+		if (this.scoreToBeat) url += "#challenge";
+		location.href = url;
 	}
 	
 });

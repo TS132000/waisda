@@ -43,7 +43,16 @@
 				</div>
 				<div class="box clean span6">
 					<div id="playerList" class="box playerlist-box">
-						<a href="/game/${game.id}/recap/${user.id}" class="button pull-right">stop</a>
+						<header class="rich">
+							<c:choose>
+							<c:when test="${game.scoreToBeat != null}">
+								<a href="/game/${game.id}/recap/${user.id}#challenge" class="button button-terra pull-right">stop</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/game/${game.id}/recap/${user.id}" class="button button-terra pull-right">stop</a>
+							</c:otherwise>
+							</c:choose>
+						</header>
 					</div>		
 				</div>
 			</div>
@@ -59,6 +68,16 @@
 		</footer>
 		
 	</div>
+
+	<c:if test="${game.scoreToBeat != null}">
+		<div id="rightColumn" class="box fullcolorbox fullcolorbox-green span4 col-game challengedGame">
+		<div class="challengerBox">
+			<span class="pull-left"><strong>Punten van je uitdager:</strong></span><h1 class="pull-right board span2">${game.scoreToBeat}</h1>
+		</div>
+	</c:if>
+	<c:if test="${game.scoreToBeat == null}">
+		<div id="rightColumn" class="box fullcolorbox fullcolorbox-green span4 col-game">
+	</c:if>
 	
 	<div id="rightColumn" class="box span4 col-game">
 		<header class="rich extended">

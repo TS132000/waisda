@@ -49,6 +49,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -216,6 +217,32 @@ public class GameController {
 			model.put("recap", recap);
 			return "recap";
 		}
+	}
+
+	@RequestMapping(value = "/accept-challenge/{gameId}/{scoreToBeat}", method = RequestMethod.GET)
+	public String acceptChallengeWelcome(@PathVariable int gameId,
+			@PathVariable int scoreToBeat, HttpSession session, ModelMap map)
+			throws NotFoundException {
+		Game game = gameService.getGameById(gameId);
+		if (game != null) {
+			map.put("game", game);
+			map.put("scoreToBeat", scoreToBeat);
+			return "challenge";
+		} else {
+			throw new NotFoundException("Game " + gameId);
+		}
+	}
+
+	@RequestMapping(value = "/accept-challenge/{gameId}/{scoreToBeat}", method = RequestMethod.POST)
+	public String acceptChallenge(@PathVariable int gameId,
+			@PathVariable int scoreToBeat, HttpSession session)
+			throws NotFoundException {
+		User user = userSessionService
+				.requireCurrentUserOrCreateAnonymous(session);
+		Game game = gameService.getGameById(gameId);
+		Game game2 = gameService.createGame(user, game.getVideo(), scoreToBeat);
+
+		return "redirect:/game/" + game2.getId();
 	}
 
 	@RequestMapping("/error")

@@ -6,6 +6,42 @@
 <tt:head title="Resultaten">
 </tt:head>
 <tt:body pageName="recap">
+
+<div id="challenge-lightbox" class="glasspane closer hidden">
+	<div class="lightbox">
+		<div class="close-icon closer"></div>
+		<div class="uil"></div>
+		<c:if test="${recap.game.scoreToBeat != null}">
+			<c:choose>
+				<c:when test="${recap.ownerScore < recap.game.scoreToBeat}">
+					<h2>Helaas, de uitdager heeft dit spel gewonnen!</h2>
+				</c:when>
+				<c:when test="${recap.ownerScore == recap.game.scoreToBeat}">
+					<h2>Jullie hebben evenveel punten gescoord!</h2>
+				</c:when>
+				<c:when test="${recap.ownerScore > recap.game.scoreToBeat}">
+					<h2>U heeft de uitdaging gewonnen!</h2>
+				</c:when>
+			</c:choose>
+		</c:if>
+		<p><strong>Daag een vriend, familielid of kennis uit!</strong><br/>Plaats een oproep via Facebook, Twitter of e-mail en daag vrienden uit om jouw score te verbeteren.</p>
+		<div id="addthis-bar" class="bigShareButtons addthis_toolbox addthis_default_style" 
+				addthis:url="http://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}"
+				addthis:title="Ik heb ${recap.ownerScore} punten behaald met het taggen van ${recap.game.video.title}. Kan jij het beter? #Waisda"
+				addthis:description="Do you want to play?">
+					<a class="addthis_button_twitter">
+						<span class="gradientButton twitter">Deel op Twitter</span>
+					</a>
+					<a class="addthis_button_facebook">
+						<span class="gradientButton facebook">Deel op Facebook</span>
+					</a>
+					<a href="mailto:?subject=Ik heb ${recap.ownerScore} punten behaald met Waisda, kan jij het beter?&body=${recap.owner.name} speelt Waisda! Hij of zij heeft ${recap.ownerScore} punten behaald met het spelen van het fragment ${recap.game.video.title}. Kun jij die score verbeteren?%0A%0AKlik op onderstaande link om de uitdaging te accepteren.%0Ahttp://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}%0A%0A%0AInstructies:%0A- Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort%0A- Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken%0A- Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler%0A- Voor woorden die dieren, planten en andere voor het programma relevante onderwerpen beschrijven ontvang je bonuspunten%0A- Op deelname aan het spel zijn de algemene voorwaarden van toepassing: http://${globalStats.domainName}/voorwaarden%0A%0AZie voor een uitgebreide uitleg ook onze spelinstructies: http://${globalStats.domainName}/spelinstructies%0A%0ASucces!"><span class="gradientButton mail">Deel via mail</span></a>
+				</div>
+		<p class="close-link closer">Of sluit dit scherm en bekijk het scorescherm</p>
+	</div>
+</div>
+
+
 <div class="equal-cols">
 	
 <div class="game-equal-cols">
@@ -125,6 +161,36 @@
 
 		</section>
 	</div>
+
+	<div class="row">
+		<div class="box colorbox span8 leading shadowbox">
+			<div class="shadowOverlay"></div>
+			<header class="rich">
+				<h2 class="h3">Daag een vriend, familielid of kennis uit!</h2>
+				<span class="boxline boxline-terra"></span>
+			</header>
+			<section class="box">
+				<p>Plaats een oproep via Facebook, Twitter of e-mail en daag vrienden uit om jouw score te verbeteren.</p>
+				<input type="text" value="http://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}" class="gameShare"></input>
+
+				<div id="addthis-bar" class="bigShareButtons addthis_toolbox addthis_default_style" 
+			addthis:url="http://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}"
+			addthis:title="Ik heb ${recap.ownerScore} punten behaald met het taggen van ${recap.game.video.title}. Kan jij het beter? #Waisda"
+			addthis:description="Do you want to play?">
+				<a class="addthis_button_twitter">
+					<span class="gradientButton twitter">Deel op Twitter</span>
+				</a>
+				<a class="addthis_button_facebook">
+					<span class="gradientButton facebook">Deel op Facebook</span>
+				</a>
+				<a href="mailto:?subject=Ik heb ${recap.ownerScore} punten behaald met Waisda, kan jij het beter?&body=${recap.owner.name} speelt Waisda! Hij of zij heeft ${recap.ownerScore} punten behaald met het spelen van het fragment ${recap.game.video.title}. Kun jij die score verbeteren?%0A%0AKlik op onderstaande link om de uitdaging te accepteren.%0Ahttp://${globalStats.domainName}/accept-challenge/${recap.game.id}/${recap.ownerScore}%0A%0A%0AInstructies:%0A- Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort%0A- Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken%0A- Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler%0A- Voor woorden die dieren, planten en andere voor het programma relevante onderwerpen beschrijven ontvang je bonuspunten%0A- Op deelname aan het spel zijn de algemene voorwaarden van toepassing: http://${globalStats.domainName}/voorwaarden%0A%0AZie voor een uitgebreide uitleg ook onze spelinstructies: http://${globalStats.domainName}/spelinstructies%0A%0ASucces!"><span class="gradientButton mail">Deel via mail</span></a>
+			</div>
+			<script type="text/plain" class="npo_cc_social" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dca79b617093d25"></script>
+			</section>
+		</div>
+	</div>
+
+
 </div>
 	
 </tt:body>
