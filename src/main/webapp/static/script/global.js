@@ -91,6 +91,38 @@ jQuery(function() {
 	    
 	  });
 	});
+
+	// check hash and open lightbox
+	var hash = window.location.hash.substring(1);
+	
+	if (hash == "challenge") {
+		var lightbox = $("#challenge-lightbox");
+		lightbox.removeClass('hidden');
+		toggleSocialOpacity(true);
+		$(".closer").click(function(e){
+			closeGlasspane("#challenge-lightbox", "challenge");
+		});
+		$(".lightbox").click(function(e){
+			e.stopPropagation();
+		});
+	}
+
+	function toggleSocialOpacity(visibility) {
+		var social = $("#social");
+		if (visibility == true) {
+			social.css("z-index",0);
+		} else {
+			social.css("z-index",99);
+		}
+	}
+
+	function closeGlasspane(glasspaneId, hashToRemove) {
+		$(glasspaneId).addClass("hidden");
+		toggleSocialOpacity(false);
+		if (hashToRemove != "") {
+			parent.location.hash = '';
+		}
+	}
 	
 });
 $(window).load(function(){
