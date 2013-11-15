@@ -97,7 +97,7 @@ var JWPlayer = base2.Base.extend({
 		this.elementId = elementId;
 
 		var self = this;
-		this.player = jwplayer(elementId).setup({
+		jwplayer(elementId).setup({
 			flashplayer: '/static/mediaplayer-6.7/jwplayer.flash.swf',
 			file: sourceUrl,
 			image: imageUrl,
@@ -107,8 +107,8 @@ var JWPlayer = base2.Base.extend({
 			events: {
 				onComplete: function() { self.dispatchEvents("fragmentEnd"); },
 				onTime: function() {
-					var elapsed = Math.ceil(self.player.getPosition() * 1000);
-					var duration = Math.ceil(self.player.getDuration() * 1000);
+					var elapsed = Math.ceil(jwplayer(self.elementId).getPosition() * 1000);
+					var duration = Math.ceil(jwplayer(self.elementId).getDuration() * 1000);
 
 					// check whether the videoplayer initialized completely
 					if (duration != 0) {
@@ -142,7 +142,7 @@ var JWPlayer = base2.Base.extend({
 	},
 
 	getElapsed : function() {
-		return Math.ceil(this.player.getPosition() * 1000);
+		return Math.ceil(jwplayer(this.elementId).getPosition() * 1000);
 	},
 
 	addEvent : function(evtName, handle) {
@@ -162,7 +162,7 @@ var JWPlayer = base2.Base.extend({
 	},
 
 	moveTo : function(sec) {
-		this.player.seek(sec);
+		jwplayer(this.elementId).seek(sec);
 	},
 
 	play : function() {
