@@ -130,6 +130,7 @@ var Game = base2.Base.extend({
 							'game.id': this.gameId
 						}
 				});
+				this.videoplayer.play();
 			}
 		}
 		if (evt.keyCode == 27 || evt.keyCode == 13)

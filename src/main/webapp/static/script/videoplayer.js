@@ -166,7 +166,7 @@ var JWPlayer = base2.Base.extend({
 	},
 
 	play : function() {
-		jwplayer(this.elementId).play();
+		jwplayer(this.elementId).play(true);
 	},
 
 	stop : function() {
