@@ -345,12 +345,6 @@
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<jettyEnvXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
 					<contextPath>/</contextPath>
-					<scanTargets>
-						<scanTarget>${basedir}/src/main/java</scanTarget>
-						<scanTarget>${basedir}/src/main/resources</scanTarget>
-					</scanTargets>
-					<reload>automatic</reload>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
 				</configuration>
 				<dependencies>
 					<dependency>
