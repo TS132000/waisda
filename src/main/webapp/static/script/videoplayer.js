@@ -33,13 +33,13 @@ var NPOPlayer = base2.Base.extend({
 					});
 					player.onPause(function(){
 						$(".pauze").addClass("play");
-						$(".pauze").text("verder spelen");
+						$(".pauze").text("continue playing");
 						$("#inputField").focus();
 						pause = true;
 					});
 					player.onPlay(function(){
 						$(".pauze").removeClass("play");
-						$(".pauze").text("pauze");
+						$(".pauze").text("pause");
 						$("#inputField").focus();
 					});
 				});
@@ -47,11 +47,11 @@ var NPOPlayer = base2.Base.extend({
 				$(".pauze").click(function(){
 					if (self.player.getState() === "PAUSED") {
 						$(".pauze").removeClass("play");
-						$(".pauze").text("pauze");
+						$(".pauze").text("pause");
 						self.play();
 					} else {
 						$(".pauze").addClass("play");
-						$(".pauze").text("verder spelen");
+						$(".pauze").text("continue playing");
 						self.stop();
 					}
 					
@@ -117,11 +117,11 @@ var JWPlayer = base2.Base.extend({
 				},
 				onPause: function(){
 					$(".pauze").addClass("play");
-					$(".pauze").text("verder spelen");
+					$(".pauze").text("continue playing");
 				},
 				onPlay: function(){
 					$(".pauze").removeClass("play");
-					$(".pauze").text("pauze");
+					$(".pauze").text("pause");
 				}
 			}
 		});
@@ -129,12 +129,12 @@ var JWPlayer = base2.Base.extend({
 		$(".pauze").click(function(){
 			if (jwplayer(this.elementId).getState() == "PAUSED") {
 				$(".pauze").removeClass("play");
-				$(".pauze").text("pauze");
+				$(".pauze").text("pause");
 				self.play();
 				
 			} else {
 				$(".pauze").addClass("play");
-				$(".pauze").text("verder spelen");
+				$(".pauze").text("continue playing");
 				self.stop();
 			}
 			

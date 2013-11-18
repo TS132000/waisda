@@ -60,7 +60,7 @@
 			<div id="videoFrame" class="outside">
 				<div id="video" class="video"></div>
 			</div>
-			<div class="pauze">hulplijn / pauze</div>
+			<div class="pauze">pause</div>
 		</section>
 
 		<footer class="outside">
@@ -72,7 +72,7 @@
 	<c:if test="${game.scoreToBeat != null}">
 		<div id="rightColumn" class="box fullcolorbox fullcolorbox-green span4 col-game challengedGame">
 		<div class="challengerBox">
-			<span class="pull-left"><strong>Punten van je uitdager:</strong></span><h1 class="pull-right board span2">${game.scoreToBeat}</h1>
+			<span class="pull-left"><strong>Challenger's score:</strong></span><h1 class="pull-right board span2">${game.scoreToBeat}</h1>
 		</div>
 	</c:if>
 	<c:if test="${game.scoreToBeat == null}">
@@ -82,10 +82,10 @@
 	<div class="playerBox">
 			<header class="rich extended">
 				<div style="clear:both">
-				<span class="pull-left"><strong>Jouw punten:</strong></span><h1 id="playerSessionScore" class="pull-right board span2">0</h1>
+				<span class="pull-left"><strong>Your score:</strong></span><h1 id="playerSessionScore" class="pull-right board span2">0</h1>
 				</div>
 			</header>
-			<h4 class="h4 sub-header light">Jouw ingevulde woorden:</h4>
+			<h4 class="h4 sub-header light">Your tags:</h4>
 			<section class="innerwhitebox">	
 				<div id="tagList" class="tag-list">
 				</div>

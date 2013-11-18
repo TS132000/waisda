@@ -156,11 +156,10 @@
 
 	<div id="rightColumn" class="box span4 game-col">
 		<header class="rich extended">
-			<h1 id="playerSessionScore" class="pull-left board span2"><nf:format number="${recap.ownerScore}"/></h1>				
-			<h2 id="playerPosition" class="pull-right reset">
-				<small class="h4">Rank</small>
-				<span id="playerPositionMine">${recap.ownerPosition + 1}</span> / <span id="playerPositionTotal" class="h4">42</span>
-			</h2>
+				<div style="clear:both">
+				<span class="pull-left"><strong>Your score:</strong></span>
+				<h1 id="playerSessionScore" class="pull-right board span2"><nf:format number="${recap.ownerScore}"/></h1>
+				</div>
 		</header>
 		<section class="reset">
 			<h3 class="h4 sub-header">Your tags:</h3>		
