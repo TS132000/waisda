@@ -4,11 +4,11 @@ Waisda? is a video labelling game. Players watch short video fragments (typicall
 
 In this way, video fragments are tagged, which makes them indexable and searchable. Whether a tag is trustworthy can be measured using heuristics, the most important one being how many matching tags exist. The game has been online in various versions and has been used to tag video archives of several public broadcasting associations.
 
-Waisda? Whitelabel is version of the website with a neutral visual style and a backend intended to be extended and customized for your own video labelling game. You can then 
+Waisda? Whitelabel is version of the website with a neutral visual style and a backend intended to be extended and customized for your own video labelling game.
 
 ## Intended audience
 
-This document is intended for programmers who would like to take the white-label version of Waisda? and customize it to their own needs. To get the most out of this document, the reader is expected to be familiar with the technologies used in this project:
+This document is intended for programmers who want to take the white-label version of Waisda? and customize it to their own needs. To get the most out of this document, the reader is expected to be familiar with the technologies used in this project:
 
 * The backend is written in the [Java programming language][java] using the [Spring framework][spring]. The views are written using [JSP][jsp].
 * The website is backed by a [MySQL][mysql] database. The code binds to the database using the [Java Persistence API][jpa] and [Hibernate][hibernate].
@@ -41,7 +41,6 @@ To give you a good idea of what is possible on the website, here is an overview 
   * how many tags have been entered in total, and how many of those match another tag;
   * options to login, logout and register if appropriate;
   * your total score and tag counts, if any.
-* Almost every page shows the games queue in the bottom right corner. When a player starts a new game, all other visitors are alerted and invited to join.
 * The footer, visible on each page, shows:
   * a link to the home page;
   * links to various pages with information;
@@ -95,7 +94,7 @@ Two normalized tag entries `(t1, t2)` match if all of the following conditions a
 
 ## How points are awarded
 
-Whenever a player enters a tag, points are awarded for that specific tag entry. If the tag is found in one of the dictionaries (database table `DictionaryEntry`), the player is awarded 25 points. If the tag *matches* one of the existing tags, the player receives 50 points. Together this gives the player a potential 75 points. If the player would receive 0 points, they receive 5 points anyway for the effort, unless the tag is an identical match with another tag entry by the same player. Awarding points this way encourages players to enter tags that are relevant for the video (relevant tags are more likely to match), and to be original if they watch the same video multiple times.
+Whenever a player enters a tag, points are awarded for that specific tag entry. If the tag *matches* one of the existing tags, the player receives 50 points. If the tag is also found in one of the dictionaries (database table `DictionaryEntry`), the player is awarded an extra 25 points. Together this gives the player a potential 75 points. If the player would receive 0 points, they receive 5 points anyway for the effort, unless the tag is an identical match with another tag entry by the same player. Awarding points this way encourages players to enter tags that are relevant for the video (relevant tags are more likely to match), and to be original if they watch the same video multiple times.
 
 Points awarded to tags might change at a later point. If a tag `t` did not match any other tags when it was first entered, but later a newly entered tag matches `t`, `t`'s score is increased. In this case, `t` does not get 50 points for matching, but a whopping 150 (for a potential total score of 175 points). Tag `t` is said to be a *pioneer* because the player was the first to introduce this tag for this specific video. Awarding pioneers more points encourages players to watch and tag videos that don't have many tags entered yet: their initial scores may be low, but the potential score when other players watch and tag the video is substantial. Pioneer tags are given special attention on users' profiles and in the page header for players who are logged in.
 

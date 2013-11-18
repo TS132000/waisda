@@ -10,14 +10,13 @@ Table `Video` has the following fields:
 
 * `id`: auto-incrementing ID
 * `title`: title of video for display in hyperlinks
+* `startTime`: starting time within the fragment (JW) or episode (NPO)
 * `duration`: duration of video in ms
 * `imageUrl`: absolute URL of preview image
 * `enabled`: whether video is available for new games
 * `playerType`: either 'JW' or 'NPO' for the JWPlayer and NPO player, respectively
 * `sourceUrl`: for playerType 'JW', absolute URL of video to play
-* `fragmentID`: for playerType 'NPO'
-* `sectionNid`: for playerType 'NPO'
-* `startTime`: for playerType 'NPO'
+* `prid`: for playerType 'NPO'
 
 ### User
 
@@ -48,7 +47,8 @@ Table `Game` models games which link tag entries to videos in gaming sessions. I
 * `start`: date/time at which game starts
 * `initiator_id`: ID of user who created the game
 * `video_id`: ID of video tags are added to
-* `countExistingVideoTags`: number of tags that were added to the video the moment the game was created; used to determine whether the "players from the past" should be shown while players are waiting for the game to start
+* `challengeSource_id`: ID of user whose challenge was accepted by creating this game
+* `scoreToBeat`: the score of the challenger at the time the challenge link was created (on the recap page)
 
 ### TagEntry
 
