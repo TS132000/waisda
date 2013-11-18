@@ -32,6 +32,9 @@ $ mysql -u root < sql/create-user.sql
 ```
 By default Waisda is configured to access the database using the account `waisda` with password `waisda`. The user is granted selection and modification rights.
 
+## Configuration
+
+File `src/main/resources/config.properties` contains configuration with key `waisda.domain`. Its value is used to create absolute URLs to pages, for example for the sharing links.
 
 ## Running in debug mode
 
