@@ -78,7 +78,6 @@ CREATE TABLE `Game` (
   `start` datetime DEFAULT NULL COMMENT 'Starting date',
   `initiator_id` int(11) DEFAULT NULL COMMENT 'User who created this session',
   `video_id` int(11) NOT NULL COMMENT 'Video played',
-  `countExistingVideoTags` int(11) NOT NULL DEFAULT '0' COMMENT 'Number of existing tags at creation time',
   `challengeSource_id` int(11) DEFAULT NULL,
   `scoreToBeat` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -164,4 +163,4 @@ CREATE TABLE `ResetPassword` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-18 15:13:00
+-- Dump completed on 2013-11-18 17:08:37
