@@ -64,7 +64,6 @@ public class GameService {
 
 		game.setStart(new Date());
 		game.setVideo(video);
-		game.setCountExistingVideoTags(tagRepo.countTags(video.getId()));
 
 		gameRepo.store(game);
 

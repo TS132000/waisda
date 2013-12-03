@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>manbijthond</groupId>
-	<artifactId>manbijthond-web</artifactId>
+	<groupId>waisda</groupId>
+	<artifactId>waisda-web</artifactId>
 	<packaging>war</packaging>
-	<name>manbijthond</name>
+	<name>waisda</name>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
@@ -345,12 +345,6 @@
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<jettyEnvXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
 					<contextPath>/</contextPath>
-					<scanTargets>
-						<scanTarget>${basedir}/src/main/java</scanTarget>
-						<scanTarget>${basedir}/src/main/resources</scanTarget>
-					</scanTargets>
-					<reload>automatic</reload>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
 				</configuration>
 				<dependencies>
 					<dependency>

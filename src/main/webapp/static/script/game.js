@@ -34,7 +34,6 @@ var Game = base2.Base.extend({
 		}
 
 		if (this.videoplayer != null) {
-			this.updateIntervalId = setTimeout(jQuery.proxy(this.update, this), 1000);
 			this.attachHelpArrow();
 			this.initVideoPlayer();
 			
@@ -57,48 +56,30 @@ var Game = base2.Base.extend({
 	
 	initVideoPlayer: function()
 	{
-		var realElapsed = this.getRealTimeElapsed();
+		this.setIntroText('<small>Game starts...</small>');
+		jQuery('#vid-overlay-screen').addClass('compact-overlay');
+		jQuery('#gameCanvas .outside').removeClass('outside');
+		jQuery('#playerList').attr('class','container clear-both spaced-top');
+		jQuery('#playerList').attr('style','');
+		jQuery('#playerList ul').attr('class','clear-both unstyled horizontal row');
+		jQuery('#playerList').insertAfter(jQuery('#rightColumn'));
+		jQuery('.equal-cols-game').equalHeights('.col-game');
 
-		if (this.startTime > this.duration) {
-			// The page was loaded after the game had already ended.
-			this.endGame();
-//				this.update();
-		} else if (realElapsed >= 0) {
-			this.setIntroText('<small>Game starts...</small>');
-			jQuery('#vid-overlay-screen').addClass('compact-overlay');
-			jQuery('#gameCanvas .outside').removeClass('outside');
-			jQuery('#playerList').attr('class','container clear-both spaced-top');
-			jQuery('#playerList').attr('style','');
-			jQuery('#playerList ul').attr('class','clear-both unstyled horizontal row');
-			jQuery('#playerList').insertAfter(jQuery('#rightColumn'));
-			jQuery('.equal-cols-game').equalHeights('.col-game');
+		setTimeout(jQuery.proxy(function() {
+			this.videoplayer.addEvent("tick", this.onVideoTick.bind(this));
+			this.videoplayer.addEvent("fragmentEnd", this.endGame.bind(this));
 
-			setTimeout(jQuery.proxy(function() {
-				this.videoplayer.addEvent("tick", this.onVideoTick.bind(this));
-				this.videoplayer.addEvent("fragmentEnd", this.endGame.bind(this));
+			this.videoplayer.play();
 
-				this.videoplayer.play();
-
-				jQuery("#inputField").keydown(jQuery.proxy(this.addTag, this));
-				jQuery("#inputField").keydown(jQuery.proxy(this.setStartTime, this));
-			}, this), 100); // Deze delay is een fix voor een bug in IE7/8
-		} else {
-			this.updateQueueTime(realElapsed);
-			setTimeout(jQuery.proxy(this.initVideoPlayer, this), 100);
-		}
+			jQuery("#inputField").keydown(jQuery.proxy(this.addTag, this));
+			jQuery("#inputField").keydown(jQuery.proxy(this.setStartTime, this));
+			}, this), 100); // This delay is a fix for a bug in IE7/8
 	},
 	
 	getRealTimeElapsed: function() {
 		var supposedVideoStartTime = this.loadTime - this.startTime;
 		var now = new Date().getTime();
 		return now - supposedVideoStartTime;
-	},
-	
-	updateQueueTime: function(realElapsed) {
-		if (realElapsed < 0) {
-			var pretty = Utils.prettyPrintTime(-realElapsed);
-			this.setIntroText('<small>Game starts in</small><strong>' + pretty + '</strong>');
-		}
 	},
 	
 	setRemainingText: function(s) {
@@ -109,44 +90,6 @@ var Game = base2.Base.extend({
 	setIntroText: function(s) {
 		if (jQuery("#timer-intro").html() != s) {
 			jQuery("#timer-intro").html(s);
-		}
-	},
-	
-	update: function() {
-		var elapsed = this.videoplayer.getElapsed();
-		
-		if (elapsed > 0) {
-			this.beenPlaying = true;
-		}
-		
-		if (elapsed == 0 && this.beenPlaying) {
-			// The videoplayer has reached the end of the video and jumped back to elaped = 0. The game is over.
-//			this.endGame();
-		} else {
-			var elapsed = this.videoplayer.getElapsed();
-			if (!elapsed) {
-				elapsed = 0;
-			}
-			var url = "/game/" + this.gameId + "/update/" + elapsed;
-			jQuery.ajax(url, {
-				success: jQuery.proxy(function(responseJSON) {
-					if (!responseJSON) {
-						return;
-					}
-					if (responseJSON.state == "ENDED") {
-						this.endGame();
-					} else {
-						this.history.update(responseJSON.tagEntries, this.videoplayer.getElapsed());
-						if (jQuery('#playerSessionScore')) {
-							jQuery('#playerSessionScore').html(responseJSON.gameScore);
-						}
-						
-						this.lastKnownUserId = responseJSON.ownId;
-
-						this.updateIntervalId = setTimeout(jQuery.proxy(this.update, this), 1000);
-					}
-				}, this)
-			});
 		}
 	},
 	
@@ -187,6 +130,7 @@ var Game = base2.Base.extend({
 							'game.id': this.gameId
 						}
 				});
+				this.videoplayer.play();
 			}
 		}
 		if (evt.keyCode == 27 || evt.keyCode == 13)

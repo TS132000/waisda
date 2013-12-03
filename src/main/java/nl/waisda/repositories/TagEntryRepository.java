@@ -165,13 +165,6 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 		return (int) (long) (Long) q.getSingleResult();
 	}
 
-	public int countTags(int videoId) {
-		Query q = getEntityManager().createQuery(
-				"SELECT COUNT(*) FROM TagEntry t WHERE t.game.video.id = :videoId");
-		q.setParameter("videoId", videoId);
-		return ((Number)q.getSingleResult()).intValue();
-	}
-
 	public int countMatches() {
 		Query q = getEntityManager().createQuery("SELECT COUNT(*) FROM TagEntry WHERE matchingTagEntry_id IS NOT NULL");
 		return (int) (long) (Long) q.getSingleResult();

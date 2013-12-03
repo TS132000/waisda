@@ -54,9 +54,6 @@ public class Game {
 	@Basic(optional = true)
 	private Date start;
 
-	@Basic(optional = false)
-	private int countExistingVideoTags;
-
 	@ManyToOne(optional = true)
 	private Game challengeSource;
 
@@ -130,14 +127,6 @@ public class Game {
 
 	public void setStart(Date start) {
 		this.start = start;
-	}
-
-	public int getCountExistingVideoTags() {
-		return countExistingVideoTags;
-	}
-
-	public void setCountExistingVideoTags(int countExistingVideoTags) {
-		this.countExistingVideoTags = countExistingVideoTags;
 	}
 
 	public Game getChallengeSource() {
