@@ -12,6 +12,16 @@
 			jQuery("body").animate({ 'opacity' : 1 }, 350);
 		}, 1000);
 	</script>
+
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=292386894120346";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
     
     <div class="brand-marker">
     	<div class="container">
@@ -74,15 +84,30 @@
 						</div>
 					</c:if>
 				</c:if>
-					<ul class="span3 box unstyled reset text-right col pull-right">		
-						<c:if test="${user != null && !user.anonymous}">
-							<li><a href="/uitloggen">log out &raquo;</a></li>
-						</c:if>
-						<c:if test="${user == null || user.anonymous}">		
-							<li><a href="/inloggen">log in &raquo;</a></li>
-							<li><a href="/registreren">register &raquo;</a></li>
-						</c:if>
-					</ul>
+
+
+
+					<div class="topRight">
+						<div id="social">
+							<div class="fb-like" data-href="http://${globalStats.domainName}" data-width="450" data-layout="button_count" data-show-faces="true" data-send="false"></div>
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-related="jasoncosta" data-lang="en" data-size="large" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						</div>
+
+						<ul class="span3 box unstyled reset text-right col pull-right">		
+							<c:if test="${user != null && !user.anonymous}">
+								<li><a href="/uitloggen">log out &raquo;</a></li>
+							</c:if>
+							<c:if test="${user == null || user.anonymous}">		
+								<li><a href="/inloggen">log in &raquo;</a></li>
+								<li><a href="/registreren">register &raquo;</a></li>
+							</c:if>
+						</ul>
+					</div>
+
+
+
 			</div>
    	</header>
 

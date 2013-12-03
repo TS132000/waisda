@@ -623,3 +623,8 @@ section.main {
   top: -128px;
   left: 86px;
 }
+#social {
+  position: absolute;
+  width: 350px;
+  right: 0px;
+}

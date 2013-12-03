@@ -11,7 +11,7 @@
 <tt:body cssClass="body" pageName="home">
 
 	<!-- AddThis Button BEGIN -->
-	<div id="addthis-bar" class="addthis_toolbox addthis_default_style pull-right spaced-bottom"
+	<!--div id="addthis-bar" class="addthis_toolbox addthis_default_style pull-right spaced-bottom"
 		addthis:url="http://waisda.nl/"
     	addthis:title="Waisda?"
 		addthis:description="Would you like to play?">
@@ -22,7 +22,7 @@
 		<a class="addthis_button_compact"></a>
 		<a class="addthis_counter addthis_bubble_style"></a>
 	</div>
-	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dca79b617093d25"></script>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dca79b617093d25"></script-->
 	<!-- AddThis Button END -->
 
 	<p class="spaced-bottom">
