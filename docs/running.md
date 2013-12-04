@@ -24,7 +24,7 @@ Now add the tables to the `waisda` database:
 $ mysql -u root waisda < sql/create-tables.sql
 ```
 
-Run all database updates by opening the files update-X_X_X.sql (where X_X_X holds the version number. At time of writing update-0_0_2.sql is available)
+To see how to specify username, password, hostname and other parameters, run `mysql --help`.
 
 The database `waisda` should now contain 8 tables. Consult the mysql documentation if you want to see the content of your database.
 
