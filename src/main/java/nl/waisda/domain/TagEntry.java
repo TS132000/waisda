@@ -27,14 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import nl.waisda.model.Util;
 
@@ -95,6 +88,9 @@ public class TagEntry implements Serializable {
 
 	@Basic(optional = false)
 	private int score;
+
+    @Transient
+    private boolean isSpecialMatch; // transient for ORM
 
 	/*
 	 * Business logic
@@ -291,7 +287,15 @@ public class TagEntry implements Serializable {
 		this.pioneer = pioneer;
 	}
 
-	public String toString() {
+    public boolean isSpecialMatch() {
+        return isSpecialMatch;
+    }
+
+    public void setSpecialMatch(boolean specialMatch) {
+        isSpecialMatch = specialMatch;
+    }
+
+    public String toString() {
 		return String.format(
 				"#%d normalizedTag:%s user:%d video:%d game:%d time:%d",
 				getId(), getNormalizedTag(), getOwner().getId(), getGame()

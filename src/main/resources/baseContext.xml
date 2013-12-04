@@ -69,10 +69,16 @@
 	</bean>
 
 
+    <mvc:resources mapping="/static/**" location="/static/"/>
+
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="nl.waisda.interceptors.GlobalModelInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+            <bean class="nl.waisda.interceptors.StaticModelInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/registreren" />
@@ -83,4 +89,10 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
+    <bean class="org.apache.http.impl.client.DefaultHttpClient"/>
+    <bean id="europeanaImportThreadPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" autowire="byName">
+        <property name="corePoolSize" value="1" />
+        <property name="maxPoolSize" value="1" />
+        <property name="queueCapacity" value="1" />
+    </bean>
 </beans>

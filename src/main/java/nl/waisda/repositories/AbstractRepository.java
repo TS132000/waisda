@@ -29,6 +29,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractRepository<T> {
 
@@ -78,7 +80,8 @@ public abstract class AbstractRepository<T> {
 				else {
 					getEntityManager().persist(entity);
 				}
-				
+				getEntityManager().flush();
+
 				break;
 			}
 		}

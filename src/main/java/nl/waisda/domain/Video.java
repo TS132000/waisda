@@ -45,6 +45,7 @@ public class Video {
 	private int duration;
 
 	@Basic
+	@Column(length = 1024)
 	private String imageUrl;
 
 	@Basic
@@ -66,6 +67,7 @@ public class Video {
 	/** Fragmentenrubriek zoals in MBH dump. */
 	private Integer sectionNid;
 
+	@Column(length = 1024)
 	private String sourceUrl;
 
 	public int getId() {
@@ -116,4 +118,62 @@ public class Video {
 		return TagEntry.getFriendlyTime(duration);
 	}
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setPlayerType(PlayerType playerType) {
+        this.playerType = playerType;
+    }
+
+    public void setFragmentID(String fragmentID) {
+        this.fragmentID = fragmentID;
+    }
+
+    public void setStartTime(Integer startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setSectionNid(Integer sectionNid) {
+        this.sectionNid = sectionNid;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append("Video");
+        sb.append("{id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", duration=").append(duration);
+        sb.append(", imageUrl='").append(imageUrl).append('\'');
+        sb.append(", enabled=").append(enabled);
+        sb.append(", timesPlayed=").append(timesPlayed);
+        sb.append(", playerType=").append(playerType);
+        sb.append(", fragmentID='").append(fragmentID).append('\'');
+        sb.append(", startTime=").append(startTime);
+        sb.append(", sectionNid=").append(sectionNid);
+        sb.append(", sourceUrl='").append(sourceUrl).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -1,3 +1,15 @@
+.width-350 {
+    margin-bottom: 8px;
+    margin-top: 8px;
+    width: 350px;
+}
+.small {
+    font-size: 0.9em;
+    line-height: 1em;
+}
+.bold {
+    font-weight: bold;
+}
 .pull-right {
   float: right;
 }
@@ -149,3 +161,40 @@ img.bordered {
 .compact {
   line-height: 1.0em;
 }
+
+.admin-body {
+    margin: 50px;
+}
+
+.admin-width-100pct {
+    width: 100%;
+}
+
+.admin-width-600px {
+    width: 600px;
+}
+
+.admin-label-200px {
+    display: inline-block;
+    width: 200px;
+}
+
+.admin-value-300px {
+    display: inline;
+    width: 300px;
+}
+
+.admin-input-300px {
+    width: 300px;
+}
+
+.admin-notify-600px {
+    color: red;
+    font-weight: bold;
+    width: 600px;
+}
+
+.admin-log {
+    font-family: Courier;
+}
+
