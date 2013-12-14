@@ -20,17 +20,12 @@
 package nl.waisda.repositories;
 
 import java.lang.reflect.Field;
+import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Id;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractRepository<T> {
 
@@ -105,4 +100,14 @@ public abstract class AbstractRepository<T> {
 			.setMaxResults(count)
 			.getResultList();
 	}
+
+    public <T> List<T> toTypedList(List<?> source, Class<T> klass) {
+        List<T> list = new LinkedList<T>();
+        for (Object item : source) {
+            list.add(klass.cast(item));
+        }
+        return list;
+    }
+
+
 }

@@ -8,7 +8,7 @@
 	<version>0.0.2-SNAPSHOT</version>
 
 	<properties>
-		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<org.springframework.version>3.2.2.RELEASE</org.springframework.version>
 		<org.hibernate.version>3.5.1-Final</org.hibernate.version>
 	</properties>
 
@@ -170,6 +170,13 @@
 			<version>1.0.0.GA</version>
 		</dependency>
 
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.2</version>
+            <scope>compile</scope>
+        </dependency>
 
 		<!-- Spring dependencies -->
 
@@ -362,8 +369,6 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
 					<!-- for static files: <webAppSourceDirectory>${basedir}/src/staticfiles</webAppSourceDirectory> -->
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
 					<webDefaultXml>src/main/resources/webdefault.xml</webDefaultXml>
 					<jettyConfig>src/main/webapp/WEB-INF/jetty.xml</jettyConfig>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
@@ -389,8 +394,8 @@
 					</dependency>
 					<dependency>
 						<groupId>org.codehaus.btm</groupId>
-						<artifactId>btm-jetty6-lifecycle</artifactId>
-						<version>2.0.1</version>
+						<artifactId>btm</artifactId>
+						<version>2.1.3</version>
 					</dependency>
 					<dependency>
 						<groupId>org.slf4j</groupId>

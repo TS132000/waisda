@@ -26,17 +26,16 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import nl.waisda.domain.TagEntry;
-import nl.waisda.domain.User;
-import nl.waisda.domain.UserScore;
-import nl.waisda.model.TagCloudItem;
-import nl.waisda.services.ScoringService;
-import nl.waisda.services.ScoringServiceIF;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import nl.waisda.domain.TagEntry;
+import nl.waisda.domain.User;
+import nl.waisda.domain.UserScore;
+import nl.waisda.model.TagCloudItem;
+import nl.waisda.services.ScoringServiceIF;
 
 
 @Repository
@@ -88,7 +87,6 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				.setParameter("ownerId", ownerId).getResultList().isEmpty();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<TagEntry> getMatches(int videoId, String normalizedTag,
 			int aroundTime) {
 		String q = "SELECT t.* FROM TagEntry t "
@@ -110,15 +108,15 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				+ "WHERE s.lo = :normalizedTag "
 				+ "  AND g.video_id = :videoId "
 				+ "  AND t.gametime between :t1 AND :t2";
-		return getEntityManager()
-				.createNativeQuery(q, TagEntry.class)
-				.setParameter("videoId", videoId)
-				.setParameter("normalizedTag", normalizedTag)
-				.setParameter("t1",
-						aroundTime - ScoringServiceIF.MAX_LOOKBACK_TIME)
-				.setParameter("t2",
-						aroundTime + ScoringServiceIF.MAX_LOOKBACK_TIME)
-				.getResultList();
+		return toTypedList(getEntityManager()
+                .createNativeQuery(q, TagEntry.class)
+                .setParameter("videoId", videoId)
+                .setParameter("normalizedTag", normalizedTag)
+                .setParameter("t1",
+                        aroundTime - ScoringServiceIF.MAX_LOOKBACK_TIME)
+                .setParameter("t2",
+                        aroundTime + ScoringServiceIF.MAX_LOOKBACK_TIME)
+                .getResultList(), TagEntry.class);
 	}
 
 	public List<TagEntry> getEntries(int gameId, int ownerId) {
@@ -172,7 +170,7 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 	@Transactional
 	public void moveTagEntries(User source, User target) {
 		Query q = getEntityManager().createQuery(
-				"UPDATE TagEntry SET owner = :target WHERE owner = :source");
+                "UPDATE TagEntry SET owner = :target WHERE owner = :source");
 		q.setParameter("source", source);
 		q.setParameter("target", target);
 		int n = q.executeUpdate();
@@ -184,7 +182,17 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 			scoringService.updateMatchAndStore(t, false);
 		}
 	}
-	
+
+    public List<TagEntry> getTags(int start, int size, int filter) {
+        Query q = getEntityManager()
+            .createQuery("select te from TagEntry te order by te.game.video.id, te.game.id")
+            .setFirstResult(start)
+            .setMaxResults(size);
+
+        List results = q.getResultList();
+        return toTypedList(results, TagEntry.class);
+    }
+
 	public int countTags() {
 		Query q = getEntityManager().createQuery("SELECT COUNT(*) FROM TagEntry");
 		return (int) (long) (Long) q.getSingleResult();
@@ -201,7 +209,7 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 		Query q = getEntityManager().createQuery("SELECT COUNT(*) FROM TagEntry WHERE matchingTagEntry_id IS NOT NULL");
 		return (int) (long) (Long) q.getSingleResult();
 	}
-	
+
 	public List<TagCloudItem> getTagCloud() {
 		// We order by decreasing count so that we may easily assign
 		// relativeSizes in the for loop below.
@@ -209,9 +217,8 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				+ "where creationDate >= now() - interval 7 day "
 				+ "group by t.normalizedTag "
 				+ "order by count(*) desc limit 20";
-		@SuppressWarnings("unchecked")
-		List<String> tags = getEntityManager().createNativeQuery(q)
-				.getResultList();
+		List<String> tags = toTypedList(getEntityManager().createNativeQuery(q)
+                .getResultList(), String.class);
 		List<TagCloudItem> cloud = new ArrayList<TagCloudItem>(tags.size());
 		int i = 0;
 		for (String tag : tags) {
@@ -261,7 +268,6 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<String> getDictionariesContaining(String tag) {
         String normalizedTag = TagEntry.normalize(tag);
 
@@ -270,7 +276,7 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
                         + "WHERE e.normalizedTag = :normalizedTag");
         query.setParameter("normalizedTag", normalizedTag);
 
-        return query.getResultList();
+        return toTypedList(query.getResultList(), String.class);
 	}
 
 }

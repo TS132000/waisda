@@ -29,10 +29,10 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import nl.waisda.model.Util;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Index;
+
+import nl.waisda.model.Util;
 
 @Entity
 public class TagEntry implements Serializable {
@@ -103,6 +103,15 @@ public class TagEntry implements Serializable {
 		}
 		return tags;
 	}
+
+    public String getTimestampHHmmss() {
+		int s = gameTime / 1000;
+		int m = s / 60;
+		int h = m / 60;
+		m %= 60;
+		s %= 60;
+		return String.format("%02d:%02d:%02d", h, m, s);
+    }
 
 	public String getFriendlyTime() {
 		return getFriendlyTime(gameTime);
