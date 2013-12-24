@@ -3,54 +3,156 @@ var TaggingHistory = base2.Base.extend({
 	idPrefix : 'tag-',
 	
 	update: function(tags, currentTime) {
-		tags.forEach(function(tag){
-			var el = jQuery('#' + this.idPrefix + tag.id);
-			
-			if (!el.length) {
+		$.each(tags, $.proxy(function(i, tag){
+			var el = $('#' + this.idPrefix + tag.id);
+
+			if (!el.length) { // if (!el.length) {
 				// Create an element for it
-				el = jQuery('<div/>', { 'class' : 'tag', 'id' : this.idPrefix + tag.id });
-				el.append(jQuery('<span/>', { 'class' : 'points', 'text': '+' + tag.score }));
+				el = $('<div/>', { 'class' : 'tag', 'id' : this.idPrefix + tag.id });
+				var match = false;
 				if (tag.matchingTag) {
-					var ownerName = tag.matchingTagOwnerName ? tag.matchingTagOwnerName : 'Guest';
-					var title = 'match met ' + tag.matchingTag + ' van ' + ownerName;
-					if (tag.pioneer) {
-						title += '. You introduced this tag';
-					}
-					var iconSrc = '/static/img/' + (tag.pioneer ? 'match-pioneer.png' : 'match-social.png');
-					el.append(jQuery('<img/>',  { 'class' : 'icon', 'title' : title, 'src' : iconSrc }));
+					el.addClass('match');
+					match = true;
 				}
-				if (tag.dictionary) {
-					// TODO test fixen op owner
-					var isMatching = "icon notMatchingWithOtherPlayer";
-					var title = "This tag was found in a dictionary but has not been confirmed by another player yet";
-					if (tag.matchingTag) {
-						isMatching = " icon";
-						title = "This tag was found in a dictionary";
+
+				el.append(document.createTextNode(tag.tag));
+
+				var explanation;
+				if (tag.pioneer && tag.matchingTag != null ) {
+					if (match) {
+						explanation = texts.pionier;
 					}
-					var iconSrc = '/static/img/match-dictionary.png';
-					el.append(jQuery('<img />',  { 'class' : isMatching, 'title' : title, 'src' : iconSrc }));
+					appendIcon(el, "pionier", explanation, true, match);
 				}
-				el.append(jQuery('<span/>', { 'text'  : tag.tag }));
+
+				if (tag.pioneer && tag.matchingTag && tag.matchingTag == tag.tag) {
+					appendIcon(el, "+75", texts.pionier, false, match);
+				} else if (tag.matchingTag && tag.matchingTag != tag.tag) {
+					appendIcon(el, "+25", texts.hierarchie, false, match);
+				} else if (tag.matchingTag && tag.matchingTag == tag.tag) {
+					appendIcon(el, "+50", texts.match, false, match);
+				}
+
+				el.append($('<span/>', { 'class' : 'tag', 'class' : 'points', 'text': '+' + tag.score }));
+				
 			} else {
 				// Update existing element
-				jQuery('span.points', el).text('+' + tag.score);
+				$('span.points', el).text('+' + tag.score);
 				if (tag.matchingTag && tag.pioneer) {
 					// Add a pioneer icon if one doesn't exist yet
 					var createNew = true;
-					jQuery('img', el).each(function(i, img) {
-						if (img.src.indexOf('pioneer') >= 0) {
+					$('span', el).each(function(i, span) {
+						if (span.hasClass("pionier")) {
 							createNew = false;
 						}
 					});
 					if (createNew) {
-						var icon = jQuery('<img/>',  { 'class' : 'icon', 'src' : '/static/img/match-pioneer.png' });
-						jQuery('span.points', el).append(icon);
+						el.append($('<span/>', { 'class' : 'icon pionier', 'text': 'pionier' }));
 					}
 				}
 			}
 
-			jQuery('#tagList').prepend(el);
-		}, this);
+			$('#tagList').prepend(el);
+		}, this));
 	}
 
+	
+
 });
+
+$(function(){
+	var tags = $("#tagList > .tag");
+	console.log("taglist", tags);
+	$.each(tags, function(t, tag){
+		$('.explanation-bubble').addClass('hidden').html("");
+		$(tag).hover(function(){	
+			console.log("hovert");
+			var t = $(this);
+			var icons = t.find(".icon");
+			var isMatch = t.hasClass('match');
+			var isPionier = t.hasClass('pionier');
+			var isHierarchy = t.hasClass('hierarchy');
+			var isConfirmed = t.hasClass('confirmed');
+
+			// put explanation texts in the bubble for each icon
+			$('.explanation-bubble').addClass('hidden').html("");
+			$.each(icons, function(i, icon){
+				var prettyName = $(icon).html();
+				fillExplanationBubble(prettyName, lookupExplanationText(prettyName, isMatch), true, isMatch);
+			});
+			if (isHierarchy) {
+				fillExplanationBubble("+25", texts.hierarchie, false, isMatch);
+			} else if (isConfirmed || isPionier) {
+				fillExplanationBubble("+50", texts.match, false, isMatch);
+			}
+			fillExplanationBubble("pionier", lookupExplanationText("pionier", true), true, true);
+			positionBubble($(tag));
+		}, function(){
+			$('.explanation-bubble').addClass('hidden').html("");
+		});
+
+
+	});
+
+
+});
+
+function lookupExplanationText(prettyName, isMatch) {
+	
+	if (prettyName == "pionier") {
+		return texts.pionier;
+	};
+	if (prettyName == "match") {
+		return isMatch ? texts.locatie_behaald : texts.locatie_potentieel;
+	};
+	if (prettyName == "hyrarchie") {
+		return isMatch ? texts.locatie_behaald : texts.locatie_potentieel;
+	};
+}
+
+function appendIcon(el, prettyName, explanation, drawIcon, isMatch) {
+	if (drawIcon) {
+		el.append($('<span/>', { 'class' : 'icon ' + prettyName, 'text': prettyName }));
+	}
+	el.hover(function(){
+		fillExplanationBubble(prettyName, explanation, drawIcon, isMatch);
+		positionBubble(el);
+	}, function(){
+		$('.explanation-bubble').addClass('hidden').html("");
+	});
+	
+}
+
+function fillExplanationBubble(prettyName, explanation, drawIcon, isMatch) {
+	var bubble = $('.explanation-bubble');
+	var bubbleRow = $("<div class='explanationRow' />"); // hier moet nog een match op als deze een match is
+	if (isMatch) bubbleRow.addClass('match');
+	var icon = $("<div class='leftCol'><span class='icon " + prettyName + "'>" + prettyName + "</span></div>");
+	if (!drawIcon) icon.addClass('numberIcon');
+	bubbleRow.append(icon);
+	bubbleRow.append("<span class='explanation'>" + explanation + "</span>");
+	bubble.append(bubbleRow).removeClass("hidden");
+
+}
+
+function positionBubble(tag) {
+	var tagListParent = $("#tagList").parent();
+	tagListParent.scroll(function(){ // remove bubble if tag list is scrolled
+		$('.explanation-bubble').addClass('hidden').html("");
+	});
+
+	var tagPosition = tag.position();
+	var tagListParentScrollTop = tagListParent.scrollTop();
+
+	var bubble = $('.explanation-bubble');
+	var bubbleHeight = bubble.height();
+	bubble.css("top", bubbleHeight * -1 + tagPosition.top - tagListParentScrollTop - 60);
+
+
+}
+
+var texts = {
+	pionier : "Je hebt deze term als eerste ingevoerd en krijgt daarom 25 bonuspunten.",
+	match : "Dit woord wordt bevestigd door een andere speler.",
+	hierarchie : "Dit woord is gerelateerd aan een woord van een andere speler."
+};

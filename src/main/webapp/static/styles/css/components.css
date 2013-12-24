@@ -111,6 +111,7 @@ section.main {
   font-weight: bold;
 }
 .box {
+  position: relative;
   display: block;
   border: 1px solid #eeeeee;
   -webkit-box-sizing: border-box;
@@ -627,4 +628,117 @@ section.main {
   position: absolute;
   width: 350px;
   right: 0px;
+}
+.explanation-bubble {
+  top: 60px;
+  width: 503px;
+  left: -330px;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 25px;
+  z-index: 9999;
+}
+.explanation-bubble.hidden {
+  display: none;
+}
+.explanation-bubble .leftCol {
+  float: left;
+  width: 90px;
+}
+.explanation-bubble .explanationRow {
+  border-top: 1px solid #cacaca;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+.explanation-bubble .explanationRow:first-child {
+  border: none;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+.explanation-bubble .icon,
+.tag-list .icon,
+.contribution .icon {
+  background-color: #cacaca;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 1px 5px;
+  text-transform: uppercase;
+  margin-right: 5px;
+}
+.explanation-bubble .icon:first-child,
+.tag-list .icon:first-child,
+.contribution .icon:first-child {
+  margin-left: 5px;
+}
+.explanation-bubble .match .icon,
+.tag-list .match .icon,
+.contribution .match .icon {
+  /* ?? */
+
+}
+.explanation-bubble .match .icon.pionier,
+.tag-list .match .icon.pionier,
+.contribution .match .icon.pionier {
+  background-color: #e80e0f;
+}
+.explanation-bubble .match .icon.gedrag,
+.tag-list .match .icon.gedrag,
+.contribution .match .icon.gedrag {
+  background-color: #ff0084;
+}
+.explanation-bubble .match .icon.soort,
+.tag-list .match .icon.soort,
+.contribution .match .icon.soort {
+  background-color: #cb00ce;
+}
+.explanation-bubble .match .icon.locatie,
+.tag-list .match .icon.locatie,
+.contribution .match .icon.locatie {
+  background-color: #601cc7;
+}
+.explanation-bubble .match .icon.natuur,
+.tag-list .match .icon.natuur,
+.contribution .match .icon.natuur {
+  background-color: #0172b4;
+}
+.explanation-bubble .match .icon.onderwerp,
+.tag-list .match .icon.onderwerp,
+.contribution .match .icon.onderwerp {
+  background-color: #158c76;
+}
+.explanation-bubble .match .icon.plant,
+.tag-list .match .icon.plant,
+.contribution .match .icon.plant {
+  background-color: #4ba00d;
+}
+.explanation-bubble .match .icon.schimmel,
+.tag-list .match .icon.schimmel,
+.contribution .match .icon.schimmel {
+  background-color: #ec8600;
+}
+.explanation-bubble .match .icon.dier,
+.tag-list .match .icon.dier,
+.contribution .match .icon.dier {
+  background-color: #bd3e07;
+}
+.explanation-bubble .match .points,
+.tag-list .match .points,
+.contribution .match .points {
+  color: #0068cf;
+  font-size: 19px;
+}
+.explanation-bubble .numberIcon .icon,
+.tag-list .numberIcon .icon,
+.contribution .numberIcon .icon {
+  background-color: transparent;
+  color: #0068cf;
+  font-weight: bold;
+  font-size: 24px;
+}
+.explanation-bubble .points,
+.tag-list .points,
+.contribution .points {
+  color: #cacaca;
+  font-size: 19px;
 }

@@ -4,6 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tt"%>
 <tt:html>
 <tt:head title="Resultaten">
+	<script src="/static/script/taggingHistory.js"></script>
 </tt:head>
 <tt:body pageName="recap">
 
@@ -200,6 +201,7 @@
 			</div>
 
 		</section>
+		<div class="explanation-bubble hidden"></div>
 	</div>
 
 

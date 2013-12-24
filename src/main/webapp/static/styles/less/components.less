@@ -98,6 +98,7 @@ section.main {
 
 // ------- BOX (.rich, .extended, .highlight)
 .box {
+	position: relative;
 	display:block;
 	border:1px solid @grayLighter;
 	.box-sizing(border-box); 
@@ -572,4 +573,78 @@ section.main {
 	position: absolute;
 	width: 350px;
 	right: 0px;
+}
+
+.explanation-bubble {
+	&.hidden {
+		display: none;
+	}
+	top: 60px;
+	width: 503px;
+	left: -330px;
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #eee;
+	padding: 25px;
+	z-index: 9999;
+	.leftCol {
+		float: left;
+		width: 90px;
+	}
+	.explanationRow {
+		border-top: 1px solid #cacaca;
+		margin-top: 10px;
+		padding-top: 10px;
+		&:first-child {
+			border: none;
+			margin-top: 0px;
+			padding-top: 0px;
+		}
+	}
+
+}
+
+.explanation-bubble, .tag-list, .contribution {
+
+		.icon {
+			&:first-child {
+				margin-left: 5px;
+			}
+			background-color: #cacaca;
+			color: @white;
+			font-size: 10px;
+			padding: 1px 5px;
+			text-transform: uppercase;
+			margin-right: 5px;
+			
+		}
+		.match {
+			.icon {
+				&.pionier { background-color: #e80e0f; }
+				&.gedrag { background-color: #ff0084; } /* ?? */
+				&.soort { background-color: #cb00ce; }
+				&.locatie { background-color: #601cc7; }
+				&.natuur { background-color: #0172b4; }
+				&.onderwerp { background-color: #158c76; }
+				&.plant { background-color: #4ba00d; }
+				&.schimmel { background-color: #ec8600; }
+				&.dier { background-color: #bd3e07; } 
+			}
+			.points {
+				color: #0068cf;
+				font-size: 19px;
+			}
+		}
+		.numberIcon {
+			.icon {
+				background-color: transparent;
+				color: #0068cf;
+				font-weight: bold;
+				font-size: 24px;
+			}
+		}
+		.points {
+			color: #cacaca;
+			font-size: 19px;
+		}
 }
