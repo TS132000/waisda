@@ -167,7 +167,21 @@
 	
 			<div id="tagList" class="tag-list scroll-box">
 				<c:forEach items="${recap.tagEntries}" var="tag">
-					<div class="tag" id="tagEntry3">
+					<c:choose>
+						<c:when test="${tag.pioneer && tag.matchingTagEntry.tag == tag.tag}">
+							<div class="tag match pionier" id="tagEntry3">
+						</c:when>
+						<c:when test="${tag.matchingTagEntry != null && tag.matchingTagEntry.tag != tag.tag}">
+							<div class="tag match hierarchy" id="tagEntry3">
+						</c:when>
+						<c:when test="${tag.matchingTagEntry != null && tag.pioneer == false}">
+							<div class="tag match confirmed" id="tagEntry3">
+						</c:when>
+						<c:otherwise>
+							<div class="tag" id="tagEntry3">
+						</c:otherwise>
+						</c:choose>
+						
 						<span class="points">+<nf:format number="${tag.score}" /></span>
 						<c:if test="${tag.matchingTagEntry != null && tag.pioneer}">
 							<img src="/static/img/match-pioneer.png" class="icon" />

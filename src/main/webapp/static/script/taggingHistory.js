@@ -78,14 +78,13 @@ $(function(){
 			$('.explanation-bubble').addClass('hidden').html("");
 			$.each(icons, function(i, icon){
 				var prettyName = $(icon).html();
-				fillExplanationBubble(prettyName, lookupExplanationText(prettyName, isMatch), true, isMatch);
+				//fillExplanationBubble(prettyName, lookupExplanationText(prettyName, isMatch), true, isMatch);
 			});
 			if (isHierarchy) {
 				fillExplanationBubble("+25", texts.hierarchie, false, isMatch);
 			} else if (isConfirmed || isPionier) {
 				fillExplanationBubble("+50", texts.match, false, isMatch);
 			}
-			fillExplanationBubble("pionier", lookupExplanationText("pionier", true), true, true);
 			positionBubble($(tag));
 		}, function(){
 			$('.explanation-bubble').addClass('hidden').html("");
