@@ -93,7 +93,7 @@ public class VideoRepository extends AbstractRepository<Video> {
 
     public List<Video> getVideos(int start, int size, int filter) {
         Query q = getEntityManager()
-            .createQuery("select v from Video v")
+            .createQuery("select t.game.video from TagEntry t group by t.game.video.id having count(t.id) > 0 order by t.game.start asc")
             .setFirstResult(start)
             .setMaxResults(size);
 
