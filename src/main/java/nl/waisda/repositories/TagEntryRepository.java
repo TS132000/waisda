@@ -268,6 +268,15 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				.getResultList();
 	}
 
+	public List<TagEntry> getTopTagEntries(int videoId, int maxResults) {
+		String q = "SELECT t FROM TagEntry t "
+				+ "WHERE t.game.video.id = :videoId "
+				+ "GROUP BY t.normalizedTag ORDER BY COUNT(*) DESC";
+		return getEntityManager().createQuery(q, TagEntry.class)
+				.setParameter("videoId", videoId).setMaxResults(maxResults)
+				.getResultList();
+	}
+
 	public List<String> getDictionariesContaining(String tag) {
         String normalizedTag = TagEntry.normalize(tag);
 

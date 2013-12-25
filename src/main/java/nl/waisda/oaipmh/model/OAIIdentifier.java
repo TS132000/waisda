@@ -12,7 +12,7 @@ import nl.waisda.oaipmh.model.jaxb.pmh.OAIPMHerrorcodeType;
 public class OAIIdentifier {
     private String prefix;
     private String domain;
-    private String type;
+    private OAIDataType type;
     private String identifier;
 
     /**
@@ -38,12 +38,12 @@ public class OAIIdentifier {
 
         this.prefix = idElements[0];
         this.domain = idElements[1];
-        this.type = idElements[2];
+        this.type = OAIDataType.valueOf(idElements[2]);
         this.identifier = idElements[3];
     }
 
     private void validateDocumentType(String identifier, String[] idElements) throws OAIException {
-        String documentType;
+        boolean isValidType;
         if (idElements == null) {
             throw new OAIException(OAIPMHerrorcodeType.BAD_ARGUMENT,
                 "identifier must have colons");
@@ -52,14 +52,17 @@ public class OAIIdentifier {
             throw new OAIException(OAIPMHerrorcodeType.BAD_ARGUMENT,
                 "identifier must consist of 4 parts ('oai:beeldengeluid.nl:documentType:documentID')");
         }
-        documentType = idElements[2];
-
-        if (!"tagentry".equals(documentType)) {
-
+        try {
+            OAIDataType.valueOf(idElements[2]);
+            isValidType = true;
+        } catch(IllegalArgumentException iae) {
+            isValidType = false;
+        }
+        if (!isValidType) {
             throw new OAIException(OAIPMHerrorcodeType.BAD_ARGUMENT, String.format(
-                    "Identifier '%s' contains type '%s' which is not recognized. Identifier must " +
-                            "have format ww:xx:yy:zz, whery yy is either 'tagentry'.",
-                    identifier, documentType));
+                "Identifier '%s' contains type '%s' which is not recognized. Identifier must " +
+                        "have format ww:xx:yy:zz, whery yy is one of " + OAIDataType.values().toString() + ".",
+                identifier, idElements[2]));
         }
     }
 
@@ -84,7 +87,11 @@ public class OAIIdentifier {
         return domain;
     }
 
-    public String getType() {
+    public OAIDataType getType() {
+        return type;
+    }
+
+    public OAIDataType getDataType() {
         return type;
     }
 

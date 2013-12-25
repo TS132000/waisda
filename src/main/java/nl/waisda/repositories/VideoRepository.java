@@ -21,13 +21,12 @@ package nl.waisda.repositories;
 
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import nl.waisda.domain.Video;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
+import nl.waisda.domain.Video;
 
 @Repository
 public class VideoRepository extends AbstractRepository<Video> {
@@ -91,5 +90,17 @@ public class VideoRepository extends AbstractRepository<Video> {
 		query.setMaxResults(maxResults);
 		return query.getResultList();
 	}
+
+    public List<Video> getVideos(int start, int size, int filter) {
+        Query q = getEntityManager()
+            .createQuery("select v from Video v")
+            .setFirstResult(start)
+            .setMaxResults(size);
+
+        List results = q.getResultList();
+        return toTypedList(results, Video.class);
+    }
+
+
 
 }

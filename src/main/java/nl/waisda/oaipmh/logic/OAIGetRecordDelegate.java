@@ -1,9 +1,13 @@
 package nl.waisda.oaipmh.logic;
 
+import java.util.List;
+import java.util.concurrent.Callable;
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import nl.waisda.domain.TagEntry;
+import nl.waisda.domain.Video;
 import nl.waisda.oaipmh.model.MetadataPrefix;
 import nl.waisda.oaipmh.model.OAIException;
 import nl.waisda.oaipmh.model.OAIIdentifier;
@@ -41,12 +45,26 @@ public class OAIGetRecordDelegate extends OAIPMHDelegateBase {
         OAIIdentifier oaiIdentifier = OAIIdentifier.newInstance(identifier);
 
         // fill metadata DRS TODO: we need to switch on identifier, not prefix as only rdf is supported
-        switch(metadataFormat) {
-        case rdf:
+        switch(oaiIdentifier.getType()) {
+        case tagentry: {
             TagEntry tagEntry = obtainTagEntry(oaiIdentifier);
             output = formatOutputWaisdaTagEntry(tagEntry);
-            headerType = createHeader(tagEntry);
+            headerType = createHeaderTagEntry(tagEntry);
             break;
+        }
+        case annotation: {
+            Video video = obtainVideo(oaiIdentifier); // either a video or an exception
+            List<TagEntry> tagEntries = tagEntryRepository.getTopTagEntries(video.getId(), 100);
+            output = formatOutputWaisdaAnnotation(video, tagEntries);
+            headerType = createHeaderAnnotation(video);
+            break;
+        }
+        case video: {
+            Video video = obtainVideo(oaiIdentifier); // either a video or an exception
+            output = formatOutputWaisdaVideo(video);
+            headerType = createHeaderVideo(video);
+            break;
+        }
         default:
             // was validated indirectly by MetadataPrefix so this code is unreachable
             output = null;
@@ -61,12 +79,11 @@ public class OAIGetRecordDelegate extends OAIPMHDelegateBase {
         return recordType;
     }
 
-    private TagEntry obtainTagEntry(OAIIdentifier identifier) throws OAIException {
-        TagEntry tagEntry;
-
+    private <T> T obtainWithinTryCatch(OAIIdentifier identifier, Callable<T> callable) throws OAIException {
         try {
-            if ("tagentry".equals(identifier.getType().toLowerCase())) {
-                return tagEntryRepository.getById(Integer.parseInt(identifier.getIdentifier()));
+            T obj = callable.call();
+            if (obj != null) {
+                return callable.call();
             }
         } catch(Exception e) {
             throw new OAIException(OAIPMHerrorcodeType.ID_DOES_NOT_EXIST, "Cannot find the object with id '" +
@@ -74,5 +91,26 @@ public class OAIGetRecordDelegate extends OAIPMHDelegateBase {
         }
         throw new OAIException(OAIPMHerrorcodeType.ID_DOES_NOT_EXIST, "type '" + identifier.getType() + "' does not exist");
     }
+
+    private TagEntry obtainTagEntry(OAIIdentifier identifier) throws OAIException {
+        final OAIIdentifier identifierConst = identifier;
+        return obtainWithinTryCatch(identifier, new Callable<TagEntry>() {
+            @Override
+            public TagEntry call() throws Exception {
+                return tagEntryRepository.getById(Integer.parseInt(identifierConst.getIdentifier()));
+            }
+        });
+    }
+
+    private Video obtainVideo(OAIIdentifier identifier) throws OAIException {
+        final OAIIdentifier identifierConst = identifier;
+        return obtainWithinTryCatch(identifier, new Callable<Video>() {
+            @Override
+            public Video call() throws Exception {
+                return videoRepository.getById(Integer.parseInt(identifierConst.getIdentifier()));
+            }
+        });
+    }
+
 
 }

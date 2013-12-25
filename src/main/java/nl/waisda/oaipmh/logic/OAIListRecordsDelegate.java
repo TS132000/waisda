@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
 import nl.waisda.domain.TagEntry;
+import nl.waisda.domain.Video;
 import nl.waisda.oaipmh.model.MetadataPrefix;
 import nl.waisda.oaipmh.model.OAIException;
 import nl.waisda.oaipmh.model.OAIListResult;
@@ -50,7 +51,7 @@ public class OAIListRecordsDelegate extends OAIPMHDelegateBase{
         switch (metadataFormat) {
             case rdf:
                 // set status
-                resultList = buildRecordTypeListWaisdaTagEntry(page);
+                resultList = buildRecordTypeListWaisdaAnnotation(page);
             break;
             default:
                 resultList = null; // shut up compiler
@@ -65,16 +66,16 @@ public class OAIListRecordsDelegate extends OAIPMHDelegateBase{
         return new OAIListResult<RecordType>(resumptionInfo, new DateTime(), resultList);
     }
 
-    private List<RecordType> buildRecordTypeListWaisdaTagEntry(int page) throws OAIException {
+    private List<RecordType> buildRecordTypeListWaisdaAnnotation(int page) throws OAIException {
         MetadataType metadata;
         HeaderType headerType;
         RecordType recordType;
         List<RecordType> recordTypeList = new LinkedList<RecordType>();
 
         // read the data (DRS TODO: same as ListIdentifiers)
-        List<TagEntry> tagEntries = tagEntryRepository.getTags((page - 1) * PAGE_SIZE, PAGE_SIZE, 0);
+        List<Video> videos = videoRepository.getVideos((page - 1) * PAGE_SIZE, PAGE_SIZE, 0);
 
-        if (tagEntries.size() == 0) {
+        if (videos.size() == 0) {
             if (page > 1) {
                 throw new OAIException(OAIPMHerrorcodeType.NO_RECORDS_MATCH, "Reached end of list");
             } else {
@@ -82,19 +83,20 @@ public class OAIListRecordsDelegate extends OAIPMHDelegateBase{
             }
         }
 
-        for (TagEntry tagEntry : tagEntries) {
+        for (Video video : videos) {
+            List<TagEntry> tagEntries = tagEntryRepository.getTopTagEntries(video.getId(), 100);
+
             metadata = JAXB_OBJECT_FACTORY_PMH.createMetadataType();
             recordType = JAXB_OBJECT_FACTORY_PMH.createRecordType();
-            headerType = createHeader(tagEntry);
+            headerType = createHeaderAnnotation(video);
 
-            metadata.setAny(formatOutputWaisdaTagEntry(tagEntry));
+            metadata.setAny(formatOutputWaisdaAnnotation(video, tagEntries));
 
             recordType.setHeader(headerType);
             recordType.setMetadata(metadata);
 
             recordTypeList.add(recordType);
         }
-
         return recordTypeList;
     }
 

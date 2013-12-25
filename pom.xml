@@ -5,7 +5,7 @@
 	<artifactId>waisda-web</artifactId>
 	<packaging>war</packaging>
 	<name>waisda</name>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 
 	<properties>
 		<org.springframework.version>3.2.2.RELEASE</org.springframework.version>
@@ -301,7 +301,7 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<!-- Support for testing Spring applications with tools such as JUnit and 
+		<!-- Support for testing Spring applications with tools such as JUnit and
 			TestNG This artifact is generally always defined with a 'test' scope for 
 			the integration testing framework and unit testing stubs -->
 		<dependency>
@@ -328,7 +328,7 @@
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
 			<version>1.0.1B</version>
-			<scope>test, provided</scope>
+			<scope>test</scope>
 		</dependency>
 
         <dependency>
