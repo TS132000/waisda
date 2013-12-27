@@ -10,46 +10,44 @@
 	<tt:body pageName="challenge">
 		<!-- FRANK FIXME :-) -->
 		<div class="box colorbox span8">
-	 		<header class="header rich"><h2 class="h2">Welkom bij Waisda<span class="boxline boxline-orange"></span></h2></header>
+	 		<header class="header rich"><h2 class="h2">Welcome to Waisda<span class="boxline boxline-orange"></span></h2></header>
 			<div class="box">
 				<section>
-				<h3>${game.initiator.name} heeft ${scoreToBeat} punten behaald met het taggen van "${game.video.title}" en daagt jou uit om zijn/haar score te verbeteren!</h3>
-				<p>Instructies:</p>
+				<h3>${game.initiator.name} plays Waisda? and has scored ${scoreToBeat} points by playing ${game.video.title}. Can you improve this score?</h3>
+				<p>Instructions:</p>
 				<ul>
-					<li>Voer zoveel mogelijk woorden in die beschrijven wat je ziet en hoort</li>
-					<li>Bevestig een woord door op de [enter] toets op jouw toetsenbord te drukken</li>
-					<li>Punten verdien je met matches, wanneer je hetzelfde woord invoert als een medespeler</li>
-					<li>Tags met een hoge inhoudelijke relevantie voor het programma ontvangen bonuspunten</li>
-					<li>Op deelname aan het spel zijn de <a href="/voorwaarden">algemene voorwaarden</a> van toepassing</li>
+					<li>Add as many words that describe what you see and what you hear</li>
+					<li>Confirm your entry by pressing the [enter] key on your keyboard</li>
+					<li>Scoring is based on matching entries from other players</li>
+					<li>Some specific terms relevant to the content will result in bonus points</li>
+					<li><a href="/voorwaarden">Terms and conditions</a> apply to playing the game</li>
 				</ul>
-				<p>Zie voor een uitgebreide uitleg ook onze <a href="/spelinstructies">spelinstructies</a>.</p>
-				<p>Succes!</p>
+				<p>Good luck!</p>
 				<form method="post" id="challengeForm">
 						<fieldset>
 							<div class="form-actions center">
-								<a href="#" onclick="document.getElementById('challengeForm').submit(); return false" class="btn btn-primary btn-large" tabindex="9">Uitdaging accepteren</a>
+								<a href="#" onclick="document.getElementById('challengeForm').submit(); return false" class="btn btn-primary btn-large" tabindex="9">Accept challenge</a>
 							</div>
 			
 							<input type="submit" value="Start" tabindex="10" style="position:absolute;top:0;left:-10000px;"/>
 						</fieldset>  
 				</form>
-				<p><a href="http://${globalStats.domainName}/">Waisda</a> is het zie, zoek en zeg spel van Vroege Vogels. Meer informatie over Waisda vind je hier: <a href="http://${globalStats.domainName}/over-het-spel">http://${globalStats.domainName}/over-het-spel</a></p>
 			</section>
 			</div>
 		</div>
 
 
 		<!-- Over Waisda -->
-		<div class="colorbox box shadowbox span4 leading">
+<!-- 		<div class="colorbox box shadowbox span4 leading">
 			<div class="shadowOverlay"></div>
 			<header class="header rich">
-				<h2 class="h2">Over Waisda <!--small>last 7 days</small--></h2><span class="bird bird-blue"></span><span class="boxline boxline-blue"></span>
+				<h2 class="h2">Over Waisda small>last 7 days</small</h2><span class="bird bird-blue"></span><span class="boxline boxline-blue"></span>
 			</header>
 			<section class="box scroll-box fixed-low">
 				<p>Het spel is ontwikkeld om het rijke archief van beeldmateriaal van Vroege Vogels beter toegankelijk te maken door op een speelse manier informatie te verzamelen over video's. Met jouw hulp worden deze video's beter vindbaar en verrijkt met aanvullende gegevens over de video.</p>
 			</section>
 		</div>
-
+ -->
 
 
 
