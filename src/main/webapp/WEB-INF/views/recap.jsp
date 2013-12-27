@@ -15,13 +15,13 @@
 		<c:if test="${recap.game.scoreToBeat != null}">
 			<c:choose>
 				<c:when test="${recap.ownerScore < recap.game.scoreToBeat}">
-					<h2>Helaas, de uitdager heeft dit spel gewonnen!</h2>
+					<h2>Unfortunately, the challenger has won this game</h2>
 				</c:when>
 				<c:when test="${recap.ownerScore == recap.game.scoreToBeat}">
-					<h2>Jullie hebben evenveel punten gescoord!</h2>
+					<h2>You both scored equal points!</h2>
 				</c:when>
 				<c:when test="${recap.ownerScore > recap.game.scoreToBeat}">
-					<h2>U heeft de uitdaging gewonnen!</h2>
+					<h2>You have won the challenge!</h2>
 				</c:when>
 			</c:choose>
 		</c:if>
