@@ -168,29 +168,29 @@
 			<div id="tagList" class="tag-list scroll-box">
 				<c:forEach items="${recap.tagEntries}" var="tag">
 					<c:choose>
-						<c:when test="${tag.pioneer && tag.matchingTagEntry.tag == tag.tag}">
-							<div class="tag match pionier" id="tagEntry3">
+						<c:when test="${tag.matchingTagEntry != null && tag.owner.id != tag.matchingTagEntry.owner.id && tag.pioneer}">
+							<div class="tag match pionier">
 						</c:when>
-						<c:when test="${tag.matchingTagEntry != null && tag.matchingTagEntry.tag != tag.tag}">
-							<div class="tag match hierarchy" id="tagEntry3">
+						<c:when test="${tag.matchingTagEntry != null && tag.owner.id != tag.matchingTagEntry.owner.id && tag.matchingTagEntry.tag != tag.tag}">
+							<div class="tag match hierarchy">
 						</c:when>
-						<c:when test="${tag.matchingTagEntry != null && tag.pioneer == false}">
-							<div class="tag match confirmed" id="tagEntry3">
+						<c:when test="${tag.matchingTagEntry != null && tag.owner.id != tag.matchingTagEntry.owner.id && !tag.pioneer}">
+							<div class="tag match confirmed">
 						</c:when>
 						<c:otherwise>
-							<div class="tag" id="tagEntry3">
+							<div class="tag">
 						</c:otherwise>
 						</c:choose>
 						
 						<span class="points">+<nf:format number="${tag.score}" /></span>
-						<c:if test="${tag.matchingTagEntry != null && tag.pioneer}">
+						<c:if test="${tag.matchingTagEntry != null && tag.owner.id != tag.matchingTagEntry.owner.id && tag.pioneer}">
 							<img src="/static/img/match-pioneer.png" class="icon" />
 						</c:if>
-						<c:if test="${tag.matchingTagEntry != null && !tag.pioneer}">
+						<c:if test="${tag.matchingTagEntry != null && tag.owner.id != tag.matchingTagEntry.owner.id && !tag.pioneer}">
 							<img src="/static/img/match-social.png" class="icon" />
 						</c:if>
 						<c:choose>
-							<c:when test="${tag.dictionary != null && tag.matchingTagEntry}">
+							<c:when test="${tag.dictionary != null && tag.matchingTagEntry != null}">
 								<img src="/static/img/match-dictionary.png" class="icon" />
 							</c:when>
 							<c:when test="${tag.dictionary != null}">

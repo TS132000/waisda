@@ -151,7 +151,7 @@ function positionBubble(tag) {
 }
 
 var texts = {
-	pionier : "Je hebt deze term als eerste ingevoerd en krijgt daarom 25 bonuspunten.",
-	match : "Dit woord wordt bevestigd door een andere speler.",
-	hierarchie : "Dit woord is gerelateerd aan een woord van een andere speler."
+	pionier : "You were the first to introduce this tag",
+	match : "This tag was confirmed by another player",
+	hierarchie : "This tag is related to a tag from another player"
 };
