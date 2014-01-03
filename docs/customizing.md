@@ -16,6 +16,44 @@ Adding dictionaries with words is done by filling table `DictionaryEntry` with r
 
 An alternative use for dictionaries is to make a dictionary `stopwords` and have the scoring engine award 0 points to all such tag entries.
 
+## Using RESTService instead of dictionary
+
+Instead of using the table `DictionaryEntry`, you can configure waisda? to use a RESTService.
+In the file `waisda/src/main/resources/config.properties` you will find property `waisda.matcher.skos.restservice.url`.
+When this property is empty, waisda? will use table `DictionaryEntry` for matching it's tag against a dictionary.
+You can also use a RESTService (e.g.: http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:).
+The tag (e.g.: 'street') is placed at the end of the RESTService URL (http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:street).
+The RESTService must return an XML file conform to RDF schema.
+There is another property `waisda.matcher.skos.start.about.tag` in the file `config.properties`.
+The value of that property is used to filter the `Description`s. When the attribute `rdf:about` starts with the value of `waisda.matcher.skos.start.about.tag`, the `Description`s is selected.
+The found `Dictionary` will then be the last part of `rdf:Description/skos:inScheme@rdf:resource`.
+E.g: When you enter the tag 'paarden', the result XML will be:
+
+
+	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" openskos:numFound="4" openskos:start="0" openskos:maxScore="11.671335">
+	<rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/28775">
+		...
+		<skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Onderwerpen"/>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/218278">
+		...
+		<skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG"/>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://data.beeldengeluid.nl/expired/178102">
+		...
+		<skos:inScheme rdf:resource="http://data.beeldengeluid.nl/expired/TVtrefwoorden_OUD"/>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://data.beeldengeluid.nl/expired/208803">
+		...
+		<skos:inScheme rdf:resource="http://data.beeldengeluid.nl/expired/RVDtrefwoorden_OUD"/>
+	</rdf:Description>
+	</rdf:RDF>
+
+After filtering with `http://data.beeldengeluid.nl/gtaa` the found dictionaries will be
+
+	Onderwerpen
+	OnderwerpenBenG
+
 ## Translating pages
 
 Because the project is not set up to support internationalization (where the language of the UI can be changed through a simple configuration setting), translating involves going through the source files and translating individual sentences.

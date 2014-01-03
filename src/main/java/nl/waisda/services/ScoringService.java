@@ -15,27 +15,31 @@
 
     You should have received a copy of the GNU General Public License
     along with Waisda.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package nl.waisda.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-import org.hibernate.tool.hbm2x.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import nl.waisda.domain.TagEntry;
-import nl.waisda.model.*;
+import nl.waisda.model.Cache;
+import nl.waisda.model.GlobalStats;
+import nl.waisda.model.TagCloudItem;
+import nl.waisda.model.TopScores;
 import nl.waisda.model.Value;
 import nl.waisda.repositories.ParticipantRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
+
+import org.apache.log4j.Logger;
+import org.hibernate.tool.hbm2x.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ScoringService implements ScoringServiceIF, InitializingBean {
@@ -46,10 +50,16 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
 	private TagEntryRepository tagEntryRepo;
 
 	@Autowired
+	private SKOSService skosService;
+
+	@Autowired
 	private UserRepository userRepo;
 
 	@Autowired
 	private ParticipantRepository participantRepo;
+
+	@org.springframework.beans.factory.annotation.Value("${waisda.matcher.skos.restservice.url}")
+	private String conceptsServiceUrl;
 
 	@org.springframework.beans.factory.annotation.Value("${waisda.matcher.specialdictionaries}")
 	private String specialDictionaries;
@@ -67,60 +77,68 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
 				List<TagCloudItem> tagCloud = tagEntryRepo.getTagCloud();
 				TopScores topScores = userRepo.getTopScores();
 				int currentlyPlaying = participantRepo.countCurrentlyPlaying();
-				return new GlobalStats(countTags, countMatches, tagCloud,
-						topScores, currentlyPlaying);
+				return new GlobalStats(countTags, countMatches, tagCloud, topScores, currentlyPlaying);
 			}
 		};
 		globalStatsCache = new Cache<GlobalStats>(fetchGlobalStats, 10000);
 	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        // create special dictionary names list
-        if (specialDictionaryList == null) {
-            specialDictionaryList = new HashSet<String>() ;
-        }
-        // split the onput dictionaries
-        if (StringUtils.isNotEmpty(specialDictionaries)) {
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		// create special dictionary names list
+		if (specialDictionaryList == null) {
+			specialDictionaryList = new HashSet<String>();
+		}
+		// split the onput dictionaries
+		if (StringUtils.isNotEmpty(specialDictionaries)) {
 
-            String[] specialDictionarySplit = specialDictionaries.split(",");
-            for (String entry : specialDictionarySplit) {
-                 specialDictionaryList.add(entry);
-            }
-        }
-    }
-
-    public void updateDictionary(TagEntry tagEntry) {
-        List<String> dictionaryEntries = tagEntryRepo.getDictionariesContaining(tagEntry.getNormalizedTag());
-        if (dictionaryEntries.size() > 0) {
-            // check for special dictionary cases first
-            for (String entry : dictionaryEntries) {
-                if (specialDictionaryList.contains(entry)) {
-                    // yes, matched!
-                    tagEntry.setSpecialMatch(true);
-                    tagEntry.setDictionary(entry);
-                    break;
-                }
-            }
-            // if this is no special case, just pick the first one
-            if (tagEntry.getDictionary() == null) {
-                // If multiple entries are found, use only the first one.
-                tagEntry.setSpecialMatch(false);
-                tagEntry.setDictionary(dictionaryEntries.get(0));
-            }
-        }
+			String[] specialDictionarySplit = specialDictionaries.split(",");
+			for (String entry : specialDictionarySplit) {
+				specialDictionaryList.add(entry);
+			}
+		}
 	}
 
-    public boolean isSpecialDictionaryMatch(final String dictionaryName) {
-        if (StringUtils.isNotEmpty(dictionaryName)) {
-            return specialDictionaryList.contains(dictionaryName);
-        }
-        return false;
-    }
+	private boolean isConceptsServiceUrlConfigured(){
+		return StringUtils.isNotEmpty(this.conceptsServiceUrl);
+	}
+
+	public void updateDictionary(TagEntry tagEntry) {
+		List<String> dictionaryEntries = new ArrayList<String>();
+		if (isConceptsServiceUrlConfigured()) {
+			dictionaryEntries = skosService.getDictionariesContaining(tagEntry.getNormalizedTag());
+		} else {
+			dictionaryEntries = tagEntryRepo.getDictionariesContaining(tagEntry.getNormalizedTag());
+		}
+
+		if (dictionaryEntries.size() > 0) {
+			// check for special dictionary cases first
+			for (String entry : dictionaryEntries) {
+				if (specialDictionaryList.contains(entry)) {
+					// yes, matched!
+					tagEntry.setSpecialMatch(true);
+					tagEntry.setDictionary(entry);
+					break;
+				}
+			}
+			// if this is no special case, just pick the first one
+			if (tagEntry.getDictionary() == null) {
+				// If multiple entries are found, use only the first one.
+				tagEntry.setSpecialMatch(false);
+				tagEntry.setDictionary(dictionaryEntries.get(0));
+			}
+		}
+	}
+
+	public boolean isSpecialDictionaryMatch(final String dictionaryName) {
+		if (StringUtils.isNotEmpty(dictionaryName)) {
+			return specialDictionaryList.contains(dictionaryName);
+		}
+		return false;
+	}
 
 	@Transactional
-	public void updateMatchAndStore(TagEntry tagEntry,
-			boolean updateReverseMatches) {
+	public void updateMatchAndStore(TagEntry tagEntry, boolean updateReverseMatches) {
 
 		// This method might be called as a result of a user merge. Check if we
 		// already have a good match.
@@ -137,17 +155,14 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
 		}
 
 		// Fetch all possible matches.
-		List<TagEntry> matches = tagEntryRepo.getMatches(tagEntry.getGame()
-				.getVideo().getId(), tagEntry.getNormalizedTag(),
-				tagEntry.getGameTime());
+		List<TagEntry> matches = tagEntryRepo.getMatches(tagEntry.getGame().getVideo().getId(),
+				tagEntry.getNormalizedTag(), tagEntry.getGameTime());
 
 		// First try and find a literal match from the user's history. If found,
 		// awards no points.
 		for (TagEntry match : matches) {
-			if (match.getId() != tagEntry.getId()
-					&& match.getOwner().getId() == tagEntry.getOwner().getId()
-					&& match.getNormalizedTag().equals(
-							tagEntry.getNormalizedTag())) {
+			if (match.getId() != tagEntry.getId() && match.getOwner().getId() == tagEntry.getOwner().getId()
+					&& match.getNormalizedTag().equals(tagEntry.getNormalizedTag())) {
 				// Literal match with a previous entry by the same owner. Set
 				// forward matching tag entry, awarding no points. Don't set
 				// reverse match to allow for real matches later on.
@@ -178,8 +193,7 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
 		if (updateReverseMatches && tagEntry.isOriginal()) {
 			for (TagEntry match : matches) {
 				if (match.getMatchingTagEntry() == null) {
-					log.info(String.format("Awarding pioneer points to tag %d",
-							match.getId()));
+					log.info(String.format("Awarding pioneer points to tag %d", match.getId()));
 					match.setMatchingTagEntry(tagEntry);
 					match.updateScore();
 					tagEntryRepo.store(match);

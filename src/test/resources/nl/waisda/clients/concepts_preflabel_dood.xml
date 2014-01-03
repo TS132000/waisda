@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" 	xmlns:openskos="http://openskos.org/xmlns#"
+		openskos:numFound="4"
+		openskos:start="0"
+		openskos:maxScore="11.671331"
+	>
+<rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/25164">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation>25164</skos:notation>
+    <skos:broadMatch rdf:resource="http://data.beeldengeluid.nl/gtaa/24833"/>
+    <skos:broadMatch rdf:resource="http://data.beeldengeluid.nl/gtaa/24862"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/27975"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/29262"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/28492"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/29559"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/25645"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/25735"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/28407"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/29194"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/27181"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/29552"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/27599"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/26624"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/28128"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/26783"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/29978"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/27661"/>
+    <dcterms:dateAccepted>2007-11-23T13:13:28</dcterms:dateAccepted>
+    <dcterms:contributor xml:lang="nl">RVD, SFW, NFM, TVA, GWA</dcterms:contributor>
+    <dcterms:modified>2007-11-23T13:54:48</dcterms:modified>
+    <skos:historyNote xml:lang="nl">Recordnummer: 10769&#13;Datum invoer: 13-12-1998&#13;Gebruiker invoer: SEBASTIAAN&#13;Datum gewijzigd: 31-1-2007&#13;Gebruiker gewijzigd: awolthuis</skos:historyNote>
+    <dcterms:creator>NAA</dcterms:creator>
+    <skos:prefLabel xml:lang="nl">dood</skos:prefLabel>
+    <dcterms:dateSubmitted>2007-11-23T13:13:28</dcterms:dateSubmitted>
+    <skos:historyNote xml:lang="nl">Gewijzigd door: NAA</skos:historyNote>
+    <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Onderwerpen"/>
+    <skos:topConceptOf rdf:resource="http://data.beeldengeluid.nl/gtaa/Onderwerpen"/>
+  </rdf:Description><rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/215866">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation>215866</skos:notation>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/222885"/>
+    <skos:broadMatch rdf:resource="http://data.beeldengeluid.nl/gtaa/221193"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/217456"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/220000"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/217966"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/220319"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/216394"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/218364"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/217850"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/219919"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/216666"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/220248"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/217057"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/219245"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/217617"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/219427"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/217128"/>
+    <skos:broadMatch rdf:resource="http://data.beeldengeluid.nl/gtaa/24833"/>
+    <skos:broadMatch rdf:resource="http://data.beeldengeluid.nl/gtaa/24862"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/215514"/>
+    <dcterms:dateAccepted>2009-11-30T14:18:55</dcterms:dateAccepted>
+    <dcterms:contributor xml:lang="nl">RVD, SFW, NFM, TVA, GWA</dcterms:contributor>
+    <dcterms:modified>2010-06-03T11:52:18</dcterms:modified>
+    <skos:historyNote xml:lang="nl">Recordnummer: 10769&#13;Datum invoer: 13-12-1998&#13;Gebruiker invoer: SEBASTIAAN&#13;Datum gewijzigd: 31-1-2007&#13;Gebruiker gewijzigd: awolthuis</skos:historyNote>
+    <dcterms:creator>Alma Wolthuis</dcterms:creator>
+    <skos:prefLabel xml:lang="nl">dood</skos:prefLabel>
+    <dcterms:dateSubmitted>2009-11-30T14:18:55</dcterms:dateSubmitted>
+    <skos:historyNote xml:lang="nl">Gewijzigd door: Alma Wolthuis</skos:historyNote>
+    <skos:historyNote xml:lang="nl">Goedgekeurd door: Alma Wolthuis</skos:historyNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG"/>
+    <skos:topConceptOf rdf:resource="http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG"/>
+  </rdf:Description><rdf:Description rdf:about="http://data.beeldengeluid.nl/expired/174948">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation>174948</skos:notation>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/175968"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/176647"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/178995"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/179556"/>
+    <skos:related rdf:resource="http://data.beeldengeluid.nl/gtaa/174107"/>
+    <dcterms:dateAccepted>2007-11-25T12:15:54</dcterms:dateAccepted>
+    <dcterms:modified>2007-11-25T14:01:14</dcterms:modified>
+    <dcterms:creator>NAA</dcterms:creator>
+    <skos:prefLabel xml:lang="nl">dood</skos:prefLabel>
+    <dcterms:dateSubmitted>2007-11-25T12:15:54</dcterms:dateSubmitted>
+    <skos:historyNote xml:lang="nl">Gewijzigd door: NAA</skos:historyNote>
+    <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/expired/TVtrefwoorden_OUD"/>
+  </rdf:Description><rdf:Description rdf:about="http://data.beeldengeluid.nl/expired/208359">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation>208359</skos:notation>
+    <dcterms:dateAccepted>2007-11-26T07:34:32</dcterms:dateAccepted>
+    <dcterms:creator>NAA</dcterms:creator>
+    <skos:prefLabel xml:lang="nl">dood</skos:prefLabel>
+    <dcterms:dateSubmitted>2007-11-26T07:34:32</dcterms:dateSubmitted>
+    <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/expired/RVDtrefwoorden_OUD"/>
+  </rdf:Description></rdf:RDF>
