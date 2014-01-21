@@ -111,15 +111,52 @@ public class OAIPMHDelegateBase {
         //        Document ownerDocument;
         String xml;
 
+        SimpleDateFormat sdf = new SimpleDateFormat(HEADER_DATE_FORMAT);
         String base = createBaseURL();
         String baseUrl = base + "?verb=GetRecord&identifier=%s&metadataPrefix=rdf";
         StringBuilder bag = new StringBuilder();
         for (TagEntry entry : entries) {
-            bag.append("<w:TagEntry rdf:resource=\"" + encode(String.format(baseUrl, createTagEntryId(entry))) + "\"/>\n");
+            //bag.append("<w:TagEntry rdf:resource=\"" + encode(String.format(baseUrl, createTagEntryId(entry))) + "\"/>\n");
+            bag.append(
+                "        <tags:tag>\n" +
+                "          <tags:Tagging>\n" +
+                "            <tags:associatedTag>\n" +
+                "              <tags:Tag rdf:about=\"" + encode(createTagEntryId(entry)) + "\">\n" +
+                "                <tags:name>" + encode(entry.getNormalizedTag()) + "</tags:name>\n" +
+                "                <time:xsdDateTime>" + encode(entry.getTimestampHHmmss()) + "</time:xsdDateTime>\n" +
+                "                <skos:Note>User entered tag</skos:Note>\n" +
+                "                <skos:prefLabel>" + encode(entry.getTag()) + "</skos:prefLabel>\n" +
+                //"                <skos:exactMatch rdf:resource=\"http://data.beeldengeluid.nl/gtaa/182523\"/>\n" +  TODO: marcel do u save this id?
+                "              </tags:Tag>\n" +
+                "            </tags:associatedTag>\n" +
+                "            <tags:taggedBy>" + encode(entry.getOwner().getName()) + "</tags:taggedBy>\n" +
+                "            <tags:taggedOn rdf:datatype=\"http://www.w3.org/2001/XMLSchemadate\">" + encode(sdf.format(entry.getCreationDate())) + "</tags:taggedOn>\n" +
+                "          </tags:Tagging>\n" +
+                "        </tags:tag>\n");
         }
 
 
-        xml =
+        xml = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" \n" +
+                "       xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \n" +
+                "       xmlns:dc=\"http://purl.org/dc/elements/1.1/\" \n" +
+                "       xmlns:tag=\"http://www.holygoat.co.uk/owl/redwood/tag/\" \n" +
+                "       xmlns:tags=\"http://www.holygoat.co.uk/owl/redwood/0.1/tags/\" \n" +
+                "       xmlns:time=\"http://www.w3.org/2006/time#\"\n" +
+                "       xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\"\n" +
+                "       xmlns:oac=\"http://www.openannotation.org/ns/\">\n" +
+                "  <oac:Annotation rdf:about=\"" + encode(createAnnotationId(video)) + "\">\n" +
+                "    <dc:title>TagEntry annotation for waisda metadata</dc:title>\n" +
+                "    <oac:hasTarget rdf:resource=\"" + encode(String.format(baseUrl, createVideoId(video))) + "\"/>\n" +
+                "    <oac:hasBody>  \n" +
+                "      <oac:Body>\n" +
+                bag.toString() +
+                "      </oac:Body>\n" +
+                "    </oac:hasBody>\n" +
+                "  </oac:Annotation>\n" +
+                "</rdf:RDF>\n";
+
+
+        /*xml =
             "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
             "         xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" +
             "         xmlns:dcterms=\"http://purl.org/dc/terms/\"\n" +
@@ -137,7 +174,8 @@ public class OAIPMHDelegateBase {
             "      </w:TagEntries>\n" +
             "    </oac:hasBody>\n" +
             "  </oac:Annotation>\n" +
-            "</rdf:RDF>\n";
+            "</rdf:RDF>\n";*/
+
         doc = readDocumentFromXmlContent(xml);
 
         //        list = doc.getElementsByTagName("rdf:Bag");
