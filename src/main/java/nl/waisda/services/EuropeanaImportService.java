@@ -1,11 +1,14 @@
 package nl.waisda.services;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +16,19 @@ import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.MovieHeaderBox;
+import nl.waisda.domain.PlayerType;
+import nl.waisda.domain.Video;
+import nl.waisda.exceptions.EuropeanaImportException;
+import nl.waisda.model.europeana.EuropeanaAbout;
+import nl.waisda.model.europeana.EuropeanaAggregation;
+import nl.waisda.model.europeana.EuropeanaMultiDef;
+import nl.waisda.model.europeana.EuropeanaObject;
+import nl.waisda.model.europeana.EuropeanaProxy;
+import nl.waisda.model.europeana.EuropeanaRecord;
+import nl.waisda.model.europeana.EuropeanaResponse;
+import nl.waisda.repositories.VideoRepository;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,12 +48,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
-import nl.waisda.domain.PlayerType;
-import nl.waisda.domain.Video;
-import nl.waisda.exceptions.EuropeanaImportException;
-import nl.waisda.model.europeana.*;
-import nl.waisda.repositories.VideoRepository;
 
 /**
  * Implementation for the Europeana import service
@@ -390,6 +400,37 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
                 }
             }
         }
+
+        logWarn("VIDEO record with no duration set, try mp4parser");
+        InputStream is = null;
+        File file = null;
+        FileOutputStream fos = null;
+        IsoFile iso = null;
+        try {
+            int numrd;
+            byte[] buf = new byte[1024];
+            String videoUrl = extractVideoUrl(object);
+            URL url = new URL(videoUrl);
+            is = url.openStream();
+            file = File.createTempFile("import", ".mp4");
+            fos = new FileOutputStream(file);
+            while((numrd = is.read(buf)) > -1) {
+                fos.write(buf, 0, numrd);
+            }
+            iso = new IsoFile(file.getPath());
+            MovieHeaderBox mhb = iso.getMovieBox().getMovieHeaderBox();
+            int duration = (int) (((double) mhb.getDuration() * 1000) / ((double) mhb.getTimescale()));
+            logInfo("Succesful mp4parse. Duration in millis retrieved: " + duration);
+            return duration;
+        } catch(Exception e) {
+            logError("mp4 parser failed '" + extractVideoUrl(object) + "'", e);
+        } finally {
+            if (fos != null) try {fos.close();} catch(Exception e) {}
+            if (is != null) try {is.close();} catch(Exception e) {}
+            if (iso != null) try {iso.close();} catch(Exception e) {}
+            if (file != null) file.delete();
+        }
+
         /*MediaPlayer player = new MediaPlayer();
         player.setMediaLocation(videoUrl);
         try {

@@ -13,6 +13,12 @@
 	</properties>
 
 	<dependencies>
+        <!-- mp4 -->
+        <dependency>
+            <groupId>com.googlecode.mp4parser</groupId>
+            <artifactId>isoparser</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
 		<!-- util -->
 		<dependency>

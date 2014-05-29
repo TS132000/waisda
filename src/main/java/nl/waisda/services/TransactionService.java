@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TransactionService implements TransactionServiceIF {
     @Override
-    @Transactional(propagation=Propagation.REQUIRES_NEW, rollbackFor=Throwable.class)
+    @Transactional(propagation=Propagation.REQUIRES_NEW, rollbackFor=Throwable.class, timeout=1000*60*30)
     public <T> T runInNewTransaction(Callable<T> callable) {
         try {
             return callable.call();
