@@ -20,11 +20,16 @@
 package nl.waisda.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import nl.waisda.domain.TagEntry;
+import nl.waisda.domain.Video;
 import nl.waisda.model.Cache;
 import nl.waisda.model.GlobalStats;
 import nl.waisda.model.TagCloudItem;
@@ -46,11 +51,14 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
 
 	private static final Logger log = Logger.getLogger(ScoringService.class);
 
+	@Resource(name="skosServiceUrlsPerVideoSet")
+	Map<String, List<String>> skosServiceUrlsPerVideoSet;
+	
 	@Autowired
 	private TagEntryRepository tagEntryRepo;
 
 	@Autowired
-	private SKOSService skosService;
+	private SKOSServiceIF skosService;
 
 	@Autowired
 	private UserRepository userRepo;
@@ -102,11 +110,26 @@ public class ScoringService implements ScoringServiceIF, InitializingBean {
 	private boolean isConceptsServiceUrlConfigured(){
 		return StringUtils.isNotEmpty(this.conceptsServiceUrl);
 	}
+	
+	private List<String> getSkosServicesUrlsForSourceUrl(String sourceUrl){
+		List<String> skosServiceUrls = Collections.emptyList();
+		
+		for(String videoSet : skosServiceUrlsPerVideoSet.keySet()){
+			if(sourceUrl.startsWith(videoSet)){
+				skosServiceUrls = skosServiceUrlsPerVideoSet.get(videoSet);
+			}
+		}
+		
+		return skosServiceUrls;
+	}
 
 	public void updateDictionary(TagEntry tagEntry) {
 		List<String> dictionaryEntries = new ArrayList<String>();
-		if (isConceptsServiceUrlConfigured()) {
-			dictionaryEntries = skosService.getDictionariesContaining(tagEntry.getNormalizedTag());
+
+		List<String> skosServiceUrls = getSkosServicesUrlsForSourceUrl(tagEntry.getGame().getVideo().getSourceUrl());
+
+		if (!skosServiceUrls.isEmpty()) {
+			dictionaryEntries = skosService.getDictionariesContaining(tagEntry.getNormalizedTag(), skosServiceUrls);
 		} else {
 			dictionaryEntries = tagEntryRepo.getDictionariesContaining(tagEntry.getNormalizedTag());
 		}

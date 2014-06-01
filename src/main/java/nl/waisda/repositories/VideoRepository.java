@@ -65,6 +65,16 @@ public class VideoRepository extends AbstractRepository<Video> {
 		query.setMaxResults(NCHANNELS);
 		return query.getResultList();
 	}
+	
+	public List<Video> getFeaturedVideosBySourceUrlStartWith(String startOfSourceUrl, int numberOfVideos) {
+		String q = "SELECT v FROM Video v WHERE v.enabled = true AND v.sourceUrl LIKE :startOfSourceUrl ORDER BY RAND()";
+		// Hibernate requires the "= true"
+
+		TypedQuery<Video> query = getEntityManager()
+				.createQuery(q, Video.class).setParameter("startOfSourceUrl", startOfSourceUrl + "%");
+		query.setMaxResults(numberOfVideos);
+		return query.getResultList();
+	}
 
 	public int getHighscore(int videoId) {
 		String q = "SELECT MAX(score) FROM (SELECT SUM(t.score) AS score "

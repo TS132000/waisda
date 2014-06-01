@@ -16,6 +16,11 @@ public class SKOSClient implements MatchingClient {
 
 	@Override
 	public RDF fetchConceptsWithPrefLabelContaining(String tag) throws URISyntaxException {
+		return fetchConceptsWithPrefLabelContaining(tag, this.conceptsServiceUrl);
+	}
+	
+	@Override
+	public RDF fetchConceptsWithPrefLabelContaining(String tag, String conceptsServiceUrl) throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
 		URI uri = new URI(conceptsServiceUrl + tag);
 		ResponseEntity<RDF> result = restTemplate.getForEntity(uri, RDF.class);

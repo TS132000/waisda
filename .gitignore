@@ -5,3 +5,6 @@ waisda.log*
 .idea
 *.iml
 *~
+.classpath
+.project
+.settings
