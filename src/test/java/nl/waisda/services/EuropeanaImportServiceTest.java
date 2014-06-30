@@ -1,14 +1,15 @@
 package nl.waisda.services;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.concurrent.Callable;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.concurrent.Callable;
 
+import nl.waisda.domain.Video;
+import nl.waisda.repositories.VideoRepository;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
@@ -19,23 +20,17 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import nl.waisda.domain.Video;
-import nl.waisda.repositories.VideoRepository;
 
 /**
  * Created with IntelliJ IDEA.
@@ -83,7 +78,7 @@ public class EuropeanaImportServiceTest {
 
     private HttpResponse mockDetailHttpResponse(String videoUrl, String webresourceVideoUrl) throws UnsupportedEncodingException {
         BasicHttpResponse response = new BasicHttpResponse(new BasicStatusLine(new HttpVersion(100, 1), 200, null));
-        response.setEntity(new StringEntity("{\"apikey\":\"XxxsEZoWj\",\"action\":\"record.json\",\"success\":true,\"statsDuration\":50,\"requestNumber\":3752," +
+        String str = "{\"apikey\":\"XxxsEZoWj\",\"action\":\"record.json\",\"success\":true,\"statsDuration\":50,\"requestNumber\":3752," +
                 "\"object\":{\"type\":\"VIDEO\",\"year\":[\"1919\"]," +
                 "\"title\":[\"Opening Staten Generaal 20-9-1921\"]," +
                 "\"about\":\"/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9\"," +
@@ -126,7 +121,8 @@ public class EuropeanaImportServiceTest {
                 "\"edmLandingPage\":\"http://www.europeana.eu/portal/record/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9\"," +
                 "\"edmCountry\":{\"def\":[\"netherlands\"]}," +
                 "\"edmLanguage\":{\"def\":[\"nl\"]}}," +
-                "\"europeanaCollectionName\":[\"2021601_Ag_NL_DNA_Open_Beelden\"]}}"));
+                "\"europeanaCollectionName\":[\"2021601_Ag_NL_DNA_Open_Beelden\"]}}";
+        response.setEntity(new StringEntity(str));
 
         return response;
     }

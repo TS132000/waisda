@@ -1,24 +1,12 @@
 package nl.waisda.oaipmh.logic;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.w3c.dom.*;
 
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
@@ -30,6 +18,22 @@ import nl.waisda.oaipmh.model.jaxb.pmh.OAIPMHerrorcodeType;
 import nl.waisda.oaipmh.model.jaxb.pmh.ObjectFactory;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.VideoRepository;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.w3c.dom.Comment;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 /**
  * User: Danny
@@ -61,12 +65,12 @@ public class OAIPMHDelegateBase {
     protected Element formatOutputWaisdaVideo(Video video) throws OAIException {
         Assert.notNull(video, "video cannot be null");
 
-        SimpleDateFormat headerFormat = new SimpleDateFormat(HEADER_DATE_FORMAT);
+        String baseUrl = createBaseURL();
+        String videoUrl = baseUrl + "/video/%d";
+
         SimpleDateFormat durationFormat = new SimpleDateFormat("'PT'HH'H'mm'M'ss'S'");
         durationFormat.setTimeZone(TimeZone.getTimeZone("+0"));
-        // DRS TODO: needs getRecord verb prefix on about and oac:hasTarget elements
-        String base = createBaseURL();
-        String baseUrl = base + "?verb=GetRecord&identifier=%s&metadataPrefix=rdf";
+
         String xml =
             "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" \n" +
             "         xmlns:ore=\"http://www.openarchives.org/ore/terms/\" \n" +
@@ -74,7 +78,7 @@ public class OAIPMHDelegateBase {
             "         xmlns:dcterms=\"http://purl.org/dc/terms/\" \n" +
             "         xmlns:dc=\"http://purl.org/dc/elements/1.1/\" \n" +
             "         xmlns:edm=\"http://www.europeana.eu/schemas/edm/\">\n" +
-            "  <edm:ProvidedCHO rdf:about=\"" + encode(createVideoId(video)) + "\">\n" +
+            "  <edm:ProvidedCHO rdf:about=\"" +  encode(String.format(videoUrl, video.getId())) + "\">\n" +
             "    <dc:title xml:lang=\"nl\">" + encode(video.getTitle())+ "</dc:title>\n" +
             //"    <dc:subject xml:lang=\"en\">Steger, E.A.M.A.</dc:subject>\n" + // DRS TODO: import
             "    <dc:language>nl</dc:language>\n" +
@@ -85,8 +89,8 @@ public class OAIPMHDelegateBase {
             "    <dcterms:medium>film</dcterms:medium>\n" +
             "    <edm:type>VIDEO</edm:type>\n" +
             "  </edm:ProvidedCHO>\n" +
-            "  <ore:Aggregation rdf:about=\"" + encode(String.format(baseUrl, createVideoId(video))) + "\">\n" +
-            "    <edm:aggregatedCHO rdf:resource=\"" + encode(createAnnotationId(video)) + "\"/>\n" +
+            "  <ore:Aggregation rdf:about=\"" + encode(createVideoId(video)) + "\">\n" +
+            "    <edm:aggregatedCHO rdf:resource=\"" + encode(String.format(videoUrl, video.getId())) + "\"/>\n" +
             //"    <edm:dataProvider>Waisda</edm:dataProvider>\n" +
             //"    <edm:isShownAt>http://www.openbeelden.nl/media/165084</edm:isShownAt>\n" +
             "    <edm:isShownBy>" + encode(video.getSourceUrl()) + "</edm:isShownBy>\n" +
@@ -102,89 +106,63 @@ public class OAIPMHDelegateBase {
 
     }
 
-    protected Element formatOutputWaisdaAnnotation(Video video, List<TagEntry> entries) throws OAIException {
+    protected String formatOutputWaisdaAnnotation(Video video, TagEntry entry) throws OAIException {
+        String baseUrl = createBaseURL();
+        String videoUrl = baseUrl + "/video/%d";
+        String annotUrl = baseUrl + "/annotation/%d";
+
+        SimpleDateFormat sdf = new SimpleDateFormat(HEADER_DATE_FORMAT);
+        String output =
+            "<oac:Annotation rdf:about=\"" + encode(String.format(annotUrl, entry.getId())) + "\">\n" +
+            "    <rdf:type rdf:resource=\"http://www.w3.org/ns/oa#\"/>\n" +
+            "    <oac:hasTarget>\n" +
+            "        <rdf:Description rdf:about=\""+ encode(String.format(videoUrl, video.getId())) + "\">\n" +
+            "            <rdf:type rdf:resource=\"http://www.w3.org/ns/oa#SpecificResource\"/>\n" +
+            "            <rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/MovingImage\"/>\n" +
+            "            <oac:hasSource rdf:resource=\"" + encode(video.getSourceUrl()) + "\"/>\n" +
+            "            <oac:hasSelector>\n" +
+            "                <oac:FragmentSelector rdf:about=\"" + encode(video.getSourceUrl()) + "\">\n" +
+            "                    <dcterms:conformsTo rdf:resource=\"http://www.w3.org/TR/media-frags/\"/>\n" +
+            "                    <rdf:value>t=npt:" + encode(entry.getTimestampHHmmss()) + "</rdf:value>\n" +
+            "                </oac:FragmentSelector>\n" +
+            "            </oac:hasSelector>\n" +
+            "        </rdf:Description>\n" +
+            "    </oac:hasTarget>\n" +
+            "    <oac:hasBody>\n" +
+            "        <oac:Tag>\n" +
+            "            <dcterms:creator>" + encode(entry.getOwner().getName()) + "</dcterms:creator>\n" +
+            "            <dcterms:created>" + encode(sdf.format(entry.getCreationDate())) + "</dcterms:created>\n" +
+            "            <rdf:type rdf:resource=\"http://w3.org/2011/content#ContextAsText\"/>\n" +
+            "            <cnt:chars>" + encode(entry.getTag()) + "</cnt:chars>\n" +
+            "        </oac:Tag>\n" +
+            "    </oac:hasBody>\n" +
+            "</oac:Annotation>";
+
+        return output;
+    }
+
+    protected Element formatOutputWaisdaAnnotations(Video video, List<TagEntry> entries) throws OAIException {
         Assert.notNull(video, "video cannot be null");
         Assert.notNull(entries, "entries cannot be null");
         Element doc;
-        //        NodeList list;
-        //        Node bag;
-        //        Document ownerDocument;
-        String xml;
 
-        SimpleDateFormat sdf = new SimpleDateFormat(HEADER_DATE_FORMAT);
-        String base = createBaseURL();
-        String baseUrl = base + "?verb=GetRecord&identifier=%s&metadataPrefix=rdf";
-        StringBuilder bag = new StringBuilder();
+        StringBuilder tags = new StringBuilder();
+
         for (TagEntry entry : entries) {
-            //bag.append("<w:TagEntry rdf:resource=\"" + encode(String.format(baseUrl, createTagEntryId(entry))) + "\"/>\n");
-            bag.append(
-                "        <tags:tag>\n" +
-                "          <tags:Tagging>\n" +
-                "            <tags:associatedTag>\n" +
-                "              <tags:Tag rdf:about=\"" + encode(createTagEntryId(entry)) + "\">\n" +
-                "                <tags:name>" + encode(entry.getNormalizedTag()) + "</tags:name>\n" +
-                "                <time:xsdDateTime>" + encode(entry.getTimestampHHmmss()) + "</time:xsdDateTime>\n" +
-                "                <skos:Note>User entered tag</skos:Note>\n" +
-                "                <skos:prefLabel>" + encode(entry.getTag()) + "</skos:prefLabel>\n" +
-                //"                <skos:exactMatch rdf:resource=\"http://data.beeldengeluid.nl/gtaa/182523\"/>\n" +  TODO: marcel do u save this id?
-                "              </tags:Tag>\n" +
-                "            </tags:associatedTag>\n" +
-                "            <tags:taggedBy>" + encode(entry.getOwner().getName()) + "</tags:taggedBy>\n" +
-                "            <tags:taggedOn rdf:datatype=\"http://www.w3.org/2001/XMLSchemadate\">" + encode(sdf.format(entry.getCreationDate())) + "</tags:taggedOn>\n" +
-                "          </tags:Tagging>\n" +
-                "        </tags:tag>\n");
+            tags.append(formatOutputWaisdaAnnotation(video, entry));
         }
 
-
-        xml = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" \n" +
-                "       xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \n" +
-                "       xmlns:dc=\"http://purl.org/dc/elements/1.1/\" \n" +
-                "       xmlns:tag=\"http://www.holygoat.co.uk/owl/redwood/tag/\" \n" +
-                "       xmlns:tags=\"http://www.holygoat.co.uk/owl/redwood/0.1/tags/\" \n" +
-                "       xmlns:time=\"http://www.w3.org/2006/time#\"\n" +
-                "       xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\"\n" +
-                "       xmlns:oac=\"http://www.openannotation.org/ns/\">\n" +
-                "  <oac:Annotation rdf:about=\"" + encode(createAnnotationId(video)) + "\">\n" +
-                "    <dc:title>TagEntry annotation for waisda metadata</dc:title>\n" +
-                "    <oac:hasTarget rdf:resource=\"" + encode(String.format(baseUrl, createVideoId(video))) + "\"/>\n" +
-                "    <oac:hasBody>  \n" +
-                "      <oac:Body>\n" +
-                bag.toString() +
-                "      </oac:Body>\n" +
-                "    </oac:hasBody>\n" +
-                "  </oac:Annotation>\n" +
-                "</rdf:RDF>\n";
-
-
-        /*xml =
-            "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
-            "         xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" +
-            "         xmlns:dcterms=\"http://purl.org/dc/terms/\"\n" +
-            "         xmlns:oac=\"http://www.openannotation.org/ns/\" \n" +
-            "         xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\"\n" +
-            "         xmlns:w=\"http://www.beeldengeluid.nl/waisda/\">\n" +
-            "  <oac:Annotation rdf:about=\"" + encode(createAnnotationId(video)) + "\">\n" +
-            "    <dc:title>TagEntry annotation for waisda metadata</dc:title>\n" +
-            "    <oac:hasTarget rdf:resource=\"" + encode(String.format(baseUrl, createVideoId(video))) + "\"/>\n" +
-            "    <oac:hasBody>\n" +
-            "      <w:TagEntries rdf:about=\"" + encode(createVideoId(video)) + "\">\n" +
-            //"        <rdf:Bag>\n" +
-            bag.toString() +
-            //"        </rdf:Bag>\n" +
-            "      </w:TagEntries>\n" +
-            "    </oac:hasBody>\n" +
-            "  </oac:Annotation>\n" +
-            "</rdf:RDF>\n";*/
+        String xml =
+            "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" \n" +
+            "   xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\n" +
+            "   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" +
+            "   xmlns:dcterms=\"http://purl.org/dc/terms/\"\n" +
+            "   xmlns:cnt=\"http://www.w3.org/2011/content#\"\n" +
+            "   xmlns:oac=\"http://www.openannotation.org/ns/\">\n" +
+            tags.toString() +
+            "</rdf:RDF>\n";
 
         doc = readDocumentFromXmlContent(xml);
-
-        //        list = doc.getElementsByTagName("rdf:Bag");
-        //        bag = list.item(0);
-        //        ownerDocument = bag.getOwnerDocument();
-        //        for (TagEntry entry : entries) {
-        //            Node entryNode = ownerDocument.importNode(formatOutputWaisdaTagEntry(entry), true);
-        //            bag.appendChild(entryNode);
-        //        }
 
         return doc;
 
@@ -202,7 +180,7 @@ public class OAIPMHDelegateBase {
         entries.add(entry);
         OAIPMHDelegateBase base = new OAIPMHDelegateBase();
         try {
-            Element element = base.formatOutputWaisdaAnnotation(video, entries);
+            Element element = base.formatOutputWaisdaAnnotations(video, entries);
             System.out.println(element);
         } catch (Exception e) {
              e.printStackTrace();
@@ -218,34 +196,22 @@ public class OAIPMHDelegateBase {
      */
     protected Element formatOutputWaisdaTagEntry(TagEntry entry) throws OAIException {
         Assert.notNull(entry);
+        Element doc;
+        StringBuilder tags = new StringBuilder();
 
-        SimpleDateFormat sdf = new SimpleDateFormat(HEADER_DATE_FORMAT);
-        // DRS TODO: needs getRecord verb prefix on about and oac:hasTarget elements
-        //String base = createBaseURL();
-        //String baseUrl = base + "?verb=GetRecord&identifier=%s&metadataPrefix=rdf";
+        tags.append(formatOutputWaisdaAnnotation(entry.getGame().getVideo(), entry));
+
         String xml =
-            "<w:TagEntry xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"" +
-            "            xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" +
-            "            xmlns:dcterms=\"http://purl.org/dc/terms/\"\n" +
-            "            xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\"\n" +
-            "            xmlns:w=\"http://www.beeldengeluid.nl/waisda/\"\n" +
-            "            rdf:about=\"" + encode(createTagEntryId(entry)) + "\">\n" +
-            "  <w:timestamp rdf:datatype=\"http://www.w3.org/2001/XMLSchema#time\">" + encode(entry.getTimestampHHmmss()) + "</w:timestamp>\n" +
-            "  <w:tag rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\" xml:lang=\"nl\">" + encode(entry.getTag()) + "</w:tag>\n" +
-            "  <dc:title>TagEntry for waisda metadata</dc:title>\n" +
-            "  <dcterms:creator>" + encode(entry.getOwner().getName()) + "</dcterms:creator>\n" +
-            "  <dcterms:created>" + encode(sdf.format(entry.getCreationDate())) + "</dcterms:created>\n" +
-            "  <dcterms:spatial>\n" +
-            "    <skos:Concept rdf:about=\"" + encode(createTagEntryId(entry)) + "\">\n" +
-            "      <skos:prefLabel xml:lang=\"nl\">" + encode(entry.getTag()) + "</skos:prefLabel>\n" +
-            "      <skos:note xml:lang=\"nl\">User entered tag</skos:note>\n" +
-            "      <skos:inScheme rdf:resource=\"http://localhost:8080/oai/gtaa/" + encode(entry.getDictionary()) + "\"/>\n" +
-            "    </skos:Concept>\n" +
-            "  </dcterms:spatial>\n" +
-            "</w:TagEntry>\n";
+            "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" \n" +
+            "   xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\n" +
+            "   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" +
+            "   xmlns:dcterms=\"http://purl.org/dc/terms/\"\n" +
+            "   xmlns:cnt=\"http://www.w3.org/2011/content#\"\n" +
+            "   xmlns:oac=\"http://www.openannotation.org/ns/\">\n" +
+            tags.toString() +
+            "</rdf:RDF>\n";
 
-
-        Element doc = readDocumentFromXmlContent(xml);
+        doc = readDocumentFromXmlContent(xml);
 
         return doc;
     }
@@ -278,17 +244,14 @@ public class OAIPMHDelegateBase {
             RequestAttributes ra = RequestContextHolder.currentRequestAttributes();
             if (ra != null && ra instanceof ServletRequestAttributes) {
                 ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-                String servletPath = sra.getRequest().getServletPath();
-                String pathInfo = sra.getRequest().getPathInfo();
-                baseURL = sra.getRequest().getScheme() + "://"+ sra.getRequest().getServerName() + ":" + sra.getRequest().getServerPort() +
-                            (servletPath != null ? "/" + servletPath : "") + (pathInfo != null ? "/" + pathInfo : "");
+                baseURL = sra.getRequest().getScheme() + "://"+ sra.getRequest().getServerName() + ":" + sra.getRequest().getServerPort();
                 baseURL = baseURL.replaceAll("(?<=[^:]{1})/{2,}+", "/");
             }
         } catch(IllegalStateException ise) {
             // RequestAttributes not available
         }
         if (baseURL == null) {
-            baseURL = "http://oai.placeholder.nl:80/oai";
+            baseURL = "http://oai.placeholder.nl";
         }
         return baseURL;
     }

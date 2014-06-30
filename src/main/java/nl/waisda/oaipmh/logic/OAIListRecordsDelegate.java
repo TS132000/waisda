@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.springframework.stereotype.Component;
-
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.Video;
 import nl.waisda.oaipmh.model.MetadataPrefix;
@@ -16,6 +13,8 @@ import nl.waisda.oaipmh.model.jaxb.pmh.HeaderType;
 import nl.waisda.oaipmh.model.jaxb.pmh.MetadataType;
 import nl.waisda.oaipmh.model.jaxb.pmh.OAIPMHerrorcodeType;
 import nl.waisda.oaipmh.model.jaxb.pmh.RecordType;
+import org.joda.time.DateTime;
+import org.springframework.stereotype.Component;
 
 /**
  * User: Vincent Hartsteen
@@ -90,7 +89,7 @@ public class OAIListRecordsDelegate extends OAIPMHDelegateBase{
             recordType = JAXB_OBJECT_FACTORY_PMH.createRecordType();
             headerType = createHeaderAnnotation(video);
 
-            metadata.setAny(formatOutputWaisdaAnnotation(video, tagEntries));
+            metadata.setAny(formatOutputWaisdaAnnotations(video, tagEntries));
 
             recordType.setHeader(headerType);
             recordType.setMetadata(metadata);

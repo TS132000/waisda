@@ -3,9 +3,6 @@ package nl.waisda.oaipmh.logic;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.Video;
 import nl.waisda.oaipmh.model.MetadataPrefix;
@@ -15,6 +12,8 @@ import nl.waisda.oaipmh.model.jaxb.pmh.HeaderType;
 import nl.waisda.oaipmh.model.jaxb.pmh.MetadataType;
 import nl.waisda.oaipmh.model.jaxb.pmh.OAIPMHerrorcodeType;
 import nl.waisda.oaipmh.model.jaxb.pmh.RecordType;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * User: Danny, Bogdan
@@ -44,7 +43,7 @@ public class OAIGetRecordDelegate extends OAIPMHDelegateBase {
 
         OAIIdentifier oaiIdentifier = OAIIdentifier.newInstance(identifier);
 
-        // fill metadata DRS TODO: we need to switch on identifier, not prefix as only rdf is supported
+        // fill metadata
         switch(oaiIdentifier.getType()) {
         case tagentry: {
             TagEntry tagEntry = obtainTagEntry(oaiIdentifier);
@@ -55,7 +54,7 @@ public class OAIGetRecordDelegate extends OAIPMHDelegateBase {
         case annotation: {
             Video video = obtainVideo(oaiIdentifier); // either a video or an exception
             List<TagEntry> tagEntries = tagEntryRepository.getTopTagEntries(video.getId(), 100);
-            output = formatOutputWaisdaAnnotation(video, tagEntries);
+            output = formatOutputWaisdaAnnotations(video, tagEntries);
             headerType = createHeaderAnnotation(video);
             break;
         }
