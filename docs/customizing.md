@@ -16,19 +16,68 @@ Adding dictionaries with words is done by filling table `DictionaryEntry` with r
 
 An alternative use for dictionaries is to make a dictionary `stopwords` and have the scoring engine award 0 points to all such tag entries.
 
+## Configuring video sets for each channel
+
+In the file `waisda/src/main/resources/applicationContext.xml` you have to configure which video set to use for each channel.
+You will do this by setting the first part of the `sourceUrl`, you can find in the table `Video`.
+For example:
+	
+	<util:list id="videoSetForEachChannel" value-type="java.lang.String">
+		<value>http://www.europeana1914-1918.eu</value>
+		<value>http://www.europeana1914-1918.eu</value>
+		<value>http://www.europeana1914-1918.eu</value>
+		<value>http://archive.org</value>
+		<value>http://archive.org</value>
+		<value>http://archive.org</value>
+	</util:list>
+	 
+This contains 6 channels where the first 3 channels uses video's of which the sourceUrl starts with `http://www.europeana1914-1918.eu`.
+
 ## Using RESTService instead of dictionary
 
 Instead of using the table `DictionaryEntry`, you can configure waisda? to use a RESTService.
-In the file `waisda/src/main/resources/config.properties` you will find property `waisda.matcher.skos.restservice.url`.
-When this property is empty, waisda? will use table `DictionaryEntry` for matching it's tag against a dictionary.
-You can also use a RESTService (e.g.: http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:).
+In the file `waisda/src/main/resources/applicationContext.xml` you will find property `skosServiceUrlsPerVideoSet`.
+Here you can configure a skos restservice url if you want. 
+If a skos restservice is configured, it will use this restservice to look up matches, otherwise it still uses the table `DictionaryEntry`. 
+
+An example of a skos restservice url is `http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:`.
 The tag (e.g.: 'street') is placed at the end of the RESTService URL (http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:street).
-The RESTService must return an XML file conform to RDF schema.
-There is another property `waisda.matcher.skos.start.about.tag` in the file `config.properties`.
-The value of that property is used to filter the `Description`s. When the attribute `rdf:about` starts with the value of `waisda.matcher.skos.start.about.tag`, the `Description`s is selected.
+The RESTService must return an XML file conform to RDF schema and the skos restservice url must be assigned to a `videoset`.
+
+	<util:map id="skosServiceUrlsPerVideoSet" value-type="java.util.List">
+		<entry key="http://www.europeana1914-1918.eu">
+			<util:list value-type="java.lang.String">
+				<value>http://skos.europeana.eu/api/find-concepts?q=prefLabel:</value>
+			</util:list>
+		</entry>
+		<entry key="http://archive.org">
+			<util:list value-type="java.lang.String">
+				<value>http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:</value>
+			</util:list>
+		</entry>
+	</util:map>
+
+
+Each skos restservice url must also have assigned a value used to filter the descriptions on it's `rdf:about` attribute.
+When the `rdf:about` attribute starts with that value, the description is take into account.
+These values are configured with the property `prefixesAboutTagPerSkosService`.
+
+	<util:map id="prefixesAboutTagPerSkosService" value-type="java.util.List">
+		<entry key="http://skos.europeana.eu/api/find-concepts?q=prefLabel:">
+			<util:list value-type="java.lang.String">
+				<value>http://localhost:3000/vocabulary/</value>
+			</util:list>
+		</entry>
+		<entry key="http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:">
+			<util:list value-type="java.lang.String">
+				<value>http://data.beeldengeluid.nl/gtaa/</value>
+			</util:list>
+		</entry>
+	</util:map>
+
+At the end you have a list of filtered `Description`'s.	
 The found `Dictionary` will then be the last part of `rdf:Description/skos:inScheme@rdf:resource`.
 E.g: When you enter the tag 'paarden', the result XML will be:
-
 
 	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" openskos:numFound="4" openskos:start="0" openskos:maxScore="11.671335">
 	<rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/28775">

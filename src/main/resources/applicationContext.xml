@@ -3,10 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
      http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/tx       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
      http://www.springframework.org/schema/jee      http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+     http://www.springframework.org/schema/util		http://www.springframework.org/schema/util/spring-util-2.5.xsd
      ">
 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/pooledDataSource"
@@ -37,6 +39,41 @@
 			</props>
 		</property>
 	</bean>
+
+	<util:list id="videoSetForEachChannel" value-type="java.lang.String">
+		<value>http://www.europeana1914-1918.eu</value>
+		<value>http://www.europeana1914-1918.eu</value>
+		<value>http://www.europeana1914-1918.eu</value>
+		<value>http://archive.org</value>
+		<value>http://archive.org</value>
+		<value>http://archive.org</value>
+	</util:list>
+
+	<util:map id="skosServiceUrlsPerVideoSet" value-type="java.util.List">
+		<entry key="http://www.europeana1914-1918.eu">
+			<util:list value-type="java.lang.String">
+				<value>http://skos.europeana.eu/api/find-concepts?q=prefLabel:</value>
+			</util:list>
+		</entry>
+		<entry key="http://archive.org">
+			<util:list value-type="java.lang.String">
+				<value>http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:</value>
+			</util:list>
+		</entry>
+	</util:map>
+
+	<util:map id="prefixesAboutTagPerSkosService" value-type="java.util.List">
+		<entry key="http://skos.europeana.eu/api/find-concepts?q=prefLabel:">
+			<util:list value-type="java.lang.String">
+				<value>http://localhost:3000/vocabulary/</value>
+			</util:list>
+		</entry>
+		<entry key="http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:">
+			<util:list value-type="java.lang.String">
+				<value>http://data.beeldengeluid.nl/gtaa/</value>
+			</util:list>
+		</entry>
+	</util:map>
 
 	<import resource="baseContext.xml" />
 
