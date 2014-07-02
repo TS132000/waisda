@@ -277,13 +277,7 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
                     // import the data
                     try {
                         final List<EuropeanaRecord> itemList = data.getItems();
-                        transactionService.runInNewTransaction(new Callable<Void>() {
-                            @Override
-                            public Void call() throws Exception {
-                                storeVideoData(itemList);
-                                return null;
-                            }
-                        });
+                        storeVideoData(itemList);
                     } catch(Throwable t) {
                         // we still try the next batch but log this error
                         logError(String.format("Error while processing videos. None of items %d - %d have been imported! Error message: %s", importingProgress, importingProgress + rowsPerQuery, t.getMessage()), t);
@@ -310,7 +304,7 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
 
     private void storeVideoData(List<EuropeanaRecord> recordList) {
         Assert.notNull(recordList);
-        for (EuropeanaRecord record : recordList) {
+        for (final EuropeanaRecord record : recordList) {
             if (this.stopRequested) {
                 break;
             }
@@ -318,12 +312,10 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
                 importingTitle = new String(getFirst(record.getTitleList()));
                 EuropeanaObject detailedRecord = getDetailedRecord(record);
                 if (detailedRecord != null) {
-                    String action = null;
-                    Video  video = null;
 
-                    String videoUrl = extractVideoUrl(detailedRecord);
-                    String imageUrl = getFirst(record.getEdmPreviewList());
-                    Integer mediaLength = getMediaLength(detailedRecord);
+                    final String videoUrl = extractVideoUrl(detailedRecord);
+                    final String imageUrl = getFirst(record.getEdmPreviewList());
+                    final Integer mediaLength = getMediaLength(detailedRecord);
 
                     if (mediaLength == null || mediaLength == -1) {
                         logError("VIDEO record with no duration set: title[0]: '" + getFirst(record.getTitleList()) + "' dcCreator[0]: '" + getFirst(record.getDcCreatorList()) + "'", null);
@@ -346,32 +338,43 @@ public class EuropeanaImportService implements EuropeanaImportServiceIF, Initial
                         continue;
                     }
 
-                    // only when we detected a video url
-                    // try to find an existing video with these properties
-                    // we try to use url as unique identifier
-                    video = videoRepository.getBySourceUrl(videoUrl);
-                    if (video == null) {
-                        // the repository takes care of insert or update so we can just create a new one
-                        // if no existing found
-                        video = new Video();
-                        action = "Imported";
-                    } else {
-                        action = "Updated";
-                    }
+                    transactionService.runInNewTransaction(new Callable<Void>() {
+                        @Override
+                        public Void call() throws Exception {
+                            Video  video = null;
+                            String action = null;
+                            // only when we detected a video url
+                            // try to find an existing video with these properties
+                            // we try to use url as unique identifier
+                            video = videoRepository.getBySourceUrl(videoUrl);
+                            if (video == null) {
+                                // the repository takes care of insert or update so we can just create a new one
+                                // if no existing found
+                                video = new Video();
+                                action = "Imported";
+                            } else {
+                                action = "Updated";
+                            }
 
-                    video.setDuration(mediaLength);
-                    video.setEnabled(true);
-                    video.setFragmentID(null);
-                    video.setImageUrl(imageUrl);
-                    video.setPlayerType(PlayerType.JW);
-                    video.setSourceUrl(videoUrl);
-                    video.setStartTime(0);
-                    video.setTitle(StringUtils.left(getFirst(record.getTitleList()), 255));
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug(video.toString());
-                    }
-                    videoRepository.store(video);
-                    logInfo(action + " record with title: '" + getFirst(record.getTitleList()) + "' dcCreator: '" + getFirst(record.getDcCreatorList()) + "'");
+                            video.setDuration(mediaLength);
+                            video.setEnabled(true);
+                            video.setFragmentID(null);
+                            video.setImageUrl(imageUrl);
+                            video.setPlayerType(PlayerType.JW);
+                            video.setSourceUrl(videoUrl);
+                            video.setStartTime(0);
+                            video.setTitle(StringUtils.left(getFirst(record.getTitleList()), 255));
+                            if (LOG.isDebugEnabled()) {
+                                LOG.debug(video.toString());
+                            }
+                            videoRepository.store(video);
+
+                            logInfo(action + " record with title: '" + getFirst(record.getTitleList()) + "' dcCreator: '" + getFirst(record.getDcCreatorList()) + "'");
+
+                            return null;
+                        }
+                    });
+
                 } else {
                     logError("No detailed record (OBJECT) found for record with title: '" + getFirst(record.getTitleList()) + "' dcCreator[0]: '" + getFirst(record.getDcCreatorList()) + "'", null);
                 }
