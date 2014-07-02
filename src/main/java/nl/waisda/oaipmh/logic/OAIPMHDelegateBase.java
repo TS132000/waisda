@@ -78,9 +78,9 @@ public class OAIPMHDelegateBase {
             "         xmlns:dcterms=\"http://purl.org/dc/terms/\" \n" +
             "         xmlns:dc=\"http://purl.org/dc/elements/1.1/\" \n" +
             "         xmlns:edm=\"http://www.europeana.eu/schemas/edm/\">\n" +
-            "  <edm:ProvidedCHO rdf:about=\"" +  encode(String.format(videoUrl, video.getId())) + "\">\n" +
+            "  <edm:ProvidedCHO rdf:about=\"" + encode(video.getSourceUrl()) + "\">\n" +
             "    <dc:title xml:lang=\"nl\">" + encode(video.getTitle())+ "</dc:title>\n" +
-            //"    <dc:subject xml:lang=\"en\">Steger, E.A.M.A.</dc:subject>\n" + // DRS TODO: import
+            //"    <dc:subject xml:lang=\"en\">Steger, E.A.M.A.</dc:subject>\n" + // DRS TODO: import commented lines from Europeana
             "    <dc:language>nl</dc:language>\n" +
             "    <dc:type>Moving Image</dc:type>\n" +
             //"    <dc:publisher xml:lang=\"nl\">Nederlands Instituut voor Beeld en Geluid</dc:publisher>\n" +
@@ -89,8 +89,8 @@ public class OAIPMHDelegateBase {
             "    <dcterms:medium>film</dcterms:medium>\n" +
             "    <edm:type>VIDEO</edm:type>\n" +
             "  </edm:ProvidedCHO>\n" +
-            "  <ore:Aggregation rdf:about=\"" + encode(createVideoId(video)) + "\">\n" +
-            "    <edm:aggregatedCHO rdf:resource=\"" + encode(String.format(videoUrl, video.getId())) + "\"/>\n" +
+            "  <ore:Aggregation rdf:about=\"" + encode(String.format(videoUrl, video.getId())) + "\">\n" +
+            "    <edm:aggregatedCHO rdf:resource=\"" + encode(video.getSourceUrl()) + "\"/>\n" +
             //"    <edm:dataProvider>Waisda</edm:dataProvider>\n" +
             //"    <edm:isShownAt>http://www.openbeelden.nl/media/165084</edm:isShownAt>\n" +
             "    <edm:isShownBy>" + encode(video.getSourceUrl()) + "</edm:isShownBy>\n" +
