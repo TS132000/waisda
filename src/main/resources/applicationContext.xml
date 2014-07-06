@@ -44,9 +44,9 @@
 		<value>http://www.europeana1914-1918.eu</value>
 		<value>http://www.europeana1914-1918.eu</value>
 		<value>http://www.europeana1914-1918.eu</value>
-		<value>http://archive.org</value>
-		<value>http://archive.org</value>
-		<value>http://archive.org</value>
+		<value>http://www.openbeelden.nl</value>
+		<value>http://www.openbeelden.nl</value>
+		<value>http://www.openbeelden.nl</value>
 	</util:list>
 
 	<util:map id="skosServiceUrlsPerVideoSet" value-type="java.util.List">
@@ -55,7 +55,7 @@
 				<value>http://skos.europeana.eu/api/find-concepts?q=prefLabel:</value>
 			</util:list>
 		</entry>
-		<entry key="http://archive.org">
+		<entry key="http://www.openbeelden.nl">
 			<util:list value-type="java.lang.String">
 				<value>http://data.beeldengeluid.nl/api/find-concepts?q=prefLabel:</value>
 			</util:list>
