@@ -13,13 +13,14 @@
 	<!-- load responsive.css if site has to scale at specific screensizes e.g. mobile or low-res screens -->
 	<!--link href="/static/styles/css/responsive.css" rel="stylesheet"/-->
 
-	  <!--[if lt IE 9]>
-		<link href="/static/styles/css/ie8andbelow.css" rel="stylesheet"/>
+	<!--[if lt IE 9]>
+	<link href="/static/styles/css/ie8andbelow.css" rel="stylesheet"/>
 
-	  	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    	<script src="/static/script/lib/less.js"></script>
-	  <![endif]-->
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<script src="/static/script/lib/html5shiv.min.js"></script>
+			 <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> -->
+		<script src="/static/script/lib/less.js"></script>
+	<![endif]-->
 	  <!--[if lt IE 8]>
 		<link href="/static/styles/css/ie7andbelow.css" rel="stylesheet"/>
 	  <![endif]-->
