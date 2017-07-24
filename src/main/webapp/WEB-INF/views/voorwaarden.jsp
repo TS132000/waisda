@@ -7,16 +7,16 @@
 </tt:head>
 <tt:body cssClass="static-page" pageName="voorwaarden">
 	
-	<h1 class="offset3">Algemene voorwaarden <small>Man bijt hond: Woordentikkertje</small></h1>
+	<h1 class="offset3">Algemene voorwaarden <small>Natuurbeelden: Woordentikkertje</small></h1>
 	
 	<div class="span9 offset3">
 		
-		<h2>1. Spel Man bijt hond: Woordentikkertje</h2>
+		<h2>1. Spel Natuurbeelden: Woordentikkertje</h2>
 		
-		<p>Door de NCRV wordt een subdomein (http://woordentikkertje.manbijthond.nl),
-		hierna te noemen: het Subdomein, van de Man bijt hond-site gehost, waarop een
+		<p>Door het Nederlands Instituut voor Beeld en Geluid wordt een subdomein (http://natuurbeelden.beeldengeluid.nl),
+		hierna te noemen: het Subdomein, van de Natuurbeelden website gehost, waarop een
 		in samenwerking met en het Nederlands Instituut voor Beeld en Geluid
-		ontwikkeld online spel, Man bijt hond: Woordentikkertje, hierna te noemen: het
+		ontwikkeld online spel, Natuurbeelden: Woordentikkertje, hierna te noemen: het
 		Spel, kan worden gespeeld. Bij dit Spel worden bezoekers van dit subdomein
 		(hierna te noemen: Spelers) uitgedaagd om passende trefwoorden toe te voegen
 		aan fragmenten uit het online Man bijt hond-archief. Spelers krijgen punten
@@ -24,8 +24,7 @@
 		trefwoorden toevoegen.</p>
 		
 		<p>Het aanbieden van de mogelijkheid het Spel te spelen doet geen enkele
-		verplichting van de NCRV en/of Beeld en Geluid jegens de Spelers ontstaan. De
-		NCRV en/of Beeld en Geluid kan de Site en/of het Subdomein, dan wel de toegang
+		verplichting van Beeld en Geluid jegens de Spelers ontstaan. Beeld en Geluid kan de Site en/of het Subdomein, dan wel de toegang
 		tot en/of het gebruik van het Spel, op elk moment onderbreken of be&euml;indigen
 		indien zich daartoe een oorzaak van technische, financi&euml;le, juridische of
 		andere aard voordoet.</p>
@@ -40,7 +39,7 @@
 		daartoe bestemde plaats (door middel van aanvinken) te bevestigen onderhavige
 		voorwaarden te erkennen en te respecteren.</p>
 		
-		<p>Ingeval een Speler in strijd met deze voorwaarden handelt kan de NCRV en/of
+		<p>Ingeval een Speler in strijd met deze voorwaarden handelt kan
 		Beeld en Geluid naar eigen inzicht besluiten om het account van desbetreffende
 		Speler te be&euml;indigen.
 		
@@ -116,26 +115,23 @@
 		</ul>
 		
 		<p>Het resultaat van niet-toegestane handelingen als hiervoor genoemd zal naar
-		het vrije oordeel van de NCRV en/of Beeld en Geluid onmiddellijk van de Site
-		en/of het Subdomein worden verwijderd c.q. gecorrigeerd. Voorts behouden de
-		NCRV en/of Beeld en Geluid zich het recht voor om de in de laatste twee zinnen
+		het vrije oordeel van Beeld en Geluid onmiddellijk van de Site
+		en/of het Subdomein worden verwijderd c.q. gecorrigeerd. Voorts behoudt Beeld en Geluid zich het recht voor om de in de laatste twee zinnen
 		van artikel 2 aangeduide maatregelen te nemen.</p>
 		
 		<h2>5. Intellectuele eigendomsrechten</h2>
 		
 		<p>De Site, het Subdomein en het Spel bevatten elementen waarop intellectuele
-		eigendomsrechten van de NCRV en/of Beeld en Geluid alsook van derden rusten.
-		Mede om de belangen van de NCRV, Beeld en Geluid en derden te beschermen is de
+		eigendomsrechten van Beeld en Geluid alsook van derden rusten.
+		Mede om de belangen van Beeld en Geluid en derden te beschermen is de
 		inhoud van de Site en/of het Subdomein alleen bestemd voor individueel
 		niet-commercieel gebruik, te weten het deelnemen aan het Spel. Voor ieder
-		ander gebruik is vooraf uitdrukkelijke schriftelijke toestemming van de NCRV
-		en/of Beeld en Geluid vereist.</p>
-		
+		ander gebruik is vooraf uitdrukkelijke schriftelijke toestemming van Beeld en Geluid vereist.</p>
+
 		<p>Spelers doen afstand van hun eventuele rechten op de door hen, al dan niet
 		in het kader van het spelen van het Spel, aan de Site en/of het Subdomein
 		toegevoegde teksten of materialen. Dit houdt in dat de door Spelers in het
-		kader van het Spel bedachte trefwoorden en/of andere teksten vrijelijk door de
-		NCRV en/of Beeld en Geluid mogen worden gebruikt, openbaar gemaakt en/of
+		kader van het Spel bedachte trefwoorden en/of andere teksten vrijelijk door Beeld en Geluid mag worden gebruikt, openbaar gemaakt en/of
 		verveelvoudigd, zonder enige beperking naar vorm, frequentie, oplage, tijd of
 		territorium waarin dit gebeurt, en zonder dat hiervoor nu of in de toekomst
 		enige vergoeding aan desbetreffende Speler(s) verschuldigd is.</p>
@@ -161,10 +157,10 @@
 		strekking, welke niet aan nietigheid blootstaan.</p>
 		
 		<p>Op deze voorwaarden is Nederlands recht van toepassing. Alle geschillen
-		tussen de Spelers en de NCRV en/of Beeld en Geluid zullen worden voorgelegd
+		tussen de Spelers en Beeld en Geluid zullen worden voorgelegd
 		aan de daartoe bevoegde rechter in het arrondissement Amsterdam.</p>
 		
-		<p>juli 2011</p>
+		<p>Juli 2017</p>
 
 	</div>
 </tt:body>

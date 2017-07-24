@@ -1,9 +1,11 @@
 package nl.waisda.services;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.concurrent.Callable;
 
-import javax.persistence.EntityManagerFactory;
-
+import nl.waisda.domain.PlayerType;
+import nl.waisda.domain.Video;
+import nl.waisda.repositories.VideoRepository;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -14,10 +16,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import nl.waisda.domain.PlayerType;
-import nl.waisda.domain.Video;
-import nl.waisda.repositories.VideoRepository;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,6 +44,7 @@ public class EuropeanaImportServiceITest {
     @Test
     @Transactional
     @Rollback(true)
+    @Ignore
     public void testImport() {
         try {
             //service.importEuropeanaData("provider_aggregation_edm_dataProvider%3A%22Open+Beelden%22");
@@ -62,7 +61,7 @@ public class EuropeanaImportServiceITest {
     @Test
     @Transactional
     @Rollback(false)
-//    @Ignore
+    @Ignore
     public void testInsert() {
         transactionService.runInNewTransaction(new Callable<Void>() {
             @Override

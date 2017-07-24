@@ -9,14 +9,14 @@
 <tt:head title="Tag ${tagEntryStats.normalizedTag}"></tt:head>
 <tt:body pageName="tag" cssClass="body">
 
-<h1>Tag <span class="mark">${tagEntryStats.normalizedTag}</span></h1>
+<h1>Term <span class="mark">${tagEntryStats.normalizedTag}</span></h1>
 
-<p>Used first by
+<p>Eerst gebruikt door
 <a href="/profiel/${tagEntryStats.firstEntry.owner.id}">${tagEntryStats.firstEntry.owner.name}</a>
-during <a href="/start-game/${tagEntryStats.firstEntry.game.video.id}">${tagEntryStats.firstEntry.game.video.title}</a>
-on ${tagEntryStats.firstEntry.prettyCreationDate}</p>
+tijdens het spel <a href="/start-game/${tagEntryStats.firstEntry.game.video.id}">${tagEntryStats.firstEntry.game.video.title}</a>
+op datum ${tagEntryStats.firstEntry.prettyCreationDate}</p>
 
-<h2 class="spaced">Clips featuring <span class="mark">${tagEntryStats.normalizedTag}</span></h2>
+<h2 class="spaced">Andere spellen met term <span class="mark">${tagEntryStats.normalizedTag}</span></h2>
 <ul class="row equal-cols unstyled">
 	<c:forEach items="${tagEntryStats.videoStats}" var="vs">
 		<li class="span2">
@@ -29,7 +29,7 @@ on ${tagEntryStats.firstEntry.prettyCreationDate}</p>
 					<h3 class="h5">${vs.video.title}</h3>
 				</a>
 				<p class="small">
-					Also tagged: <c:forEach items="${vs.topTags}" var="topTag" varStatus="topTagStatus"><a href="/tag/${topTag}" class="reset">${topTag}</a><c:if test="${topTagStatus.index < fn:length(vs.topTags) - 1}">, </c:if></c:forEach>
+					Andere ingevoerd termen: <c:forEach items="${vs.topTags}" var="topTag" varStatus="topTagStatus"><a href="/tag/${topTag}" class="reset">${topTag}</a><c:if test="${topTagStatus.index < fn:length(vs.topTags) - 1}">, </c:if></c:forEach>
 				</p>
 			</div>
 		</li>

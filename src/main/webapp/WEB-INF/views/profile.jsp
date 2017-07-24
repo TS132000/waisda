@@ -8,17 +8,17 @@
 <c:set var="you" value="${user != null && user.id == profile.user.id}"/>
 
 <tt:html>
-<tt:head title="${fn:escapeXml(profile.user.name)}'s profile'"></tt:head>
+<tt:head title="Profiel van ${fn:escapeXml(profile.user.name)}'"></tt:head>
 <tt:body pageName="profile">
 <c:choose>
 <c:when test="${you}">
-<h1>Your profile</h1>
-<p class="spaced">This profile is visible to all visitors of this site</p>		
+<h1>Jouw profile</h1>
+<p class="spaced">Dit profiel is zichtbaar voor alle bezoekers van deze site</p>
 
 </c:when>
 <c:otherwise>
-<h1>${fn:escapeXml(profile.user.name)}'s profile</h1>
-<p>Playing since ${profile.user.prettyCreationDate}</p>
+<h1>Profiel van ${fn:escapeXml(profile.user.name)}</h1>
+<p>Geregistreerd op ${profile.user.prettyCreationDate}</p>
 </c:otherwise>
 </c:choose>
 <div class="row equal-cols">
@@ -27,7 +27,7 @@
 		<div class="box-inner">
 			<img src="${profile.user.avatarUrl}" class="pull-left" />
 			<h2 class="pull-left h3"><c:out value="${profile.user.name}"/></h2>	
-			<p class="h1 reset clear-both"><nf:format number="${profile.user.totalScore}" /><span class="small">Total score</span></p>
+			<p class="h1 reset clear-both"><nf:format number="${profile.user.totalScore}" /><span class="small">Totaal aantal punten</span></p>
 		</div>
 	</div>	
 	
@@ -35,9 +35,9 @@
 		<header class="rich">
 			<h2 class="h3 reset pull-left">Details</h2>
 			<c:if test="${you}">
-				<a href="#" class="btn btn-primary pull-right" id="edit-details">Edit</a>
-				<a href="#" class="btn btn-primary pull-right hide" id="submit-details">Save</a>
-				<a href="#" class="btn pull-right hide" id="close-details">Cancel</a>
+				<a href="#" class="btn btn-primary pull-right" id="edit-details">Aanpassen</a>
+				<a href="#" class="btn btn-primary pull-right hide" id="submit-details">Opslaan</a>
+				<a href="#" class="btn pull-right hide" id="close-details">Afbreken</a>
 			</c:if>
 		</header>
 		
@@ -49,7 +49,7 @@
 					<f:hidden path="id"/>
 					
 					<div class="control-group">
-						<f:label path="auth.name" cssClass="control-label">Name</f:label>
+						<f:label path="auth.name" cssClass="control-label">Naam</f:label>
 						<div class="controls">
 							<f:input path="auth.name" cssClass="input-medium" />
 							<f:errors path="auth.name" cssClass="help-block"/>
@@ -67,7 +67,7 @@
 					 --%>
 					 
 					<div class="control-group">
-						<f:label path="dateOfBirth" cssClass="control-label">Date of birth</f:label>
+						<f:label path="dateOfBirth" cssClass="control-label">Geboorte datum</f:label>
 						<div class="controls">
 							<f:input path="dateOfBirth" placeholder="30-04-1980" cssClass="input-medium" />
 							<f:errors path="dateOfBirth" cssClass="help-block" />
@@ -75,17 +75,17 @@
 					</div>
 					
 					<div class="control-group reset genderEditor">
-						<f:label path="gender" cssClass="control-label">Gender</f:label>
+						<f:label path="gender" cssClass="control-label">Geslacht</f:label>
 						<div class="inline-boxes controls">
 							<f:radiobuttons path="gender" itemLabel="prettyLongName"/>
 						</div>
 					</div>
 					
-					<a href="" id="trigger-password" class="indent-form spaced-min ${showPassword ? 'opened' : '' }">+ Change password</a>
+					<a href="" id="trigger-password" class="indent-form spaced-min ${showPassword ? 'opened' : '' }">+ Wachtwoord wijzigen</a>
 					
 					<div id="change-password">
 						<div class="control-group">
-							<f:label path="currentPassword" cssClass="control-label compact">Current password</f:label>
+							<f:label path="currentPassword" cssClass="control-label compact">Huidige wachtwoord</f:label>
 							<div class="controls">
 								<f:password path="currentPassword" cssClass="input-medium" />
 								<f:errors path="currentPassword" cssClass="help-block" />
@@ -93,7 +93,7 @@
 						</div>
 						
 						<div class="control-group">
-							<f:label path="auth.password" cssClass="control-label">Password</f:label>
+							<f:label path="auth.password" cssClass="control-label">Nieuw wachtwoord</f:label>
 							<div class="controls">
 								<f:password path="auth.password" cssClass="input-medium"/>
 								<f:errors path="auth.password" cssClass="help-block"/>
@@ -101,7 +101,7 @@
 						</div>
 						
 						<div class="control-group">
-							<f:label path="auth.repeatPassword" cssClass="control-label compact">Repeat password</f:label>
+							<f:label path="auth.repeatPassword" cssClass="control-label compact">Herhaal nieuw wachtwoord</f:label>
 							<div class="controls">
 								<f:password path="auth.repeatPassword" cssClass="input-medium"/>
 								<f:errors path="auth.repeatPassword" cssClass="help-block"/>
@@ -138,24 +138,24 @@
 			</c:if>
 			<table class="table table-condensed table-clean">
 				<tr>
-					<th class="span2 indent">Name</th>
+					<th class="span2 indent">Naam</th>
 					<td>${fn:escapeXml(profile.user.name)}</td>
 				</tr>
 				<c:if test="${profile.user.dateOfBirth != null}">
 					<tr>
-						<th class="span2 indent">Age</th>
+						<th class="span2 indent">Leeftijd</th>
 						<td>${profile.user.age}</td>
 					</tr>
 				</c:if>
 				<c:if test="${not empty profile.user.gender.prettyLongName}">
 					<tr>
-						<th class="span2 indent">Gender</th>
+						<th class="span2 indent">Geslacht</th>
 						<td>${profile.user.gender.prettyLongName}</td>
 					</tr>
 				</c:if>
 				<c:if test="${not empty profile.user.usernameTwitter || not empty profile.user.usernameFacebook || not empty profile.user.usernameHyves}">
 					<tr>
-						<th class="span2 indent">Find me on</th>
+						<th class="span2 indent">Vind me op</th>
 						<td>
 						<c:if test="${not empty profile.user.usernameTwitter}">
 							<a href="http://twitter.com/${profile.user.usernameTwitter}" title="Twitter: @${fn:escapeXml(profile.user.usernameTwitter)}" target="_blank"><img src="/static/img/ico-twitter.png" /></a>
@@ -179,7 +179,7 @@
 	<!-- #rankings -->
 	<div id="rankings" class="box span4 col leading">
 		<header class="rich">
-			<h2 class="h3 reset">Rank this week</h2>
+			<h2 class="h3 reset">Beste score van afgelopen week</h2>
 		</header>
 		<section class="reset">
 			<ol class="unstyled reset">
@@ -199,7 +199,7 @@
 	<!-- #your-games -->
 	<div class="span4 box col">
 		<header class="rich">
-			<h2 class="h3 reset">Most recent games</h2>
+			<h2 class="h3 reset">Recent gespeelde spellen</h2>
 		</header>
 		<section class="reset scroll-box">
 			<table class="table table-condensed table-striped table-clean">
@@ -220,7 +220,7 @@
 						</c:otherwise>
 						</c:choose>
 						
-						<span class="small"><nf:format number="${gameScore.score}" /> points | <nf:format number="${gameScore.countTags}" /> ${gameScore.countTags == 1 ? 'tag' : 'tags' }</span>
+						<span class="small"><nf:format number="${gameScore.score}" /> points | <nf:format number="${gameScore.countTags}" /> ${gameScore.countTags == 1 ? 'term' : 'termen' }</span>
 					</td>
 				</tr>
 			</c:forEach>
@@ -230,14 +230,14 @@
 	
 	<div id="pioneer-matches" class="box span4">
 		<header class="rich relative ${you && user.countNewPioneerMatches > 0 ? 'highlight' : ''}">
-			<h2 class="h3 reset">Most recent pioneer matches</h2>
+			<h2 class="h3 reset">Recent ingevoerde eerste overeenkomsten</h2>
 			<img src="/static/img/match-pioneer-l.png" title="" class="pull-out-right" />
 		</header>
 		<section class="reset">
-			<p class="small box-inner"><strong>Pioneer matches</strong> are made when you are first to enter a word that gets matched. This can only happen once per word.</p>
+			<p class="small box-inner"><strong>Eerste overeenkomsten</strong> worden gemaakt als je de eerste speler bent die een overeenkomst met een door een andere speler ingevoerde term maakt.</p>
 			<div class="row box-inner">
-				<h3 class="h5 span1 pull-left">match</h3>
-				<h3 class="h5 pull-left">in game</h3>
+				<h3 class="h5 span1 pull-left">overeenkomst</h3>
+				<h3 class="h5 pull-left">in spel</h3>
 			</div>
 			<div class="scroll-box bordered">
 				<table class="table table-condensed table-striped table-clean">
@@ -255,7 +255,7 @@
 						</c:otherwise>
 						</c:choose>
 						</td>
-						<td>+150</td>
+						<td>+145</td>
 					</tr>
 					</c:forEach>
 					</tbody>

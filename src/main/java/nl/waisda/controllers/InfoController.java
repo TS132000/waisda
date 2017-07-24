@@ -32,12 +32,6 @@ public class InfoController {
 		return "voorwaarden";
 	}
 
-	@RequestMapping("/over-het-spel")
-	public String overHetSpel(ModelMap modelMap) {
-		modelMap.addAttribute("cssClass", "content");
-		return "overHetSpel";
-	}
-
 	@RequestMapping("/spelinstructies")
 	public String hoeWerktHet(ModelMap modelMap) {
 		modelMap.addAttribute("cssClass", "content");

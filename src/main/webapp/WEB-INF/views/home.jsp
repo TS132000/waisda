@@ -25,7 +25,7 @@
 	<!-- AddThis Button END -->
 
 	<p class="spaced-bottom">
-		By playing <strong>Waisda</strong>, you're helping us improve our archives by making them easier to search through. Thanks!
+		Door <strong>Waisda</strong> te spelen help je ons archief beter doorzoekbaar te maken. Bedankt!
 	</p>
 	
 	<!--h2>Kanalen</h2-->
@@ -49,12 +49,12 @@
 	<!--h2 class="spaced">Hoe werkt het?</h2-->
 	<div class="row equal-cols">
 		<ol class="unstyled pull-left">
-			<li class="box rich order span3 col"><span class="index">1</span>Select a video above or from the queue</li>
-			<li class="box rich order span3 col"><span class="index">2</span>Enter as many words as you can to describe what you see and hear</li>
-			<li class="box rich order span3 col"><span class="index">3</span>Score points by entering the same words as other players.</li>
-			<li class="box rich order span3 col"><span class="index">4</span>Read the <a href="/spelinstructies">instructions</a> and <a href="/registreren">register</a> to save your score.</li>
+			<li class="box rich order span3 col"><span class="index">1</span>Selecteer een spel via de kanalen of via de huidige rondes</li>
+			<li class="box rich order span3 col"><span class="index">2</span>Voeg zo veel mogelijk termen in om te beschrijven wat je ziet en hoort</li>
+			<li class="box rich order span3 col"><span class="index">3</span>Verdien punten met termen die overeenkomen met termen van andere spelers</li>
+			<li class="box rich order span3 col"><span class="index">4</span>Lees de <a href="/spelinstructies">spel instructies</a> en <a href="/registreren">maak een account</a> aan om je scores te bewaren</li>
 		</ol>
-		<p id="silverlight-message" class="clear-both small">In order to be able to join <a href="http://www.silverlight.net/">Microsoft Silverlight plugin</a> has to be installed.</p>
+		<!-- laten we hopen dat dit niet nodig is: <p id="silverlight-message" class="clear-both small">In order to be able to join <a href="http://www.silverlight.net/">Microsoft Silverlight plugin</a> has to be installed.</p> -->
 	</div>
 	<!--div id="prizebanner">
 		<a href="/spelinstructies#wedstrijdregels">
@@ -64,7 +64,7 @@
 	
 	<div class="row equal-cols">
 		<div class="box span4 col">
-			<header class="header rich"><h2 class="h3 reset">Top Scorers <small>last 7 days</small></h2></header>
+			<header class="header rich"><h2 class="h3 reset">Beste scores <small>(afgelopen week)</small></h2></header>
 			<section class="reset scroll-box">
 				<ol class="unstyled reset">
 				<c:forEach items="${globalStats.topScores.topTen}" var="u" varStatus="status">
@@ -82,7 +82,7 @@
 		<!-- #tagcloud -->
 		<div class="box span4 col leading">
 
-			<header class="header rich"><h2 class="h3 reset">Most popular tags <small>last 7 days</small></h2></header>
+			<header class="header rich"><h2 class="h3 reset">Beste termen <small>(afgelopen week)</small></h2></header>
 			<section class="reset fixed-low">
 				<ul class="tagcloud unstyled">
 					<c:forEach items="${globalStats.tagCloud}" var="tag">

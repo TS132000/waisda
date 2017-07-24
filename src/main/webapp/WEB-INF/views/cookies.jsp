@@ -7,6 +7,6 @@
 <tt:head title="How does it work?"></tt:head>
 <tt:body pageName="cookiesUitleg">
    	<h1>Cookies</h1>
-	<p>To take part in Waisda? cookies have to be enabled in your browser. Enable cookies and <a href="${fn:escapeXml(targetUrl)}">try again</a>.</p>
+	<p>Om aan Waisda? deel te nemen moeten cookies zijn ingeschakeld. Schakel cookies in en <a href="${fn:escapeXml(targetUrl)}">probeer opnieuw</a>.</p>
 </tt:body>
 </tt:html>

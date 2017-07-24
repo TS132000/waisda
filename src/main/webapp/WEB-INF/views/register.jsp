@@ -9,9 +9,9 @@
 	</tt:head>
 	<tt:body pageName="register">
 		<div class="box span9">
-	 		<h1 class="h2 form-shift">Register</h1>
+	 		<h1 class="h2 form-shift">Registreer</h1>
 	 		<c:if test="${user.totalScore > 0}">
-				<p  class="form-shift">Your <nf:format number="${user.totalScore}" /> points will be added after you've registered.</p>
+				<p  class="form-shift">Je <nf:format number="${user.totalScore}" /> punten worden opgeslagen nadat je een account hebt aangemaakt.</p>
 			</c:if>			
 			<f:form commandName="form" autocomplete="off" id="meedoenForm" class="form-horizontal">
 	  		<fieldset>
@@ -26,7 +26,7 @@
 
  	  			    <c:set var="passwordErrors"><f:errors path="auth.password"/></c:set>
 					<div class="control-group ${not empty passwordErrors ? 'error' : ''}">
-						<f:label path="auth.password" cssClass="control-label">Password</f:label>
+						<f:label path="auth.password" cssClass="control-label">Wachtwoord</f:label>
 						<div class="controls">
 		  				<f:password path="auth.password" tabindex="5" cssClass="input-xlarge" /><br/>
 		  				<f:errors path="auth.password" cssClass="help-inline"/>
@@ -35,7 +35,7 @@
 
   			    <c:set var="repeatPasswordErrors"><f:errors path="auth.repeatPassword"/></c:set>
 		  		<div class="control-group ${not empty repeatPasswordErrors ? 'error' : ''}">
-						<f:label path="auth.repeatPassword" cssClass="control-label">Repeat password</f:label>
+						<f:label path="auth.repeatPassword" cssClass="control-label">Herhaal wachtwoord</f:label>
 						<div class="controls">
 							<f:password path="auth.repeatPassword" tabindex="6" cssClass="input-xlarge" /><br/>
 		  				<f:errors path="auth.repeatPassword" cssClass="help-inline"/>
@@ -44,11 +44,11 @@
 
 	  			    <c:set var="nameErrors"><f:errors path="auth.name"/></c:set>
 					<div class="control-group ${not empty nameErrors ? 'error' : ''}">
-						<f:label path="auth.name" cssClass="control-label">Username</f:label>
+						<f:label path="auth.name" cssClass="control-label">Gebruikersnaam</f:label>
 						<div class="controls">
 		  				<f:input path="auth.name" tabindex="7" cssClass="input-xlarge" /><br/>
 		  				<f:errors path="auth.name" cssClass="help-inline"/>
-		  				<p class="help-block">Your username will be visible to other players. It cannot be changed after you've registered.</p>
+		  				<p class="help-block">Je gebruikersnaam is zichtbaar voor andere spelers. Het kan na registratie niet worden gewijzigd.</p>
 					</div>
 				</fieldset>
 				<fieldset>
@@ -56,7 +56,7 @@
 					<div class="control-group ${not empty agreeTosErrors ? 'error' : ''}">
 						<div class="controls">
 							<label for="agree_tos" class="checkbox">
-								<f:checkbox value="" path="agreeTos" id="agree_tos" tabindex="8"/>I agree with the <a href="#" target="_blank">terms and conditions</a>
+								<f:checkbox value="" path="agreeTos" id="agree_tos" tabindex="8"/>Ik ga akkoord met de <a href="#" target="_blank">voorwaarden</a>
 							</label>
 							<f:errors path="agreeTos" cssClass="help-inline"/>
 						</div>
@@ -70,7 +70,5 @@
 				</fieldset>
 			</f:form>
 		</div>
-
-		
 	</tt:body>
 </tt:html>

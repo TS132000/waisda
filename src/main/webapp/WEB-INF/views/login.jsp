@@ -11,7 +11,7 @@
 		<div class="box span9">
 			<h1 class="h2 form-shift">Log in</h1>
 			<c:if test="${user.totalScore > 0}">
-				<p class="form-shift">Your <nf:format number="${user.totalScore}" /> score will be added to your overall score after you've logged in.</p>
+				<p class="form-shift">Je <nf:format number="${user.totalScore}" /> score wordt verwerkt al je inlogt.</p>
 			</c:if>
 	 		<f:form commandName="loginForm" action="/inloggen" id="loginForm" class="form-horizontal">
 				<fieldset>
@@ -25,10 +25,10 @@
   						</div>
   					</div>
   					<div class="control-group">
-  						<f:label path="password" cssClass="control-label">Password</f:label>
+  						<f:label path="password" cssClass="control-label">Wachtwoord</f:label>
   						<div class="controls">
   							<f:password path="password" id="loginPassword" />
-  							<p class="help-block"><a href="/wachtwoord-vergeten">Forgot your password?</a></p>
+  							<p class="help-block"><a href="/wachtwoord-vergeten">Wachtwoord vergeten?</a></p>
   						</div>
   					</div>
   					<div class="form-actions">

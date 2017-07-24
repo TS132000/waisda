@@ -22,22 +22,22 @@
 		<section class="reset">
 			<div id="vid-overlay-screen" class="row-fluid show">
 				<div id="explanation" class="box clean span6">
-					<div id="timer-intro" class="timer-intro"><small>The game starts in</small><strong>00:15</strong></div>
+					<div id="timer-intro" class="timer-intro"><small>De ronde start in</small><strong>00:15</strong></div>
 				
-					<h2 class="h4">Instructions</h2>
+					<h2 class="h4">Instructies</h2>
 					<ul>
-						<li>Try to enter as many words as possible to describe what you see or hear</li>
-						<li>Confirm a word by pushing [enter] on your keyboard</li>
-						<li>Earn points by <strong>matching</strong>, which happens when you enter the same word as another player</li>
-						<li>By joining a game, you submit to the following <a href="/voorwaarden" target="_blank">terms and conditions</a></li>
+						<li>Probeer zo veel mogelijk termen die omschrijven wat je ziet in te voeren</li>
+						<li>Druk voor elk ingevoerde woord op &lt;ENTER&gt; om het aan de lijst toe te voegen</li>
+						<li>Je verdient punten als een ingevoerde term <strong>overeenkomt</strong> met een term van een andere speler</li>
+						<li>Als je een ronde meespeelt ga je akkoord met de <a href="/voorwaarden" target="_blank">voorwaarden</a></li>
 					</ul>				
-					<h3 class="h5">Good luck!</h3>
+					<h3 class="h5">Veel speel plezier!</h3>
 				</div>
 				<div class="box clean span6">
 					<div id="playerList" class="box">
 						<header class="rich">
-							<h2 class="h3 pull-left reset">Players</h2>
-							<a href="/game/${game.id}/recap/${user.id}" class="btn btn-primary pull-right">stop</a>
+							<h2 class="h3 pull-left reset">Spelers</h2>
+							<a href="/game/${game.id}/recap/${user.id}" class="btn btn-primary pull-right">stop met spelen</a>
 						</header>
 						<section class="reset">
 							<ul class="unstyled reset">
@@ -63,12 +63,12 @@
 		<header class="rich extended">
 			<h1 id="playerSessionScore" class="pull-left board span2">0</h1>				
 			<h2 id="playerPosition" class="pull-right reset">
-				<small class="h4">Rank</small>
+				<small class="h4">Beste scores</small>
 				<span id="playerPositionMine">-</span> / <span id="playerPositionTotal" class="h4">-</span>
 			</h2>
 		</header>
 		<section class="reset">
-			<h3 class="h4 sub-header">Your tags:</h3>		
+			<h3 class="h4 sub-header">Jouw ingevoerde termen:</h3>
 			<div id="tagList" class="tag-list scroll-box">
 			</div>
 		</section>
