@@ -21,13 +21,102 @@ html {
   position: relative;
   min-height: 100%;
 }
+.box-inner,section.reset.scroll-box .small {
+    color: #333;
+}
+.span3.box.media.col {
+    margin-left: 342px;
+}
+li.chart-entry img {
+    border-radius: 100%;
+}
+h1.h2.form-shift {
+    margin-top: 30px;
+}
+section.main.container {
+    padding-bottom: 140px;
+}
+
+.game-queue table .time-remaining{
+	
+	color:#666;
+}
+
+table.table.table-condensed.table-striped.table-clean a,.span9 offset3 a,.span9-blog a,.rood-link a,.box.rich a,.controls a,li.box.rich.order.span3.col a,p.help-block a {
+    color: #e00034;
+}
+section.main.container {
+    margin-top: 60px;
+}
+li.chart-entry a {
+    color: #666;
+}
+ul.row.equal-cols.unstyled.clear-both {
+    width: 1000px;
+}
+a.link-block {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80px;
+    color: #e00034;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #fff;
+    text-decoration:none;
+}
+a.link-block:hover {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #e00034;
+    text-decoration:none;
+}
+p.online {
+    color: #fff;
+}
+a.box.channel.col {
+    background-color: #e00034;
+}
+.waisda-logo {
+    position: absolute;
+    z-index: 1;
+
+}
+.login-box {
+    margin-top: 127px;
+    margin-right: -121px;
+}
+p.header-text {
+    margin-top: -165px;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #fff;
+    width: 600px;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+}
 .brand-marker {
-  height: 30px;
+  height: 70px;
   overflow: hidden;
-  padding: 2px 0 4px 0;
-  background-color: #000000;
+  padding: 20px 0 4px 0;
   *zoom: 1;
   *zoom: 1;
+  position: absolute;
+   width: 100%;
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 }
 .brand-marker p {
   line-height: 30px;
@@ -56,24 +145,27 @@ html {
   clear: both;
 }
 header.site-header {
-  background-color: #eeeeee;
-  margin: 0 0 18px 0;
-  padding: 10px 0;
+    background-image: url(/static/img/header-5.jpg);
+    background-size: cover;
+    height:248px;
   *zoom: 1;
   *zoom: 1;
 }
 header.site-header .stats {
   position: absolute;
   top: 50%;
-  margin-top: -9px;
+  margin-top: -26px;
   text-align: center;
 }
 header.site-header .stats p {
-  font-size: 18px;
-  color: #666666;
+	color: #ffffff;
+    margin-top: -50px;
+    margin-left: 85px;
+    width: 800px;
+    font-size:18px;
 }
 header.site-header .stats p strong {
-  color: #000000;
+  color: #ffffff;
 }
 header.site-header .online {
   position: absolute;
@@ -103,10 +195,11 @@ section.main {
 }
 .site-footer {
   padding-top: 10px;
-  background-color: #eeeeee;
-  color: #666666;
+  background-color: #e00034;
+  color: #fff;
   position: absolute;
-  bottom: 0;
+  padding-bottom:30px;
+  bottom: -50px;
   width: 100%;
 }
 .site-footer a {
@@ -217,9 +310,9 @@ section.main {
   padding: 10px;
 }
 .box.media {
-  border: none;
-  padding: 10px;
-  background-color: #FFF;
+    border: none;
+    padding: 10px;
+    margin-top: 0px;
 }
 .box.media a {
   text-decoration: none;
@@ -227,6 +320,7 @@ section.main {
 .box.media img {
   margin-right: 10px;
   width: 72px;
+  border-radius: 100%;
 }
 .box.media.blow-up {
   padding: 0;
@@ -294,6 +388,7 @@ section.main {
 }
 .channel .img img {
   width: 100%;
+  height:190px;
 }
 .channel .img .overlay {
   position: absolute;
@@ -322,7 +417,7 @@ section.main {
 }
 .order .index {
   border: 3px solid #eeeeee;
-  background-color: #999999;
+  background-color: #e00034;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -365,7 +460,7 @@ section.main {
   text-decoration: none;
 }
 .chart-entry.highlight .index {
-  background-color: #0088cc;
+  background-color: #e00034;
   color: #ffffff;
 }
 .chart-entry img {
@@ -415,10 +510,13 @@ section.main {
 .tagcloud:after {
   clear: both;
 }
+li.tag-entry a {
+    color: #666;
+    }
 .tag-entry {
   float: left;
   padding: 0 10px;
-  line-height: 40px;
+  line-height: 30px;
 }
 .tag-entry.size-1 {
   font-size: 12px;
@@ -577,6 +675,7 @@ section.main {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 160px;
+  color:#e00034;
 }
 .game-queue table .time-remaining {
   line-height: 24px;

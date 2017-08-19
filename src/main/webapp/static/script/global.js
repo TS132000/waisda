@@ -4,6 +4,13 @@ var details;
 var vidPlayerWidth = 618;
 var vidPlayerHeight = 351;
 
+if (typeof String.prototype.trim !== 'function') {
+    window.alert('create String.prototype.trim');
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
+}
+
 jQuery(function() {
 	
 	// on-click of ...:

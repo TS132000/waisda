@@ -5,7 +5,7 @@ var TaggingHistory = base2.Base.extend({
 	update: function(tags, currentTime) {
 		tags.forEach(function(tag){
 			var el = jQuery('#' + this.idPrefix + tag.id);
-			
+
 			if (!el.length) {
 				// Create an element for it
 				el = jQuery('<div/>', { 'class' : 'tag', 'id' : this.idPrefix + tag.id });
@@ -20,7 +20,13 @@ var TaggingHistory = base2.Base.extend({
 					el.append(jQuery('<img/>',  { 'class' : 'icon', 'title' : title, 'src' : iconSrc }));
 				}
 				if (tag.dictionary) {
-					var iconSrc = '/static/img/match-dictionary.png';
+				    var iconSrc;
+				    if (tag.specialMatch) {
+                        iconSrc = '/static/img/match-dictionary-' + tag.dictionary + '.png';
+				    } else {
+                        iconSrc = '/static/img/match-dictionary.png';
+				    }
+
 					el.append(jQuery('<img/>',  { 'class' : 'icon', 'title' : 'This tag was found in a dictionary', 'src' : iconSrc }));
 				}
 				el.append(jQuery('<span/>', { 'text'  : tag.tag }));

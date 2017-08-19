@@ -17,7 +17,7 @@
 				<li><a href="#dd">Item D</a></li>
 			</ul>
 		</div>
-		<div class="span9">
+		<div class="span9-blog">
 			<h2 id="aa">Item A</h2>
 			
 			<p>The streets at last became quiet, and the patrol, the officers of which, in their splendid costumes, 

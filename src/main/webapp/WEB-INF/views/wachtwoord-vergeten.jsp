@@ -37,7 +37,7 @@
 		<p class="help-block form-shift">In a few moments you will receive an email with the instructions.
 		<br/>
 		<br/>
-		<a href="/">Back to the homepage</a></p>
+		<a href="/">Back to the homepage</a><br><br></p>
 	</c:otherwise>
 	</c:choose>
 	</div>

@@ -19,14 +19,13 @@
 
 package nl.waisda.repositories;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.lang.reflect.Field;
+import java.util.List;
 
 import org.springframework.beans.BeanWrapperImpl;
 
@@ -78,7 +77,8 @@ public abstract class AbstractRepository<T> {
 				else {
 					getEntityManager().persist(entity);
 				}
-				
+				getEntityManager().flush();
+
 				break;
 			}
 		}

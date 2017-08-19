@@ -12,8 +12,8 @@
 <h1>Tag <span class="mark">${tagEntryStats.normalizedTag}</span></h1>
 
 <p>Used first by
-<a href="/profiel/${tagEntryStats.firstEntry.owner.id}">${tagEntryStats.firstEntry.owner.name}</a>
-during <a href="/start-game/${tagEntryStats.firstEntry.game.video.id}">${tagEntryStats.firstEntry.game.video.title}</a>
+<a style="color:#e00034" href="/profiel/${tagEntryStats.firstEntry.owner.id}">${tagEntryStats.firstEntry.owner.name}</a>
+during <a style="color:#e00034" href="/start-game/${tagEntryStats.firstEntry.game.video.id}">${tagEntryStats.firstEntry.game.video.title}</a>
 on ${tagEntryStats.firstEntry.prettyCreationDate}</p>
 
 <h2 class="spaced">Clips featuring <span class="mark">${tagEntryStats.normalizedTag}</span></h2>
@@ -26,10 +26,10 @@ on ${tagEntryStats.firstEntry.prettyCreationDate}</p>
 						<img src="${vs.video.imageUrl}" />
 						<div class="overlay trigger"></div>
 					</div>
-					<h3 class="h5">${vs.video.title}</h3>
+					<h3 style="color:#333;"class="h5">${vs.video.title}</h3>
 				</a>
-				<p class="small">
-					Also tagged: <c:forEach items="${vs.topTags}" var="topTag" varStatus="topTagStatus"><a href="/tag/${topTag}" class="reset">${topTag}</a><c:if test="${topTagStatus.index < fn:length(vs.topTags) - 1}">, </c:if></c:forEach>
+				<p class="small" style="color:#333;">
+					Also tagged: <c:forEach items="${vs.topTags}" var="topTag" varStatus="topTagStatus"><a style="color:#e00034" href="/tag/${topTag}" class="reset">${topTag}</a><c:if test="${topTagStatus.index < fn:length(vs.topTags) - 1}">, </c:if></c:forEach>
 				</p>
 			</div>
 		</li>

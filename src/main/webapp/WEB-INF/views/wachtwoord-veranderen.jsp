@@ -12,7 +12,7 @@
 		<h1 class="h2 form-shift">Change password</h1>
 			<c:choose>
 			<c:when test="${success}">
-				<p class="help-block form-shift">Your password has been changed. Please <a href="/inloggen">log in</a> with your new password.</p>
+				<p class="help-block form-shift">Your password has been changed. Please <a style="color:#e00034;" href="/inloggen">log in</a> with your new password.</p>
 			</c:when>
 			<c:when test="${errorMessage != null}">
 				<div class="error-block">${errorMessage}</div>

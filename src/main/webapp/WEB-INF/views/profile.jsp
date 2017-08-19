@@ -27,7 +27,7 @@
 		<div class="box-inner">
 			<img src="${profile.user.avatarUrl}" class="pull-left" />
 			<h2 class="pull-left h3"><c:out value="${profile.user.name}"/></h2>	
-			<p class="h1 reset clear-both"><nf:format number="${profile.user.totalScore}" /><span class="small">Total score</span></p>
+			<p class="h1 reset clear-both"><nf:format number="${profile.user.totalScore}" /><span class="small" style="color:#333;">Total score</span></p>
 		</div>
 	</div>	
 	

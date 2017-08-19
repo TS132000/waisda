@@ -19,7 +19,9 @@
 
 package nl.waisda.services;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import nl.waisda.domain.TagEntry;
 import nl.waisda.model.Cache;
@@ -30,16 +32,15 @@ import nl.waisda.model.Value;
 import nl.waisda.repositories.ParticipantRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
-
 import org.apache.log4j.Logger;
+import org.hibernate.tool.hbm2x.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ScoringService {
-
-	public static int MAX_LOOKBACK_TIME = 10000;
+public class ScoringService implements ScoringServiceIF, InitializingBean {
 
 	private static final Logger log = Logger.getLogger(ScoringService.class);
 
@@ -51,6 +52,10 @@ public class ScoringService {
 
 	@Autowired
 	private ParticipantRepository participantRepo;
+
+	@org.springframework.beans.factory.annotation.Value("${waisda.matcher.specialdictionaries}")
+	private String specialDictionaries;
+	private Set<String> specialDictionaryList;
 
 	private Value<GlobalStats> globalStatsCache;
 
@@ -71,13 +76,49 @@ public class ScoringService {
 		globalStatsCache = new Cache<GlobalStats>(fetchGlobalStats, 10000);
 	}
 
-	public void updateDictionary(TagEntry tagEntry) {
-		List<String> dictionaryEntries = tagEntryRepo.getDictionariesContaining(tagEntry.getTag());
-		if (dictionaryEntries.size() > 0) {
-			// If multiple entries are found, use only the first one.
-			tagEntry.setDictionary(dictionaryEntries.get(0));
-		}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        // create special dictionary names list
+        if (specialDictionaryList == null) {
+            specialDictionaryList = new HashSet<String>() ;
+        }
+        // split the onput dictionaries
+        if (StringUtils.isNotEmpty(specialDictionaries)) {
+
+            String[] specialDictionarySplit = specialDictionaries.split(",");
+            for (String entry : specialDictionarySplit) {
+                 specialDictionaryList.add(entry);
+            }
+        }
+    }
+
+    public void updateDictionary(TagEntry tagEntry) {
+        List<String> dictionaryEntries = tagEntryRepo.getDictionariesContaining(tagEntry.getNormalizedTag());
+        if (dictionaryEntries.size() > 0) {
+            // check for special dictionary cases first
+            for (String entry : dictionaryEntries) {
+                if (specialDictionaryList.contains(entry)) {
+                    // yes, matched!
+                    tagEntry.setSpecialMatch(true);
+                    tagEntry.setDictionary(entry);
+                    break;
+                }
+            }
+            // if this is no special case, just pick the first one
+            if (tagEntry.getDictionary() == null) {
+                // If multiple entries are found, use only the first one.
+                tagEntry.setSpecialMatch(false);
+                tagEntry.setDictionary(dictionaryEntries.get(0));
+            }
+        }
 	}
+
+    public boolean isSpecialDictionaryMatch(final String dictionaryName) {
+        if (StringUtils.isNotEmpty(dictionaryName)) {
+            return specialDictionaryList.contains(dictionaryName);
+        }
+        return false;
+    }
 
 	@Transactional
 	public void updateMatchAndStore(TagEntry tagEntry,

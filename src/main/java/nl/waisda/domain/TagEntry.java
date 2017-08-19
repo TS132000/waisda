@@ -19,14 +19,6 @@
 
 package nl.waisda.domain;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.Normalizer;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,9 +27,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import nl.waisda.model.Util;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Index;
 
@@ -95,6 +94,9 @@ public class TagEntry implements Serializable {
 
 	@Basic(optional = false)
 	private int score;
+
+    @Transient
+    private boolean isSpecialMatch; // transient for ORM
 
 	/*
 	 * Business logic
@@ -291,7 +293,15 @@ public class TagEntry implements Serializable {
 		this.pioneer = pioneer;
 	}
 
-	public String toString() {
+    public boolean isSpecialMatch() {
+        return isSpecialMatch;
+    }
+
+    public void setSpecialMatch(boolean specialMatch) {
+        isSpecialMatch = specialMatch;
+    }
+
+    public String toString() {
 		return String.format(
 				"#%d normalizedTag:%s user:%d video:%d game:%d time:%d",
 				getId(), getNormalizedTag(), getOwner().getId(), getGame()

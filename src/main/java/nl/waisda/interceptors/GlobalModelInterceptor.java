@@ -19,10 +19,9 @@
 
 package nl.waisda.interceptors;
 
-import java.io.StringWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.StringWriter;
 
 import nl.waisda.controllers.StaticController;
 import nl.waisda.domain.User;
@@ -30,9 +29,8 @@ import nl.waisda.model.GameScore;
 import nl.waisda.repositories.GameRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.services.GameService;
-import nl.waisda.services.ScoringService;
+import nl.waisda.services.ScoringServiceIF;
 import nl.waisda.services.UserSessionService;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,7 +45,7 @@ public class GlobalModelInterceptor extends HandlerInterceptorAdapter {
 	private UserSessionService userSessionService;
 
 	@Autowired
-	private ScoringService scoringService;
+	private ScoringServiceIF scoringService;
 
 	@Autowired
 	private GameRepository gameRepo;

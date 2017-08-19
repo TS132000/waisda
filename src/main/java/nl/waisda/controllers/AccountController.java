@@ -35,7 +35,6 @@ import nl.waisda.services.MailService;
 import nl.waisda.services.UserService;
 import nl.waisda.services.UserSessionService;
 import nl.waisda.validators.UberValidator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,18 +86,43 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/registreren", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute("form") RegisterForm form,
-			Errors errors, HttpSession session) {
-		if (errors.hasErrors()) {
-			return "register";
-		} else {
-			User user = new User();
-			form.applyTo(user);
-			userRepo.store(user);
-			userSessionService.login(session, user);
-			log.info(String.format("Registered %s!", user.getShortDescription()));
-			return "redirect:/";
-		}
+	public String register(@ModelAttribute("form") RegisterForm form,
+        Errors errors, HttpSession session) {
+        // this provides as much safety against double clicks as possible
+        // without requiring a table lock...
+        synchronized(AccountController.class) { // hopefully registrations don't occur too much
+            User user = userSessionService.getCurrentUser(session);
+            if (user == null || user.isAnonymous()) {
+                validator.validate(form, errors);
+                if (!errors.hasErrors()) {
+                    try {
+                        user = new User();
+                        form.applyTo(user);
+                        userRepo.store(user);
+                        userSessionService.login(session, user);
+                        log.info(String.format("Registered %s!", user.getShortDescription()));
+                    } catch(Exception e) {
+                        // this exception may have been caused by duplicate user
+                        // so we'll simply validate again. If validation fails
+                        // we'll return this page, otherwise we'll rethrow,
+                        // resulting in the error page
+                        validator.validate(form, errors);
+                        if (!errors.hasErrors()) {
+                            if (e instanceof RuntimeException) {
+                                throw (RuntimeException) e;
+                            }
+                            throw new RuntimeException(e);
+                        }
+                        // show form again
+                        return "register";
+                    }
+                } else {
+                    // show form again
+                    return "register";
+                }
+            }
+        }
+        return "redirect:/";
 	}
 
 	@RequestMapping("/inloggen")

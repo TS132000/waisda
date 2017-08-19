@@ -5,7 +5,7 @@
 	<header class="header rich"><h2 class="h3 reset">Join now <small>(<span id="games-queue-count">0 games</span>)</small></h2></header>
 	<section class="reset">
 		<!-- Als game-queue class="empty" heeft verschijnt de onderstaande boodschap en wordt de tabel verborgen -->
-		<p class="box-inner show">Currently there are no games to join. Start one yourself by  selecting one of the channels on the <a href="/">homepage</a> .</p>
+		<p class="box-inner show">Currently there are no games to join. Start one yourself by  selecting one of the channels on the <a style="color:#e00034" href="/">homepage</a>.</p>
 		<div class="hide">
 			<div class="row box-inner">
 				<h3 class="h5 pull-left">Click to select a game</h3>

@@ -59,8 +59,12 @@
 							<td class="text-right"><nf:format number="${recap.ownerScore}" /></td>
 						</tr>
 					</table>
-					<p class="small spaced-min">On the right, below 'Your tags', you can find a more detailed description of each match.</p>
-					
+					<p class="spaced-min">On the right, below 'Your tags', you can find a more detailed description of each match.</p>
+                    <c:if test="${user == null || user.anonymous}">
+                        <h3>Want to keep this score?</h3>
+                        <p>If you <a href="/registreren"><strong>register</strong></a> or <a href="/inloggen"><strong>log in</strong></a>, the points
+                        you earned will be added to your account. Try to achieve the highest ranking!</p>
+                    </c:if>
 					<h3>Want to earn even more points?</h3>
 					<p>Challenge your friends and improve your chances at a higher score <span class="help" title="If you were the first to enter a word then the first match will earn you 145 points">?</span></p>
 
@@ -126,8 +130,11 @@
 						<c:if test="${tag.matchingTagEntry != null && !tag.pioneer}">
 							<img src="/static/img/match-social.png" class="icon" />
 						</c:if>
-						<c:if test="${tag.dictionary != null}">
+						<c:if test="${tag.dictionary != null && !tag.specialMatch}">
 							<img src="/static/img/match-dictionary.png" class="icon" />
+						</c:if>
+						<c:if test="${tag.dictionary != null && tag.specialMatch}">
+							<img src="/static/img/match-dictionary-${tag.dictionary}.png" class="icon" />
 						</c:if>
 						<span><c:out value="${tag.tag}"/></span>
 						<span class="matching small">

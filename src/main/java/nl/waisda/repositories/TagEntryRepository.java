@@ -19,19 +19,17 @@
 
 package nl.waisda.repositories;
 
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
 import nl.waisda.domain.UserScore;
 import nl.waisda.model.TagCloudItem;
-import nl.waisda.services.ScoringService;
-
+import nl.waisda.services.ScoringServiceIF;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,7 +43,7 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 	private Logger log = Logger.getLogger(TagEntryRepository.class);
 	
 	@Autowired
-	private ScoringService scoringService;
+	private ScoringServiceIF scoringService;
 
 	public TagEntryRepository() {
 		super(TagEntry.class);
@@ -63,8 +61,8 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 		return getEntityManager()
 			.createQuery("SELECT t FROM TagEntry t WHERE t.game.id = :gameId AND t.gameTime BETWEEN :t1 AND :t2", TagEntry.class)
 			.setParameter("gameId", gameId)
-			.setParameter("t1", aroundTime - ScoringService.MAX_LOOKBACK_TIME)
-			.setParameter("t2", aroundTime + ScoringService.MAX_LOOKBACK_TIME)
+			.setParameter("t1", aroundTime - ScoringServiceIF.MAX_LOOKBACK_TIME)
+			.setParameter("t2", aroundTime + ScoringServiceIF.MAX_LOOKBACK_TIME)
 		.getResultList();
 	}
 	
@@ -81,9 +79,9 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				.setParameter("gameId", gameId)
 				.setParameter("normalizedTag", normalizedTag)
 				.setParameter("t1",
-						aroundTime - ScoringService.MAX_LOOKBACK_TIME)
+						aroundTime - ScoringServiceIF.MAX_LOOKBACK_TIME)
 				.setParameter("t2",
-						aroundTime + ScoringService.MAX_LOOKBACK_TIME)
+						aroundTime + ScoringServiceIF.MAX_LOOKBACK_TIME)
 				.setParameter("ownerId", ownerId).getResultList().isEmpty();
 	}
 
@@ -114,9 +112,9 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 				.setParameter("videoId", videoId)
 				.setParameter("normalizedTag", normalizedTag)
 				.setParameter("t1",
-						aroundTime - ScoringService.MAX_LOOKBACK_TIME)
+						aroundTime - ScoringServiceIF.MAX_LOOKBACK_TIME)
 				.setParameter("t2",
-						aroundTime + ScoringService.MAX_LOOKBACK_TIME)
+						aroundTime + ScoringServiceIF.MAX_LOOKBACK_TIME)
 				.getResultList();
 	}
 
@@ -262,14 +260,14 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
 
 	@SuppressWarnings("unchecked")
 	public List<String> getDictionariesContaining(String tag) {
-		String normalizedTag = TagEntry.normalize(tag);
+        String normalizedTag = TagEntry.normalize(tag);
 
-		Query query = getEntityManager().createNativeQuery(
-				"SELECT e.dictionary FROM DictionaryEntry e "
-						+ "WHERE e.normalizedTag = :normalizedTag");
-		query.setParameter("normalizedTag", normalizedTag);
+        Query query = getEntityManager().createNativeQuery(
+                "SELECT e.dictionary FROM DictionaryEntry e "
+                        + "WHERE e.normalizedTag = :normalizedTag");
+        query.setParameter("normalizedTag", normalizedTag);
 
-		return query.getResultList();
+        return query.getResultList();
 	}
 
 }

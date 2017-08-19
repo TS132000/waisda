@@ -39,6 +39,7 @@ The following fields are for registered users only and are optional; they are on
 * `usernameHyves`: Hyves username
 * `usernameTwitter`: Twitter username
 * `gender`: user's gender
+* 'isAdmin': user is an administrator (allowed to access Europeana importer)
 
 ### Game
 

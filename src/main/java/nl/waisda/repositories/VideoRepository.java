@@ -19,12 +19,10 @@
 
 package nl.waisda.repositories;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import nl.waisda.domain.Video;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -35,6 +33,20 @@ public class VideoRepository extends AbstractRepository<Video> {
 	public VideoRepository() {
 		super(Video.class);
 	}
+
+    public Video getBySourceUrl(final String sourceUrl) {
+		String q = "SELECT v FROM Video v WHERE v.sourceUrl = :url ORDER BY v.id DESC";
+        List<Video> resultList = null;
+		TypedQuery<Video> query = getEntityManager()
+				.createQuery(q, Video.class);
+		query.setParameter("url", sourceUrl);
+		query.setMaxResults(1);
+		resultList = query.getResultList();
+		if (resultList != null && resultList.size() > 0) {
+		    return resultList.get(0);
+        }
+        return null;
+    }
 
 	/**
 	 * Currently this method makes a random, unbiased selection. If you would

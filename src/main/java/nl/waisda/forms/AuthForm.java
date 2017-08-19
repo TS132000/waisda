@@ -20,7 +20,6 @@
 package nl.waisda.forms;
 
 import nl.waisda.domain.User;
-
 import org.apache.commons.lang.StringUtils;
 
 

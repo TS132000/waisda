@@ -19,13 +19,12 @@
 
 package nl.waisda.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import nl.waisda.domain.Game;
 import nl.waisda.domain.Participant;
@@ -45,10 +44,9 @@ import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
 import nl.waisda.repositories.VideoRepository;
 import nl.waisda.services.GameService;
-import nl.waisda.services.ScoringService;
+import nl.waisda.services.ScoringServiceIF;
 import nl.waisda.services.UserSessionService;
 import nl.waisda.validators.RegisterValidator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,7 +84,7 @@ public class GameController {
 	private ParticipantRepository participantRepo;
 
 	@Autowired
-	private ScoringService scoringService;
+	private ScoringServiceIF scoringService;
 	
 	@RequestMapping("/start-game/{videoId}")
 	public String startGame(@PathVariable int videoId, ModelMap model, HttpSession session)
