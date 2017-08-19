@@ -1,0 +1,9 @@
+<rdf:RDF>
+  <rdf:Description rdf:about="">
+    <wv:type></wv:type>
+    <wv:year></wv:year>
+    <wv:title></wv:title>
+
+  </rdf:Description>
+</rdf:RDF>
+
