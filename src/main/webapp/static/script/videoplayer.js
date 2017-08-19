@@ -129,6 +129,7 @@ var JWPlayer = EventBase.extend({
 
 		this.player = jwplayer(elementId).setup({
 			flashplayer: '/static/mediaplayer-5.9/player.swf',
+			controls: false,
 			file: sourceUrl,
 			image: imageUrl,
 			height: 351,

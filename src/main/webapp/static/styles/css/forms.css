@@ -433,13 +433,13 @@ input[type="checkbox"][readonly] {
 .control-group.error > label,
 .control-group.error .help-block,
 .control-group.error .help-inline {
-  color: #b94a48;
+  color: #e00034;
 }
 .control-group.error input,
 .control-group.error select,
 .control-group.error textarea {
-  color: #b94a48;
-  border-color: #b94a48;
+  color: #e00034;
+  border-color: #e00034;
 }
 .control-group.error input:focus,
 .control-group.error select:focus,
@@ -454,20 +454,20 @@ input[type="checkbox"][readonly] {
 }
 .control-group.error .input-prepend .add-on,
 .control-group.error .input-append .add-on {
-  color: #b94a48;
+  color: #e00034;
   background-color: #f2dede;
-  border-color: #b94a48;
+  border-color: #e00034;
 }
 .control-group.error > label,
 .control-group.error .help-block,
 .control-group.error .help-inline {
-  color: #b94a48;
+  color: #e00034;
 }
 .control-group.error input,
 .control-group.error select,
 .control-group.error textarea {
-  color: #b94a48;
-  border-color: #b94a48;
+  color: #e00034;
+  border-color: #e00034;
 }
 .control-group.error input:focus,
 .control-group.error select:focus,
@@ -482,9 +482,9 @@ input[type="checkbox"][readonly] {
 }
 .control-group.error .input-prepend .add-on,
 .control-group.error .input-append .add-on {
-  color: #b94a48;
+  color: #e00034;
   background-color: #f2dede;
-  border-color: #b94a48;
+  border-color: #e00034;
 }
 .control-group.success > label,
 .control-group.success .help-block,
@@ -545,7 +545,7 @@ input[type="checkbox"][readonly] {
 input:focus:required:invalid,
 textarea:focus:required:invalid,
 select:focus:required:invalid {
-  color: #b94a48;
+  color: #e00034;
   border-color: #ee5f5b;
 }
 input:focus:required:invalid:focus,
@@ -890,7 +890,7 @@ legend + .control-group {
   margin-top: 9px;
   margin-bottom: 9px;
   margin-left: 160px;
-  color: #b94a48;
+  color: #e00034;
 }
 .form-horizontal .form-actions {
   padding-left: 160px;

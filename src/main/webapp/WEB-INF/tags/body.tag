@@ -15,26 +15,25 @@
     
     <div class="brand-marker">
     	<div class="container">
-      	<p class="pull-left">A <a href="http://blog.waisda.nl" target="_newwindow"><img src="/static/img/logo-waisda-small.png" alt="Waisda" /></a> project</p>
-      	<c:if test="${globalStats != null}">
-					<c:if test="${user != null || user.playerBarVisible}">
-					<div class="stats pull-right">
-						<c:if test="${user == null || user.anonymous}">
-							<p ><strong><nf:format number="${globalStats.totalTags}" /></strong> <!-- ${globalStats.totalTags} --> termen ingevoerd en <strong><nf:format number="${globalStats.totalMatches}" /></strong> <!-- ${globalStats.totalMatches} --> overeenkomsten gemaakt</p>
-						</c:if>
-						<c:if test="${user != null && !user.anonymous}">
-							<p>Je hebt <strong><nf:format number="${user.totalTags}"/></strong> van de <strong ><nf:format number="${globalStats.totalTags}" /></strong> termen en <strong><nf:format number="${user.totalMatches}" /></strong> van de <strong><nf:format number="${globalStats.totalMatches}"  /></strong> overeenkomsten verzorgt</p>
-						</c:if>		
-					</div>
-					</c:if>
-				</c:if>
+            <div class="waisda-logo"><a href="/"> <img src="/static/img/waisda-logo.png" alt="Waisda" height="44" width="272"/></a></div>
+            <c:if test="${globalStats != null}">
+                <c:if test="${user != null || user.playerBarVisible}">
+                <div class="stats pull-right">
+                    <c:if test="${user == null || user.anonymous}">
+                        <p ><strong><nf:format number="${globalStats.totalTags}" /></strong> <!-- ${globalStats.totalTags} --> termen ingevoerd en <strong><nf:format number="${globalStats.totalMatches}" /></strong> <!-- ${globalStats.totalMatches} --> overeenkomsten gemaakt</p>
+                    </c:if>
+                    <c:if test="${user != null && !user.anonymous}">
+                        <p>Je hebt <strong><nf:format number="${user.totalTags}"/></strong> van de <strong ><nf:format number="${globalStats.totalTags}" /></strong> termen en <strong><nf:format number="${user.totalMatches}" /></strong> van de <strong><nf:format number="${globalStats.totalMatches}"  /></strong> overeenkomsten verzorgt</p>
+                    </c:if>
+                </div>
+                </c:if>
+            </c:if>
     	</div>
     </div>
 
     <header class="site-header">
   		<div class="container row relative equal-cols">
-	    	<h1 class="reset span3"><a href="/" class="logo reset col"><img src="/static/img/logo-europeana.png" alt="LOGO"></a></h1>
-	  		
+
 	  		<c:if test="${globalStats != null}">
 	  			<c:if test="${user == null || !user.playerBarVisible}">
 					<div class="stats span6 offset3">
@@ -74,16 +73,19 @@
 						</div>
 					</c:if>
 				</c:if>
-					<ul class="span3 box unstyled reset text-right col pull-right">		
+
+                <div class="login-box">
+					<ul class="span3 box unstyled reset text-right col pull-right">
 						<c:if test="${user != null && !user.anonymous}">
-							<li><a href="/uitloggen">uitloggen &raquo;</a></li>
+							<li><a class="link-block" href="/uitloggen">uitloggen</a></li>
 						</c:if>
-						<c:if test="${user == null || user.anonymous}">		
-							<li><a href="/inloggen">inloggen &raquo;</a></li>
-							<li><a href="/registreren">account maken &raquo;</a></li>
+						<c:if test="${user == null || user.anonymous}">
+							<li><a class="link-block" href="/inloggen">inloggen</a></li>
+							<li><a class="link-block" href="/registreren">account maken</a></li>
 						</c:if>
 					</ul>
-
+			    </div>
+				<div style="margin-top:-99px;position:absolute;margin-left:740px;width:200px;"></div>
 				<c:if test="${globalStats.currentlyPlaying > 0}">
 					<p class="online">
 						<strong>${globalStats.currentlyPlaying} ${globalStats.currentlyPlaying == 1 ? 'player' : 'players'}</strong> momenteel online

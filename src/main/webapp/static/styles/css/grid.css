@@ -34,6 +34,9 @@
 .navbar-fixed-bottom .container {
   width: 940px;
 }
+.span13 {
+  width: 300px;
+}
 .span12 {
   width: 940px;
 }
@@ -42,6 +45,9 @@
 }
 .span10 {
   width: 780px;
+}
+.span9-blog {
+  width: 700px;
 }
 .span9 {
   width: 700px;

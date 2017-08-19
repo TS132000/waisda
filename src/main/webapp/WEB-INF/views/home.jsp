@@ -9,31 +9,16 @@
 </tt:head>
 <tt:body cssClass="body" pageName="home">
 
-	<!-- AddThis Button BEGIN -->
-	<div id="addthis-bar" class="addthis_toolbox addthis_default_style pull-right spaced-bottom"
-		addthis:url="${staticModel.socialReferenceHome}"
-    	addthis:title="${staticModel.socialReferenceTitle}"
-		addthis:description="${staticModel.socialReferenceDescription}">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-	</div>
-	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dca79b617093d25"></script>
-	<!-- AddThis Button END -->
-
-	<p class="spaced-bottom">
-		Door <strong>Waisda</strong> te spelen help je ons archief beter doorzoekbaar te maken. Bedankt!
+	<p class="header-text">
+		<span style="font-size:26px">Door <strong>Waisda</strong> te spelen</span>, help je ons archief beter doorzoekbaar te maken. Bedankt!
 	</p>
-	
+
 	<!--h2>Kanalen</h2-->
-	<ul class="row equal-cols unstyled clear-both">
+	<ul style="margin-top:103px;" class="row equal-cols unstyled clear-both">
 		
 		<c:forEach var="channel" items="${channels}">
 		
-		<li class="span2">
+		<li class="span13" style="margin-left:0px;padding-right: 21px;margin-bottom:21px;">
 			<a href="/start-game/${channel.video.id}" title="${channel.video.title}" rel="nofollow" class="box channel col">
 				<div class="img">
 					<img src="${channel.video.imageUrl}" />
