@@ -13,6 +13,17 @@ import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import nl.waisda.domain.PlayerType;
+import nl.waisda.domain.Video;
+import nl.waisda.exceptions.EuropeanaImportException;
+import nl.waisda.model.europeana.EuropeanaAbout;
+import nl.waisda.model.europeana.EuropeanaAggregation;
+import nl.waisda.model.europeana.EuropeanaMultiDef;
+import nl.waisda.model.europeana.EuropeanaObject;
+import nl.waisda.model.europeana.EuropeanaProxy;
+import nl.waisda.model.europeana.EuropeanaRecord;
+import nl.waisda.model.europeana.EuropeanaResponse;
+import nl.waisda.repositories.VideoRepository;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,12 +43,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
-import nl.waisda.domain.PlayerType;
-import nl.waisda.domain.Video;
-import nl.waisda.exceptions.EuropeanaImportException;
-import nl.waisda.model.europeana.*;
-import nl.waisda.repositories.VideoRepository;
 
 /**
  * Implementation for the Europeana import service

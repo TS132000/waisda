@@ -39,7 +39,6 @@ import nl.waisda.model.TagEntrySummary;
 import nl.waisda.model.Value;
 import nl.waisda.repositories.GameRepository;
 import nl.waisda.repositories.TagEntryRepository;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

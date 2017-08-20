@@ -22,7 +22,6 @@ package nl.waisda.repositories;
 import javax.persistence.TypedQuery;
 
 import nl.waisda.domain.ResetPassword;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

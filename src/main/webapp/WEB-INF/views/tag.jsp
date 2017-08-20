@@ -12,8 +12,8 @@
 <h1>Term <span class="mark">${tagEntryStats.normalizedTag}</span></h1>
 
 <p>Eerst gebruikt door
-<a href="/profiel/${tagEntryStats.firstEntry.owner.id}">${tagEntryStats.firstEntry.owner.name}</a>
-tijdens het spel <a href="/start-game/${tagEntryStats.firstEntry.game.video.id}">${tagEntryStats.firstEntry.game.video.title}</a>
+<a style="color:#e00034" href="/profiel/${tagEntryStats.firstEntry.owner.id}">${tagEntryStats.firstEntry.owner.name}</a>
+tijdens het spel <a style="color:#e00034" href="/start-game/${tagEntryStats.firstEntry.game.video.id}">${tagEntryStats.firstEntry.game.video.title}</a>
 op datum ${tagEntryStats.firstEntry.prettyCreationDate}</p>
 
 <h2 class="spaced">Andere spellen met term <span class="mark">${tagEntryStats.normalizedTag}</span></h2>
@@ -26,10 +26,10 @@ op datum ${tagEntryStats.firstEntry.prettyCreationDate}</p>
 						<img src="${vs.video.imageUrl}" />
 						<div class="overlay trigger"></div>
 					</div>
-					<h3 class="h5">${vs.video.title}</h3>
+					<h3 style="color:#333;"class="h5">${vs.video.title}</h3>
 				</a>
-				<p class="small">
-					Andere ingevoerd termen: <c:forEach items="${vs.topTags}" var="topTag" varStatus="topTagStatus"><a href="/tag/${topTag}" class="reset">${topTag}</a><c:if test="${topTagStatus.index < fn:length(vs.topTags) - 1}">, </c:if></c:forEach>
+				<p class="small" style="color:#333;">
+					Andere ingevoerd termen: <c:forEach items="${vs.topTags}" var="topTag" varStatus="topTagStatus"><a style="color:#333;" href="/tag/${topTag}" class="reset">${topTag}</a><c:if test="${topTagStatus.index < fn:length(vs.topTags) - 1}">, </c:if></c:forEach>
 				</p>
 			</div>
 		</li>

@@ -12,7 +12,7 @@
 		<h1 class="h2 form-shift">Wachtwoord wijzigen</h1>
 			<c:choose>
 			<c:when test="${success}">
-				<p class="help-block form-shift">Je wachtwoord is gewijzigd. <a href="/inloggen">Log opnieuw in</a> met je nieuwe wachtwoord.</p>
+				<p class="help-block form-shift">Je wachtwoord is gewijzigd. <a style="color:#e00034;" href="/inloggen">Log opnieuw in</a> met je nieuwe wachtwoord.</p>
 			</c:when>
 			<c:when test="${errorMessage != null}">
 				<div class="error-block">${errorMessage}</div>

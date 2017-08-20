@@ -23,19 +23,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-import org.hibernate.tool.hbm2x.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import nl.waisda.domain.TagEntry;
-import nl.waisda.model.*;
+import nl.waisda.model.Cache;
+import nl.waisda.model.GlobalStats;
+import nl.waisda.model.TagCloudItem;
+import nl.waisda.model.TopScores;
 import nl.waisda.model.Value;
 import nl.waisda.repositories.ParticipantRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
+import org.apache.log4j.Logger;
+import org.hibernate.tool.hbm2x.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ScoringService implements ScoringServiceIF, InitializingBean {

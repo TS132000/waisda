@@ -1,0 +1,125 @@
+ /D/Data/Beeldengeluid/waisda/target/waisda-web-0.0.3-SNAPSHOT.war
+
+{"apikey":"XxxsEZoWj", "action":"record.json", "success":true, "statsDuration":50, "requestNumber":3752, "object":{
+    "type":"VIDEO",
+    "year":["1919"],
+    "title":["Opening Staten Generaal 20-9-1921"],
+    "about":"/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+    "proxies":[
+        {
+            "about":"/proxy/provider/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+            "dcCreator":{
+                "def":["Nederlands Instituut voor Beeld en Geluid (beheerder)", "Netherlands Institute for Sound and Vison (curator)"]
+            },
+            "dcDate":{
+                "def":["1919-01-01"]
+            },
+            "dcDescription":{
+                "def":[]
+            },
+            "dcLanguage":{
+                "def":["nl"]
+            },
+            "dcPublisher":{
+                "def":["Nederlands Instituut voor Beeld en Geluid", "http://www.openbeelden.nl/users/beeldengeluid"]
+            },
+            "dcSource":{
+                "def":["ONTHULLINGSTA-HRE00007FDA"]
+            },
+            "dcSubject":{
+                "def":["standbeelden", "volkscultuur", "steden", "zwemmen", "trams", "onthullingen", "wedstrijden", "optochten", "menigte", "hotels", "musici", "roeiboten", "kransleggingen"]
+            },
+            "dcTitle":{
+                "def":["Opening Staten Generaal 20-9-1921"]
+            },
+            "dcType":{
+                "def":["Moving Image"]
+            },
+            "dctermsAlternative":{
+                "def":["", ""]
+            },
+            "dctermsExtent":{
+                "def":["PT10M57S"]
+            },
+            "proxyIn":["/aggregation/provider/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9"],
+            "proxyFor":"/item/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+            "edmType":"VIDEO",
+            "europeanaProxy":false
+        },
+        {
+            "about":"/proxy/europeana/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+            "edmHasMet":{
+                "def":["http://semium.org/time/19xx_1_third", "http://semium.org/time/1919"]
+            },
+            "proxyIn":["/aggregation/europeana/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9"],
+            "proxyFor":"/item/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+            "year":{
+                "def":["1919"]
+            },
+            "europeanaProxy":true
+        }
+    ],
+    "aggregations":[
+        {
+            "about":"/aggregation/provider/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+            "edmDataProvider":{
+                "def":["Open Beelden"]
+            },
+            "edmIsShownBy":"http://www.host.com/shownby.mp4",
+            "edmIsShownAt":"http://preview.europeana.eu/api/728/redirect.json?shownAt=http%3A%2F%2Fwww.openbeelden.nl%2Fmedia%2F3969%3Fbt%3Deuropeanaapi&provider=Nationale+Aggregator&id=http://www.europeana.eu/resolve/record/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9&profile=full",
+            "edmObject":"http://www.openbeelden.nl/images/66690/Vlissingen_%285_28%29.png",
+            "edmProvider":{
+                "def":["Nationale Aggregator"]
+            },
+            "edmRights":{
+                "def":["http://creativecommons.org/licenses/by-sa/3.0/nl/"]
+            },
+            "webResources":[
+                {
+                    "about":"http://www.openbeelden.nl/media/3969"
+                },
+                {
+                    "about":"http://www.host.com/webresource.mp4"
+                },
+                {
+                    "about":"http://www.openbeelden.nl/images/66690/Vlissingen_%285_28%29.png"
+                }
+            ]
+        }
+    ],
+    "timespans":[
+        {
+            "about":"http://semium.org/time/19xx_1_third",
+            "prefLabel":{
+                "en":["early 20th century"],
+                "ru":["начало 20-го века"]
+            }
+        },
+        {
+            "about":"http://semium.org/time/1919",
+            "prefLabel":{
+                "def":["1919"]
+            },
+            "isPartOf":{
+                "en":["http://semium.org/time/19xx_1_third"]
+            }
+        }
+    ],
+    "europeanaCompleteness":10,
+    "providedCHOs":[
+        {
+            "about":"/item/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9"
+        }
+    ],
+    "europeanaAggregation":{
+        "about":"/aggregation/europeana/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+        "edmLandingPage":"http://www.europeana.eu/portal/record/2021601/6D84A6DB3976320008D516D00F5399132A5E8EE9",
+        "edmCountry":{
+            "def":["netherlands"]
+        },
+        "edmLanguage":{
+            "def":["nl"]
+        }
+    },
+    "europeanaCollectionName":["2021601_Ag_NL_DNA_Open_Beelden"]
+}}

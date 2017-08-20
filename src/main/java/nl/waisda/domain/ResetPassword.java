@@ -19,8 +19,6 @@
 
 package nl.waisda.domain;
 
-import java.util.Date;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +27,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import java.util.Date;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
 

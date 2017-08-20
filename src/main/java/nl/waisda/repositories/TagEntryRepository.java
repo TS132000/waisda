@@ -19,20 +19,17 @@
 
 package nl.waisda.repositories;
 
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
 import nl.waisda.domain.UserScore;
 import nl.waisda.model.TagCloudItem;
-import nl.waisda.services.ScoringService;
 import nl.waisda.services.ScoringServiceIF;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

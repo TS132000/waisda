@@ -19,15 +19,11 @@
 
 package nl.waisda.repositories;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import nl.waisda.domain.Video;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class VideoRepository extends AbstractRepository<Video> {

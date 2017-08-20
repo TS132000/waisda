@@ -24,12 +24,13 @@
 					<img src="${channel.video.imageUrl}" />
 					<div class="overlay trigger"></div>
 				</div>
-				<h3 class="h5">${channel.video.title}</h3>
-				<p class="small">games: ${channel.video.timesPlayed}<br/>high score: <nf:format number="${channel.highscore}" /></p>
+				<h3 class="h5" style="font-size:16px;font-weight:normal">${channel.video.title}</h3>
+				<p class="small">Rondes: ${channel.video.timesPlayed}<br/>Beste score: <nf:format number="${channel.highscore}" /></p>
 			</a>
 		</li>
 		</c:forEach>		
 	</ul>
+	
 
 	<!--h2 class="spaced">Hoe werkt het?</h2-->
 	<div class="row equal-cols">

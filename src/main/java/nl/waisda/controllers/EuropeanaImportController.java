@@ -1,5 +1,10 @@
 package nl.waisda.controllers;
 
+import nl.waisda.domain.User;
+import nl.waisda.exceptions.EuropeanaImportException;
+import nl.waisda.forms.EuropeanaImportForm;
+import nl.waisda.services.EuropeanaImportServiceIF;
+import nl.waisda.services.UserSessionService;
 import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import nl.waisda.domain.User;
-import nl.waisda.exceptions.EuropeanaImportException;
-import nl.waisda.forms.EuropeanaImportForm;
-import nl.waisda.services.EuropeanaImportServiceIF;
-import nl.waisda.services.UserSessionService;
 
 /**
  * Very simple controller to control Europeana imports

@@ -32,7 +32,6 @@ import nl.waisda.repositories.GameRepository;
 import nl.waisda.repositories.ResetPasswordRepository;
 import nl.waisda.repositories.TagEntryRepository;
 import nl.waisda.repositories.UserRepository;
-
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -35,7 +35,6 @@ import nl.waisda.services.MailService;
 import nl.waisda.services.UserService;
 import nl.waisda.services.UserSessionService;
 import nl.waisda.validators.UberValidator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

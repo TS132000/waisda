@@ -19,22 +19,20 @@
 
 package nl.waisda.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-
-import nl.waisda.domain.*;
+import nl.waisda.domain.Game;
+import nl.waisda.domain.Participant;
+import nl.waisda.domain.TagEntry;
+import nl.waisda.domain.User;
+import nl.waisda.domain.UserScore;
+import nl.waisda.domain.UserSummary;
+import nl.waisda.domain.Video;
 import nl.waisda.exceptions.Forbidden;
 import nl.waisda.exceptions.NotFoundException;
 import nl.waisda.model.CurrentGames;
@@ -49,7 +47,16 @@ import nl.waisda.services.GameService;
 import nl.waisda.services.ScoringServiceIF;
 import nl.waisda.services.UserSessionService;
 import nl.waisda.validators.RegisterValidator;
-
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("userSession")

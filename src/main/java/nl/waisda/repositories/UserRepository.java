@@ -19,15 +19,13 @@
 
 package nl.waisda.repositories;
 
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.TypedQuery;
 
 import nl.waisda.domain.User;
 import nl.waisda.domain.UserScore;
 import nl.waisda.model.TopScores;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
