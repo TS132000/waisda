@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+﻿<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <%@ attribute name="dynamic" required="true" %>
 <div id="games-queue" class="game-queue box span4 ${dynamic == 'true' ? 'dynamic' : 'col'}">

@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ attribute name="title" required="true" type="java.lang.String" %>
 <head>
 	<title>${title} - Waisda?</title>

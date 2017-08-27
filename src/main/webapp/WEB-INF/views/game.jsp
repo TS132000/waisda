@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="tt" tagdir="/WEB-INF/tags"%>
 <tt:html>
 <tt:head title="${game.video.title}">
