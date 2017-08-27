@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tt"%>
 
 <tt:html>
-<tt:head title="Password forgotten" />
+<tt:head title="Wachtwoord vergeten" />
 <tt:body pageName="wachtwoord-vergeten">
 
 	<div class="box span9">

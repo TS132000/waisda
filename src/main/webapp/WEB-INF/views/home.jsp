@@ -5,7 +5,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tt"%>
 
 <tt:html>
-<tt:head title="Home">
+<tt:head title="Hoofdpagina">
 </tt:head>
 <tt:body cssClass="body" pageName="home">
 

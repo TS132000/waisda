@@ -3,7 +3,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tt"%>
 
 <tt:html>
-<tt:head title="Example contentpage 2"></tt:head>
+<tt:head title="Spel instructies"></tt:head>
 <tt:body cssClass="static-page" pageName="spelinstructies">
 	<h1 class="offset3">Instructies</h1>
 	<div class="row">
