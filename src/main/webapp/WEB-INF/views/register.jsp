@@ -17,7 +17,7 @@
 	  		<fieldset>
  	  			    <c:set var="emailErrors"><f:errors path="email"/></c:set>
 					<div class="control-group ${not empty emailErrors ? 'error' : ''}">
-						<f:label path="email" cssClass="control-label">Email address</f:label>
+						<f:label path="email" cssClass="control-label">E-mailadres</f:label>
 						<div class="controls" >
 							<f:input path="email" tabindex="4" cssClass="input-xlarge" /><br/>
 							<f:errors path="email" cssClass="help-inline"/>
@@ -48,7 +48,7 @@
 						<div class="controls">
 		  				<f:input path="auth.name" tabindex="7" cssClass="input-xlarge" /><br/>
 		  				<f:errors path="auth.name" cssClass="help-inline"/>
-		  				<p class="help-block">Je gebruikersnaam is zichtbaar voor andere spelers. Het kan na registratie niet worden gewijzigd.</p>
+		  				<p class="help-block">Je gebruikersnaam is zichtbaar voor andere spelers. Na registratie kun je hem niet meer wijzigen.</p>
 					</div>
 				</fieldset>
 				<fieldset>
@@ -56,7 +56,7 @@
 					<div class="control-group ${not empty agreeTosErrors ? 'error' : ''}">
 						<div class="controls">
 							<label for="agree_tos" class="checkbox">
-								<f:checkbox value="" path="agreeTos" id="agree_tos" tabindex="8"/>Ik ga akkoord met de <a href="#" target="_blank">voorwaarden</a>
+								<f:checkbox value="" path="agreeTos" id="agree_tos" tabindex="8"/>Ik ga akkoord met de <a href="voorwaarden" target="_blank">voorwaarden</a>
 							</label>
 							<f:errors path="agreeTos" cssClass="help-inline"/>
 						</div>

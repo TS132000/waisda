@@ -126,10 +126,10 @@
 		<div class="container spaced-ext">
 			<p class="pull-left bold"  style="margin-top:20px;">
 				Met steun van<br><br>
-				<a style="padding-right:20px" href="http://beeldengeluid.nl" target="_nieuw"> <img height="40px" src="/static/img/logo1.png" title="Beeld en Geluid /"></a>
+				<a style="padding-right:20px" href="http://beeldengeluid.nl" target="_blank"> <img height="40px" src="/static/img/logo1.png" title="Beeld en Geluid /"></a>
 
-				<a style="padding-right:20px" href="http://vu.nl" target="_nieuw"><img height="40px" src="/static/img/logo2.png" title="Vrije Universiteit" /></a>
-							<a href="http://www.natuurbeelden.nl/" target="_nieuw">
+				<a style="padding-right:20px" href="http://vu.nl" target="_blank"><img height="40px" src="/static/img/logo2.png" title="Vrije Universiteit" /></a>
+							<a href="http://www.natuurbeelden.nl/" target="_blank">
 							<img height="40px" src="/static/img/logo3.png" title="Natuurbeelden" /></a>
 		        <br><br>
 			</p>

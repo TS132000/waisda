@@ -35,8 +35,8 @@
 	<!--h2 class="spaced">Hoe werkt het?</h2-->
 	<div class="row equal-cols">
 		<ol class="unstyled pull-left">
-			<li class="box rich order span3 col"><span class="index">1</span>Selecteer een spel via de kanalen of via de huidige rondes</li>
-			<li class="box rich order span3 col"><span class="index">2</span>Voeg zo veel mogelijk termen in om te beschrijven wat je ziet en hoort</li>
+			<li class="box rich order span3 col"><span class="index">1</span>Selecteer een video via de kanalen of speel mee met andere spelers</li>
+			<li class="box rich order span3 col"><span class="index">2</span>Voer zo veel mogelijk termen in en beschrijf wat je ziet en hoort</li>
 			<li class="box rich order span3 col"><span class="index">3</span>Verdien punten met termen die overeenkomen met termen van andere spelers</li>
 			<li class="box rich order span3 col"><span class="index">4</span>Lees de <a href="/spelinstructies">spel instructies</a> en <a href="/registreren">maak een account</a> aan om je scores te bewaren</li>
 		</ol>

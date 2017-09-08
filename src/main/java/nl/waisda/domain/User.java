@@ -138,7 +138,7 @@ public class User implements Comparable<User> {
 	}
 
 	public String getName() {
-		return name != null ? name : "Guest";
+		return name != null ? name : "Speler";
 	}
 
 	public void setName(String name) {

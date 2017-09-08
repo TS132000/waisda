@@ -35,7 +35,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><strong><nf:format number="${recap.summary.countEmptyTags}" /></strong> ${recap.summary.countEmptyTags == 1 ? 'term' : 'termen' } nieuwe termen <span class="help" title="Als andere spelers een overeenkomende term invoeren ontvangt u alsnog 145 punten">?</span></td>
+							<td><strong><nf:format number="${recap.summary.countEmptyTags}" /></strong> nieuwe ${recap.summary.countEmptyTags == 1 ? 'term' : 'termen' }<span class="help" title="Als andere spelers een overeenkomende term invoeren ontvangt u alsnog 145 punten">?</span></td>
 							<td class="text-right"><nf:format number="${recap.summary.countEmptyTags * 5}" /></td>
 						</tr>
 						<tr>
@@ -45,7 +45,7 @@
 						</tr>
 						<tr>
 							<td><img src="/static/img/match-social.png" alt="overeenkomst met een andere speler" /></td>
-							<td><strong><nf:format number="${recap.summary.countMatchingTags}"/></strong> ${recap.summary.countMatchingTags == 1 ? 'overeenkomst' : 'overeenkomsten' } met ingevoerde termen van andere spelers <span class="help" title="U ontvangt 50 punten als een andere speler deze term ook heeft ingevoerd">?</span></td>
+							<td><strong><nf:format number="${recap.summary.countMatchingTags}"/></strong> ${recap.summary.countMatchingTags == 1 ? 'overeenkomst' : 'overeenkomsten' } met termen van andere spelers <span class="help" title="U ontvangt 50 punten als een andere speler deze term ook heeft ingevoerd">?</span></td>
 							<td class="text-right"><nf:format number="${recap.summary.countMatchingTags * 50}" /></td>
 						</tr>
 						<tr>
@@ -59,11 +59,11 @@
 							<td class="text-right"><nf:format number="${recap.ownerScore}" /></td>
 						</tr>
 					</table>
-					<p class="spaced-min">Bij 'Jouw ingevoerde termen' vindt je een gedetaileerde omschrijving van de gemaakte overeenkomsten</p>
+					<p class="spaced-min">Bij 'Jouw ingevoerde termen' vind je een gedetailleerde omschrijving van de gemaakte overeenkomsten</p>
                     <c:if test="${user == null || user.anonymous}">
                         <h3>Wil je de score bewaren?</h3>
                         <p>Als je een <a href="/registreren"><strong>account aanmaakt</strong></a> of <a href="/inloggen"><strong>in logt</strong></a>, worden
-                        de punten die je hebt verdient opgeslagen. Probeer de hoogste score te halen!</p>
+                        de punten die je hebt verdiend opgeslagen. Probeer de hoogste score te halen!</p>
                     </c:if>
 					<h3>Wil je méér punten verdienen?</h3>
 					<p>Daag je vrienden uit en verhoog je kans op een hogere score <span class="help" title="Door met méér spelers tegelijk te spelen heeft u meer kans om 145 punten per term te verdienen">?</span></p>

@@ -204,7 +204,13 @@ section.main {
 }
 .site-footer a {
   font-weight: bold;
+  color: #fff;
 }
+.site-footer a:hover {
+  font-weight: bold;
+  color: #fff;
+}
+
 .box {
   display: block;
   border: 1px solid #eeeeee;

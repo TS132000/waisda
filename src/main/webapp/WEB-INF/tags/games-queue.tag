@@ -5,7 +5,7 @@
 	<header class="header rich"><h2 class="h3 reset">Speel mee <small>(<span id="games-queue-count">0 spellen</span>)</small></h2></header>
 	<section class="reset">
 		<!-- Als game-queue class="empty" heeft verschijnt de onderstaande boodschap en wordt de tabel verborgen -->
-		<p class="box-inner show">Momenteel zijn er geen spel rondes om aan deel te nemen. Start zelf een ronde door één van de kanalen op de <a style="color:#e00034" href="/">hoofdpagina</a> te selecteren.</p>
+		<p class="box-inner show">Momenteel zijn er geen spellen om aan deel te nemen. Start zelf een spel door één van de video's op de <a style="color:#e00034" href="/">hoofdpagina</a> te selecteren.</p>
 		<div class="hide">
 			<div class="row box-inner">
 				<h3 class="h5 pull-left">Klik hier om een spel te selecteren</h3>
