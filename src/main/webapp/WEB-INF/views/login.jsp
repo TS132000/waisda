@@ -11,7 +11,7 @@
 		<div class="box span9">
 			<h1 class="h2 form-shift">Log in</h1>
 			<c:if test="${user.totalScore > 0}">
-				<p class="form-shift">Je <nf:format number="${user.totalScore}" /> score wordt verwerkt al je inlogt.</p>
+				<p class="form-shift">Je score van <nf:format number="${user.totalScore}" /> punten wordt opgeslagen als je inlogt.</p>
 			</c:if>
 	 		<f:form commandName="loginForm" action="/inloggen" id="loginForm" class="form-horizontal">
 				<fieldset>
