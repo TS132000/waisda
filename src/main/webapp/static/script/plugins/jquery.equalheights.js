@@ -21,7 +21,7 @@ and sets their min-height to the tallest height (or width to widest width). Sets
 
 (function($) { 
 	function xHeight(elt){
-		var height = $.browser.mozilla ? elt.height() : elt.outerHeight();
+		var height = elt.outerHeight();
 		return height;
 	}
 	$.fn.equalHeights = function(col) {
