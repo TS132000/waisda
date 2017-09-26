@@ -70,6 +70,9 @@ public class Video {
 	@Column(length = 1024)
 	private String sourceUrl;
 
+	@Column(length = 1024)
+	private String guci;
+
 	public int getId() {
 		return id;
 	}
@@ -158,6 +161,14 @@ public class Video {
         this.sourceUrl = sourceUrl;
     }
 
+    public String getGuci() {
+        return guci;
+    }
+
+    public void setGuci(String guci) {
+        this.guci = guci;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
@@ -173,6 +184,7 @@ public class Video {
         sb.append(", startTime=").append(startTime);
         sb.append(", sectionNid=").append(sectionNid);
         sb.append(", sourceUrl='").append(sourceUrl).append('\'');
+        sb.append(", guci='").append(guci).append('\'');
         sb.append('}');
         return sb.toString();
     }

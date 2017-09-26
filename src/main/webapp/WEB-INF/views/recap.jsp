@@ -62,7 +62,7 @@
 					<p class="spaced-min">Bij 'Jouw ingevoerde termen' vind je een gedetailleerde omschrijving van de gemaakte overeenkomsten</p>
                     <c:if test="${user == null || user.anonymous}">
                         <h3>Wil je de score bewaren?</h3>
-                        <p>Als je een <a href="/registreren"><strong>account aanmaakt</strong></a> of <a href="/inloggen"><strong>in logt</strong></a>, worden
+                        <p>Als je een <a href="/registreren"><strong>account aanmaakt</strong></a> of <a href="/inloggen"><strong>inlogt</strong></a>, worden
                         de punten die je hebt verdiend opgeslagen. Probeer de hoogste score te halen!</p>
                     </c:if>
 					<h3>Wil je méér punten verdienen?</h3>
@@ -70,7 +70,7 @@
 
 					<!-- AddThis Button BEGIN -->
 					<div id="addthis-bar" class="addthis_toolbox addthis_default_style spaced reserved-space" 
-					addthis:url="http://waisda.nl/start-game/${recap.game.video.id}"
+					addthis:url="http://digibirds.beeldengeluid.nl/start-game/${recap.game.video.id}"
 					addthis:title="Ik heb net ${recap.ownerScore} punten verdiend door ${fn:length(recap.tagEntries)} ${fn:length(recap.tagEntries) == 1 ? 'term' : 'termen'} aan &quot;${recap.game.video.title}&quot; toe te voegen"
 					addthis:description="Wil je een ronde spelen?">
 						<a class="addthis_button_preferred_1"></a>
@@ -156,6 +156,8 @@
 		</section>
 	</div>
 </div>
-	
+</div>
+<div style="margin-top: 1em"><h2 style="text-align: center; color: #666666">De video's in dit spel komen uit de collectie <a target="_blank" href="http://www.natuurbeelden.nl">Natuurbeelden</a>, een unieke verzameling ruwe, ongemonteerde beelden van de Nederlandse natuur.</h2></div>
+
 </tt:body>
 </tt:html>

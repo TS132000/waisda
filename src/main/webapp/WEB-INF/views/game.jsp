@@ -7,6 +7,7 @@
 	<script src="/static/script/videoplayer.js"></script>
 	<script src="/static/script/taggingHistory.js"></script>
 	<script src="/static/script/game.js"></script>
+    <script src="http://player.video.beeldengeluid.videodock.com/latest/js/svf.min.js"></script>
 </tt:head>
 <tt:body cssClass="game" pageName="game">
 
@@ -91,6 +92,13 @@
 				var video = {
 						playerType : 'JW',
 						sourceUrl : '${game.video.sourceUrl}',
+						imageUrl : '${game.video.imageUrl}'
+					};
+			</c:when>
+			<c:when test="${game.video.playerType == 'VIDEODOCK'}">
+				var video = {
+						playerType : 'VD',
+						sourceUrl : '${game.video.guci}',
 						imageUrl : '${game.video.imageUrl}'
 					};
 			</c:when>

@@ -10,7 +10,7 @@
 <tt:body cssClass="body" pageName="home">
 
 	<p class="header-text">
-		<span style="font-size:26px">Door <strong>Waisda</strong> te spelen</span>, help je ons archief beter doorzoekbaar te maken. Bedankt!
+		<span style="font-size:26px">Door <strong>Digibirds</strong> te spelen</span>, help je ons archief beter doorzoekbaar te maken. Bedankt!
 	</p>
 
 	<!--h2>Kanalen</h2-->
@@ -38,7 +38,7 @@
 			<li class="box rich order span3 col"><span class="index">1</span>Selecteer een video via de kanalen of speel mee met andere spelers</li>
 			<li class="box rich order span3 col"><span class="index">2</span>Voer zo veel mogelijk termen in en beschrijf wat je ziet en hoort</li>
 			<li class="box rich order span3 col"><span class="index">3</span>Verdien punten met termen die overeenkomen met termen van andere spelers</li>
-			<li class="box rich order span3 col"><span class="index">4</span>Lees de <a href="/spelinstructies">spel instructies</a> en <a href="/registreren">maak een account</a> aan om je scores te bewaren</li>
+			<li class="box rich order span3 col"><span class="index">4</span>Lees de <a href="/spelinstructies">spelinstructies</a> en <a href="/registreren">maak een account</a> aan om je scores te bewaren</li>
 		</ol>
 		<!-- laten we hopen dat dit niet nodig is: <p id="silverlight-message" class="clear-both small">In order to be able to join <a href="http://www.silverlight.net/">Microsoft Silverlight plugin</a> has to be installed.</p> -->
 	</div>
@@ -81,6 +81,7 @@
 		<tt:games-queue dynamic="false"/>
 		
 	</div>
+    <div style="margin-top: 1em"><h2 style="text-align: center; color: #666666">De video's in dit spel komen uit de collectie <a target="_blank" href="http://www.natuurbeelden.nl">Natuurbeelden</a>, een unieke verzameling ruwe, ongemonteerde beelden van de Nederlandse natuur.</h2></div>
 
 </tt:body>
 </tt:html>

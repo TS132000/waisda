@@ -48,7 +48,7 @@
 
             <c:if test="${globalStats != null}">
                 <c:if test="${user == null || !user.playerBarVisible}">
-                    <div class="stats span6 offset3">
+                    <div class="stats offset1">
                         <c:if test="${user == null || user.anonymous}">
                             <p><strong><nf:format number="${globalStats.totalTags}" /></strong> <!-- ${globalStats.totalTags} --> termen ingevoerd en <strong><nf:format number="${globalStats.totalMatches}" /></strong> <!-- ${globalStats.totalMatches} --> overeenkomsten gemaakt</p>
                         </c:if>
@@ -100,7 +100,7 @@
             <div style="margin-top:-99px;position:absolute;margin-left:740px;width:200px;">
             <c:if test="${globalStats.currentlyPlaying > 0}">
                 <p class="online">
-                    <strong>${globalStats.currentlyPlaying} ${globalStats.currentlyPlaying == 1 ? 'player' : 'players'}</strong> momenteel online
+                    momenteel <strong>${globalStats.currentlyPlaying} ${globalStats.currentlyPlaying == 1 ? 'speler' : 'spelers'}</strong> online
                 </p>
             </c:if>
             </div>
@@ -117,11 +117,6 @@
             <ul class="unstyled horizontal pull-left">
                 <li><a href="/">Hoofdpagina</a></li>
             </ul>
-	  		<ul class="unstyled horizontal pull-right">
-	  			<li>Vind ons op</li>
-		  		<li><a href="https://twitter.com/EuropeanaTech">Twitter</a></li>
-		  		<li><a href="http://pro.europeana.eu/web/network/europeana-tech">Blog</a></li>
-		  	</ul>
 		</div>
 		<div class="container spaced-ext">
 			<p class="pull-left bold"  style="margin-top:20px;">

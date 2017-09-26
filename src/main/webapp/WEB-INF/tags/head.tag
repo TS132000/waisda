@@ -1,10 +1,10 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ attribute name="title" required="true" type="java.lang.String" %>
 <head>
-	<title>${title} - Waisda?</title>
+	<title>${title} - Digibirds</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-	<meta name="description" content="Waisda? is een leuk spelletje waarbij u de juiste woorden intikt die bij een fragment horen."/>
+	<meta name="description" content="Digibirds is een leuk spelletje waarbij u de juiste woorden intikt die bij een fragment horen."/>
 	<meta name="keywords" content="spel, game, crowdsourcing, archief, beeld en geluid, online video, gratis"/>
 	<link rel="shortcut icon" href="/static/img/favicon_waisda.ico" />
 	
