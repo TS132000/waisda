@@ -9,7 +9,7 @@
 
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+   		<org.springframework.version>3.2.2.RELEASE</org.springframework.version>
 		<org.hibernate.version>3.5.1-Final</org.hibernate.version>
 	</properties>
 
@@ -123,6 +123,11 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.5</version>
 		</dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.0.0</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>

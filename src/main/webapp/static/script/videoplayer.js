@@ -126,16 +126,16 @@ var JWPlayer = EventBase.extend({
 		this.elementId = elementId;
 
 		var self = this;
+		var starting = false;
 
 		this.player = jwplayer(elementId).setup({
-			flashplayer: '/static/mediaplayer-5.9/player.swf',
 			controls: false,
 			file: sourceUrl,
 			image: imageUrl,
 			height: 351,
 			width: 618,
 			events: {
-				onComplete: function() { self.dispatchEvents("fragmentEnd"); return true;},
+				onComplete: function() { if (!starting) { self.dispatchEvents("fragmentEnd"); } return true;},
 				onTime: function() {
 					var elapsed = Math.ceil(self.player.getPosition() * 1000);
 					var duration = Math.ceil(self.player.getDuration() * 1000);
@@ -148,7 +148,7 @@ var JWPlayer = EventBase.extend({
 				}
 			}
 		});
-	},
+    },
 
 	getElapsed : function() {
 		return Math.ceil(this.player.getPosition() * 1000);

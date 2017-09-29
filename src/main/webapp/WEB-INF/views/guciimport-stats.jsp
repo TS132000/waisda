@@ -31,14 +31,41 @@
                         <fieldset class="admin-width-600px">
                             <script>
                                 window.setTimeout(function() {
-                                    //window.location.reload();
-                                    $('#admin-body').load('./stats');
+                                    $('#admin-body').load('./guci/stats');
                                 }, 4000);
                             </script>
+                            <div class="control-group">
+                                <f:label path="importingTitle" cssClass="admin-label-200px">Current importing title</f:label>
+                                <div class="admin-value-300px">
+                                    <c:out escapeXml="true" value="${form.importingTitle}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <f:label path="importingProgress" cssClass="admin-label-200px">Current import item number</f:label>
+                                <div class="admin-value-300px">
+                                    <c:out escapeXml="true" value="${form.importingProgress}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <f:label path="importingTotalItems" cssClass="admin-label-200px">Current import num items</f:label>
+                                <div class="admin-value-300px">
+                                    <c:out escapeXml="true" value="${form.importingTotalItems}"/>
+                                </div>
+                            </div>
                         </fieldset>
                         <input type="submit" name="stop" value="Stop"/>
                     </c:otherwise>
                 </c:choose>
+                <c:if test="${not empty form.log}">
+                    <h1>Progress Log</h1>
+                    <div class="admin-log">
+                        <c:forEach var="item" items="${form.log}">
+                            <div>
+                                <c:out escapeXml="false" value="${item}"/>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:if>
 			</f:form>
 		</section>
 	</div>
