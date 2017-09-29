@@ -30,7 +30,7 @@
 						<li>Probeer zo veel mogelijk termen die omschrijven wat je ziet in te voeren</li>
 						<li>Druk na elk ingevoerde woord op &lt;ENTER&gt; om het aan de lijst toe te voegen</li>
 						<li>Je verdient punten als een ingevoerde term <strong>overeenkomt</strong> met een term van een andere speler</li>
-						<li>Als je een ronde meespeelt ga je akkoord met de <a href="voorwaarden" target="_blank">voorwaarden</a></li>
+						<li>Als je een ronde meespeelt ga je akkoord met de <a href="../voorwaarden" target="_blank">voorwaarden</a></li>
 					</ul>				
 					<h3 class="h5">Veel speel plezier!</h3>
 				</div>

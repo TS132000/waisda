@@ -67,6 +67,8 @@
                     </c:if>
 					<h3>Wil je méér punten verdienen?</h3>
 					<p>Daag je vrienden uit en verhoog je kans op een hogere score <span class="help" title="Door met méér spelers tegelijk te spelen heeft u meer kans om 145 punten per term te verdienen">?</span></p>
+					<h3>Wil je nog een spel spelen?</h3>
+					<p>Klik <a href="/">hier</a> om terug naar de Hoofdpagina te gaan.</p>
 
 					<!-- AddThis Button BEGIN -->
 					<div id="addthis-bar" class="addthis_toolbox addthis_default_style spaced reserved-space" 
@@ -157,7 +159,7 @@
 	</div>
 </div>
 </div>
-<div style="margin-top: 1em"><h2 style="text-align: center; color: #666666">De video's in dit spel komen uit de collectie <a target="_blank" href="http://www.natuurbeelden.nl">Natuurbeelden</a>, een unieke verzameling ruwe, ongemonteerde beelden van de Nederlandse natuur.</h2></div>
+<div style="margin-top: 1em"><h2 style="text-align: center; color: #666666">Dit spel bevat video's uit de collectie <a target="_blank" href="http://www.natuurbeelden.nl">Natuurbeelden</a>, een unieke verzameling ruwe, ongemonteerde beelden van de Nederlandse natuur.</h2></div>
 
 </tt:body>
 </tt:html>

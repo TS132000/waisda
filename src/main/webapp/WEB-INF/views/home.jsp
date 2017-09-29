@@ -10,7 +10,7 @@
 <tt:body cssClass="body" pageName="home">
 
 	<p class="header-text">
-		<span style="font-size:26px">Door <strong>Digibirds</strong> te spelen</span>, help je ons archief beter doorzoekbaar te maken. Bedankt!
+		<span style="font-size:26px">Speel <strong>DigiBird</strong> en help de collectie Natuurbeelden nog beter doorzoekbaar te maken.
 	</p>
 
 	<!--h2>Kanalen</h2-->
@@ -81,7 +81,7 @@
 		<tt:games-queue dynamic="false"/>
 		
 	</div>
-    <div style="margin-top: 1em"><h2 style="text-align: center; color: #666666">De video's in dit spel komen uit de collectie <a target="_blank" href="http://www.natuurbeelden.nl">Natuurbeelden</a>, een unieke verzameling ruwe, ongemonteerde beelden van de Nederlandse natuur.</h2></div>
+    <div style="margin-top: 1em"><h2 style="text-align: center; color: #666666">Dit spel bevat video's uit de collectie <a target="_blank" href="http://www.natuurbeelden.nl">Natuurbeelden</a>, een unieke verzameling ruwe, ongemonteerde beelden van de Nederlandse natuur.</h2></div>
 
 </tt:body>
 </tt:html>
