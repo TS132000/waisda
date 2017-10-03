@@ -31,16 +31,7 @@ var Game = base2.Base.extend({
 		} else if (video.playerType == 'JW') {
 			this.videoplayer = new JWPlayer('video', video.imageUrl, video.sourceUrl);
 		} else if (video.playerType == 'VD') {
-			var setup = {
-				width:  '100%',
-				height: '100%',
-				type: 'guci',
-				id: guci,
-				logo: true,
-				sharer: false
-			};
-
-			this.videoplayer = svf('video').setup(setup);
+			this.videoplayer = new VDPlayer('video', video.sourceUrl);
 	    }
 
 		if (this.videoplayer != null) {

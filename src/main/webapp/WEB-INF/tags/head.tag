@@ -34,8 +34,6 @@
 	<script src="/static/script/global.js"></script>
 	<script src="/static/script/games-queue.js"></script>
 	<script src="/static/script/lib/base2.js"></script>
-	<!--script src="/static/mediaplayer-5.9/jwplayer.js"></script-->
-	<script src="/static/jwplayer/jwplayer.js"></script>
     <script src="http://player.video.beeldengeluid.videodock.com/latest/js/svf.min.js"></script>
 	<jsp:doBody/>
 </head>

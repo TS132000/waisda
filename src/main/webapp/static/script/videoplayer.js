@@ -126,8 +126,7 @@ var JWPlayer = EventBase.extend({
 		this.elementId = elementId;
 
 		var self = this;
-		var starting = false;
-
+        jwplayer.key = svf.config.jwplayerKey;
 		this.player = jwplayer(elementId).setup({
 			controls: false,
 			file: sourceUrl,
@@ -135,7 +134,10 @@ var JWPlayer = EventBase.extend({
 			height: 351,
 			width: 618,
 			events: {
-				onComplete: function() { if (!starting) { self.dispatchEvents("fragmentEnd"); } return true;},
+				onComplete: function() {
+				    self.dispatchEvents("fragmentEnd");
+				    return true;
+				},
 				onTime: function() {
 					var elapsed = Math.ceil(self.player.getPosition() * 1000);
 					var duration = Math.ceil(self.player.getDuration() * 1000);
@@ -148,6 +150,55 @@ var JWPlayer = EventBase.extend({
 				}
 			}
 		});
+    },
+
+	getElapsed : function() {
+		return Math.ceil(this.player.getPosition() * 1000);
+	},
+
+	moveTo : function(sec) {
+		this.player.seek(sec);
+	},
+
+	play : function() {
+		this.player.play(true);
+	},
+
+	stop : function() {
+		this.player.pause(true);
+	}
+});
+
+var VDPlayer = EventBase.extend({
+	constructor : function(elementId, guci) {
+		this.elementId = elementId;
+
+		var self = this;
+
+		this.player = svf(elementId).setup({
+			height: 351,
+			width: 618,
+            type: 'guci',
+            id: guci,
+            sharer: false
+		});
+        this.player.onReady(function() {
+            this.player.setControls(false);
+        });
+		this.player.onComplete(function() {
+		    self.dispatchEvents("fragmentEnd");
+		    return true;
+		});
+		this.player.onTime(function() {
+            var elapsed = Math.ceil(self.player.getPosition() * 1000);
+            var duration = Math.ceil(self.player.getDuration() * 1000);
+
+            // check whether the videoplayer initialized completely
+            if (duration != 0) {
+                self.dispatchEvents("tick", [ elapsed, duration ]);
+            }
+            return true;
+        });
     },
 
 	getElapsed : function() {
