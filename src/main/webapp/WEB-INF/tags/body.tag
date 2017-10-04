@@ -15,7 +15,7 @@
     
     <div class="brand-marker">
     	<div class="container">
-            <div class="waisda-logo"><a href="/"> <img src="/static/img/waisda-logo.png" alt="Waisda" height="44" width="272"/></a></div>
+            <div class="waisda-logo"><a href="/"> <img src="/static/img/waisda-logo.png" alt="Waisda" width="320"/></a></div>
             <c:if test="${globalStats != null}">
                 <c:if test="${user != null || user.playerBarVisible}">
                 <div class="stats pull-right">
